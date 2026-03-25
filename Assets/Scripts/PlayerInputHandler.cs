@@ -5,7 +5,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private InputSystem inputSystem;
     public InputSystem.PlayerActions playerActions;
-    public bool JumpPressed { get; private set; }
+    public bool jumpPressed;
     private PlayerMotor playerMotor;
     public Vector2 moveInput { get; private set; }
     public Vector2 lookInput { get; private set; }
@@ -17,9 +17,6 @@ public class PlayerInputHandler : MonoBehaviour
         playerActions = inputSystem.Player;
 
         playerMotor = GetComponent<PlayerMotor>();
-
-        playerActions.Jump.performed += ctx => JumpPressed = true;
-        playerActions.Jump.canceled += ctx => JumpPressed = false;
     }
 
     void Start()
@@ -41,12 +38,14 @@ public class PlayerInputHandler : MonoBehaviour
         {
             //Debug.Log(lookInput);
         }
-        //Debug.Log(JumpPressed);
+        //Debug.Log(jumpPressed);
     }
 
     private void OnEnable()
     {
         playerActions.Enable();
+        playerActions.Jump.performed += ctx => jumpPressed = true;
+        //JumpPressed = false;
     }
 
     private void OnDisable()

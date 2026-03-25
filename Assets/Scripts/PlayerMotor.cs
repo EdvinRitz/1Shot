@@ -28,6 +28,10 @@ public class PlayerMotor : MonoBehaviour
         ProcessMove(moveInput);
 
         isGrounded = controller.isGrounded;
+        if(playerInputHandler.jumpPressed == true)
+        {
+            Jump();
+        }
         
     }
 
@@ -37,11 +41,11 @@ public class PlayerMotor : MonoBehaviour
         moveDirection.x = input.x;
         moveDirection.z = input.y;
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
-        //playerVelocity.y += gravity * Time.deltaTime;
-        //if (isGrounded && playerVelocity.y < 0){
-        //    playerVelocity.y = -2f;
-        //}
-        //controller.Move(playerVelocity * Time.deltaTime);
+        playerVelocity.y += gravity * Time.deltaTime;
+        if (isGrounded && playerVelocity.y < 0){
+            playerVelocity.y = -2f;
+        }
+        controller.Move(playerVelocity * Time.deltaTime);
         //Vector3 worldMove = transform.TransformDirection(moveDirection) * speed;
         //Debug.Log($"input: {input}, move magnitude: {worldMove.magnitude}");
 
@@ -51,5 +55,6 @@ public class PlayerMotor : MonoBehaviour
         if(isGrounded){
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
+        playerInputHandler.jumpPressed = false;
     }
 }
