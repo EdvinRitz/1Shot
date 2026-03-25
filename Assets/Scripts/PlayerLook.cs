@@ -17,8 +17,7 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 lookInput = playerInputHandler.lookInput;
-        ProcessLook(lookInput);
+        ProcessLook(playerInputHandler.lookInput);
     }
 
     public void ProcessLook(Vector2 input){
