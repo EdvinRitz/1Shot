@@ -5,6 +5,8 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private InputSystem inputSystem;
     public InputSystem.PlayerActions playerActions;
+    public bool JumpPressed { get; private set; }
+    private PlayerMotor playerMotor;
     public Vector2 moveInput { get; private set; }
     public Vector2 lookInput { get; private set; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,6 +15,11 @@ public class PlayerInputHandler : MonoBehaviour
     {
         inputSystem = new InputSystem();
         playerActions = inputSystem.Player;
+
+        playerMotor = GetComponent<PlayerMotor>();
+
+        playerActions.Jump.performed += ctx => JumpPressed = true;
+        playerActions.Jump.canceled += ctx => JumpPressed = false;
     }
 
     void Start()
@@ -32,9 +39,9 @@ public class PlayerInputHandler : MonoBehaviour
         lookInput = playerActions.Look.ReadValue<Vector2>();
         if (lookInput != Vector2.zero)
         {
-            Debug.Log(lookInput);
+            //Debug.Log(lookInput);
         }
-
+        //Debug.Log(JumpPressed);
     }
 
     private void OnEnable()

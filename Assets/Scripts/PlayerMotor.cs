@@ -7,6 +7,9 @@ public class PlayerMotor : MonoBehaviour
     public PlayerInputHandler playerInputHandler;
     private Vector3 playerVelocity;
     public float speed = 5f;
+    private bool isGrounded;
+    public float gravity = -9.8f;
+    public float jumpHeight = 0.75f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -23,6 +26,8 @@ public class PlayerMotor : MonoBehaviour
     {
         Vector2 moveInput = playerInputHandler.moveInput;
         ProcessMove(moveInput);
+
+        isGrounded = controller.isGrounded;
         
     }
 
@@ -40,5 +45,11 @@ public class PlayerMotor : MonoBehaviour
         //Vector3 worldMove = transform.TransformDirection(moveDirection) * speed;
         //Debug.Log($"input: {input}, move magnitude: {worldMove.magnitude}");
 
+    }
+
+        public void Jump(){
+        if(isGrounded){
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+        }
     }
 }
