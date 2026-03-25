@@ -24,8 +24,7 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveInput = playerInputHandler.moveInput;
-        ProcessMove(moveInput);
+        ProcessMove(playerInputHandler.moveInput);
 
         isGrounded = controller.isGrounded;
         if(playerInputHandler.jumpPressed == true)
