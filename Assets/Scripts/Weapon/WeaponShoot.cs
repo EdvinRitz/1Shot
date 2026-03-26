@@ -15,7 +15,7 @@ public class WeaponShoot : MonoBehaviour
     {
         if(playerInputHandler.shootPressed == true)
         {
-            Debug.Log("shot");
+            //Debug.Log("shot");
             Shoot();
         }
     }
