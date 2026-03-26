@@ -6,6 +6,7 @@ public class PlayerInputHandler : MonoBehaviour
     private InputSystem inputSystem;
     public InputSystem.PlayerActions playerActions;
     public bool jumpPressed;
+    public bool shootPressed;
     private PlayerMotor playerMotor;
     public Vector2 moveInput { get; private set; }
     public Vector2 lookInput { get; private set; }
@@ -45,6 +46,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         playerActions.Enable();
         playerActions.Jump.performed += ctx => jumpPressed = true;
+        playerActions.Shoot.performed += ctx => shootPressed = true;
         //JumpPressed = false;
     }
 
