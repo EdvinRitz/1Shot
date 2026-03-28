@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 243934800}
   - component: {fileID: 243934799}
   - component: {fileID: 243934798}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 425291802}
   - component: {fileID: 425291801}
   - component: {fileID: 425291800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1135,7 +1135,7 @@ GameObject:
   - component: {fileID: 1244051140}
   - component: {fileID: 1244051139}
   - component: {fileID: 1244051138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1359,7 +1359,7 @@ GameObject:
   - component: {fileID: 1742994662}
   - component: {fileID: 1742994661}
   - component: {fileID: 1742994660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
