@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+
 
 public class WeaponShoot : MonoBehaviour
 {
@@ -22,9 +24,20 @@ public class WeaponShoot : MonoBehaviour
 
     public void Shoot()
     {
-        RaycastHit hit;
-        Physics.Raycast(fpCamera.transform.position, fpCamera.transform.forward, out hit);
-        Debug.Log(hit.transform);
+        //RaycastHit hit;
+        var hits = Physics.RaycastAll(fpCamera.transform.position, fpCamera.transform.forward);
+        List<RaycastHit> orderedHitsByDistance = new List<RaycastHit>(hits);
+        orderedHitsByDistance.Sort(SortByDistance);
+        foreach (RaycastHit hit in orderedHitsByDistance)
+        {
+            Debug.Log(hit.transform.name);
+        }
+        //Debug.Log(hits);
         playerInputHandler.shootPressed = false;
+    }
+
+    private int SortByDistance(RaycastHit a, RaycastHit b)
+    {
+        return a.distance.CompareTo(b.distance);
     }
 }
