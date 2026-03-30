@@ -1,0 +1,22 @@
+using UnityEngine;
+
+public class EnemyMovingTowardsPlayer : MonoBehaviour
+{
+    private UnityEngine.AI.NavMeshAgent agent;
+    public UnityEngine.AI.NavMeshAgent Agent { get => agent; }
+    private GameObject player;
+    public GameObject Player { get => player; }
+    public EnemyMovingTowardsPlayer enemyMovingTowardsPlayer;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        agent.SetDestination(player.transform.position);
+    }
+}
