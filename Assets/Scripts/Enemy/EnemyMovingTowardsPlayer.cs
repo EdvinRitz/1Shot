@@ -13,9 +13,9 @@ public class EnemyMovingTowardsPlayer : MonoBehaviour
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");
         stateMachine = GetComponent<StateMachine>();
         stateMachine.Initialise();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -24,16 +24,16 @@ public class EnemyMovingTowardsPlayer : MonoBehaviour
         //agent.SetDestination(player.transform.position);
     }
     
-    public void Die()
-    {
-        agent.isStopped = true;
-        StartCoroutine(DisableAfterDelay());
-    }
+    //public void Die()
+    //{
+        //agent.isStopped = true;
+        //StartCoroutine(DisableAfterDelay());
+    //}
 
-    IEnumerator DisableAfterDelay()
-    {
-        yield return new WaitForSeconds(1f);
-        gameObject.SetActive(false);
-    }
+    //IEnumerator DisableAfterDelay()
+    //{
+        //yield return new WaitForSeconds(1f);
+        //gameObject.SetActive(false);
+    //}
 
 }

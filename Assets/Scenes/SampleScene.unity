@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &125604711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58985bc8215fdc04e973c260a86414e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovingTowardsPlayer
-  player: {fileID: 0}
   enemyMovingTowardsPlayer: {fileID: 0}
 --- !u!195 &125604712
 NavMeshAgent:
@@ -1650,7 +1649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58985bc8215fdc04e973c260a86414e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovingTowardsPlayer
-  player: {fileID: 0}
   enemyMovingTowardsPlayer: {fileID: 0}
 --- !u!114 &1085093027
 MonoBehaviour:

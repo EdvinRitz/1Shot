@@ -43,10 +43,10 @@ public class WeaponShoot : MonoBehaviour
         foreach (RaycastHit hitValid in validHits)
         {
             Debug.Log(hitValid.transform.name);
-            EnemyMovingTowardsPlayer enemy = hitValid.transform.GetComponent<EnemyMovingTowardsPlayer>();
-            if (enemy != null)
+            StateMachine stateMachine = hitValid.transform.GetComponent<StateMachine>();
+            if (stateMachine != null)
             {
-                enemy.Die();
+                stateMachine.ChangeState(new DieState());
             }
         }
         //Debug.Log(hits);
