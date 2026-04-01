@@ -7,6 +7,8 @@ public class AttackState : BaseState
     float winddownTimer;
     Vector3 dashDirection;
     Vector3 playerInitialPosition;
+    Vector3 enemyInitialPostion;
+    float dashDistanceTarget;
 
     float dashSpeed = 10f;
 
@@ -14,8 +16,10 @@ public class AttackState : BaseState
     {
         dashDirection = (enemyMovingTowardsPlayer.Player.transform.position - enemyMovingTowardsPlayer.transform.position).normalized;
         playerInitialPosition = enemyMovingTowardsPlayer.Player.transform.position;
+        enemyInitialPostion = enemyMovingTowardsPlayer.transform.position;
+        dashDistanceTarget = Vector3.Distance(enemyMovingTowardsPlayer.transform.position, playerInitialPosition);
         windupTimer = 0.5f;
-        winddownTimer = 0.5f;
+        winddownTimer = 1f;
         enemyMovingTowardsPlayer.Agent.isStopped = true;
 
     }
@@ -26,12 +30,12 @@ public class AttackState : BaseState
         if (windupTimer <= 0)
         {
             Debug.Log("attack made");
-            if(Vector3.Distance(enemyMovingTowardsPlayer.transform.position, playerInitialPosition) >= 0.1f)
+            if(Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyInitialPostion) < dashDistanceTarget)
             {
                 enemyMovingTowardsPlayer.transform.position += dashSpeed * Time.deltaTime * dashDirection;
             }
 
-            if(Vector3.Distance(enemyMovingTowardsPlayer.transform.position, playerInitialPosition) <= 0.1f)
+            if(Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyInitialPostion) >= dashDistanceTarget)
             {
                 winddownTimer -= Time.deltaTime;
                 if(winddownTimer <= 0)
