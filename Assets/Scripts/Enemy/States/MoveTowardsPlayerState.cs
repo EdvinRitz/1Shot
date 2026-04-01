@@ -1,3 +1,4 @@
+using UnityEngine;
 public class MoveTowardsPlayerState : BaseState
 {
 
@@ -12,6 +13,13 @@ public class MoveTowardsPlayerState : BaseState
     public void walkTowardsPlayer()
     {
         enemyMovingTowardsPlayer.Agent.SetDestination(enemyMovingTowardsPlayer.Player.transform.position);
+        
+        if(Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyMovingTowardsPlayer.Player.transform.position) < enemyMovingTowardsPlayer.attackDistance)
+        {
+            Debug.Log("attack State activated");
+            stateMachine.ChangeState(new AttackState());
+        }
+        //Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyMovingTowardsPlayer.Player.transform.position)
         
     }
     public override void Exit()

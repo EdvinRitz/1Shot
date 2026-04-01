@@ -9,6 +9,7 @@ public class EnemyMovingTowardsPlayer : MonoBehaviour
     public GameObject Player { get => player; }
     public EnemyMovingTowardsPlayer enemyMovingTowardsPlayer;
     private StateMachine stateMachine;
+    public float attackDistance = 6f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,7 +25,10 @@ public class EnemyMovingTowardsPlayer : MonoBehaviour
         //agent.SetDestination(player.transform.position);
     }
     
-    //public void Die()
+    public void Die()
+    {
+        stateMachine.ChangeState(new DieState());
+    }
     //{
         //agent.isStopped = true;
         //StartCoroutine(DisableAfterDelay());
