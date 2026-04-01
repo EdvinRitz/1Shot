@@ -19,7 +19,7 @@ public class AttackState : BaseState
         enemyInitialPostion = enemyMovingTowardsPlayer.transform.position;
         dashDistanceTarget = Vector3.Distance(enemyMovingTowardsPlayer.transform.position, playerInitialPosition);
         windupTimer = 0.5f;
-        winddownTimer = 1f;
+        winddownTimer = 0.5f;
         enemyMovingTowardsPlayer.Agent.isStopped = true;
 
     }

@@ -14,7 +14,7 @@ public class MoveTowardsPlayerState : BaseState
     {
         enemyMovingTowardsPlayer.Agent.SetDestination(enemyMovingTowardsPlayer.Player.transform.position);
         
-        if(Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyMovingTowardsPlayer.Player.transform.position) < enemyMovingTowardsPlayer.attackDistance)
+        if((Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyMovingTowardsPlayer.Player.transform.position) < enemyMovingTowardsPlayer.attackDistance) && enemyMovingTowardsPlayer.CanSeePlayer()) 
         {
             Debug.Log("attack State activated");
             stateMachine.ChangeState(new AttackState());
@@ -22,6 +22,7 @@ public class MoveTowardsPlayerState : BaseState
         //Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyMovingTowardsPlayer.Player.transform.position)
         
     }
+
     public override void Exit()
     {
         

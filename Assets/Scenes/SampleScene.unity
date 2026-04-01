@@ -153,6 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovingTowardsPlayer
   enemyMovingTowardsPlayer: {fileID: 0}
+  attackDistance: 6
+  sightDistance: 20
+  fieldOfView: 85
 --- !u!195 &125604712
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -668,6 +671,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovingTowardsPlayer
   enemyMovingTowardsPlayer: {fileID: 0}
+  attackDistance: 6
+  sightDistance: 20
+  fieldOfView: 5
 --- !u!195 &440772719
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1814,6 +1820,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovingTowardsPlayer
   enemyMovingTowardsPlayer: {fileID: 0}
+  attackDistance: 6
+  sightDistance: 20
+  fieldOfView: 85
 --- !u!114 &1085093027
 MonoBehaviour:
   m_ObjectHideFlags: 0
