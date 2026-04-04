@@ -8,10 +8,12 @@ public class PlayerLook : MonoBehaviour
     public float ySensetivity = 30f;
 
     public PlayerInputHandler playerInputHandler;
+    public PlayerMotor playerMotor;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerInputHandler = GetComponent<PlayerInputHandler>();
+        playerMotor = GetComponent<PlayerMotor>();
     }
 
     // Update is called once per frame
