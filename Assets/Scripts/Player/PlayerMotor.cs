@@ -31,6 +31,10 @@ public class PlayerMotor : MonoBehaviour
         {
             Jump();
         }
+        if(playerInputHandler.dashPressed == true)
+        {
+            Dash();
+        }
         
     }
 
@@ -50,10 +54,16 @@ public class PlayerMotor : MonoBehaviour
 
     }
 
-        public void Jump(){
+    public void Jump(){
         if(isGrounded){
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
         playerInputHandler.jumpPressed = false;
+    }
+
+    public void Dash()
+    {
+        Debug.Log("dashed");
+        playerInputHandler.dashPressed = false;
     }
 }
