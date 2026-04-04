@@ -19,10 +19,7 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerMotor.isDashing == false)
-        {
-            ProcessLook(playerInputHandler.lookInput);
-        }
+        ProcessLook(playerInputHandler.lookInput);
     }
 
     public void ProcessLook(Vector2 input){
