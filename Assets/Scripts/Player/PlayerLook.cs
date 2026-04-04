@@ -8,16 +8,21 @@ public class PlayerLook : MonoBehaviour
     public float ySensetivity = 30f;
 
     public PlayerInputHandler playerInputHandler;
+    public PlayerMotor playerMotor;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerInputHandler = GetComponent<PlayerInputHandler>();
+        playerMotor = GetComponent<PlayerMotor>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ProcessLook(playerInputHandler.lookInput);
+        if(playerMotor.isDashing == false)
+        {
+            ProcessLook(playerInputHandler.lookInput);
+        }
     }
 
     public void ProcessLook(Vector2 input){

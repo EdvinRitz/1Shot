@@ -13,6 +13,7 @@ public class PlayerMotor : MonoBehaviour
     public float gravity = -9.8f;
     public float jumpHeight = 0.75f;
     public bool isDashing;
+    public float dashTimer = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -71,14 +72,24 @@ public class PlayerMotor : MonoBehaviour
         if(!isDashing){
         dashDirection.x = input.x;
         dashDirection.z = input.y;
+        dashTimer = 1f;
         }
         isDashing = true;
         if(dashDirection == Vector3.zero)
         {
             isDashing = false;
+            playerInputHandler.dashPressed = false;
             return;
         }
-        controller.Move(transform.TransformDirection(moveDirection) * (speed * 3) * Time.deltaTime);
+        dashTimer -= Time.deltaTime;
+        if(dashTimer > 0)
+        {
+            controller.Move(transform.TransformDirection(moveDirection) * (speed * 3) * Time.deltaTime);
+        }
+        else
+        {
+            isDashing = false;
+        }
         //Debug.Log("dashed");
         playerInputHandler.dashPressed = false;
     }
