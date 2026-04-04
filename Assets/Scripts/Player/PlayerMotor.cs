@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMotor : MonoBehaviour
 {
+    public Vector3 moveDirection = Vector3.zero;
+    public Vector3 dashDirection = Vector3.zero;
     private CharacterController controller;
     public PlayerInputHandler playerInputHandler;
     private Vector3 playerVelocity;
@@ -10,6 +12,7 @@ public class PlayerMotor : MonoBehaviour
     private bool isGrounded;
     public float gravity = -9.8f;
     public float jumpHeight = 0.75f;
+    public bool isDashing;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -24,23 +27,25 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ProcessMove(playerInputHandler.moveInput);
-
+        if (!isDashing)
+        {
+            ProcessMove(playerInputHandler.moveInput);
+        }
+       
         isGrounded = controller.isGrounded;
         if(playerInputHandler.jumpPressed == true)
         {
             Jump();
         }
-        if(playerInputHandler.dashPressed == true)
+        if(playerInputHandler.dashPressed == true || isDashing == true)
         {
-            Dash();
+            Dash(playerInputHandler.moveInput);
         }
         
     }
 
     public void ProcessMove(Vector2 input)
     {
-        Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
@@ -61,9 +66,20 @@ public class PlayerMotor : MonoBehaviour
         playerInputHandler.jumpPressed = false;
     }
 
-    public void Dash()
+    public void Dash(Vector2 input)
     {
-        Debug.Log("dashed");
+        if(!isDashing){
+        dashDirection.x = input.x;
+        dashDirection.z = input.y;
+        }
+        isDashing = true;
+        if(dashDirection == Vector3.zero)
+        {
+            isDashing = false;
+            return;
+        }
+        controller.Move(transform.TransformDirection(moveDirection) * (speed * 3) * Time.deltaTime);
+        //Debug.Log("dashed");
         playerInputHandler.dashPressed = false;
     }
 }
