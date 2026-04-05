@@ -72,7 +72,8 @@ public class PlayerMotor : MonoBehaviour
         if(!isDashing){
         dashDirection.x = input.x;
         dashDirection.z = input.y;
-        dashTimer = 0.15f;
+        dashDirection = transform.TransformDirection(dashDirection);
+        dashTimer = 0.2f;
         }
         isDashing = true;
         if(dashDirection == Vector3.zero)
@@ -84,7 +85,7 @@ public class PlayerMotor : MonoBehaviour
         dashTimer -= Time.deltaTime;
         if(dashTimer > 0)
         {
-            controller.Move(transform.TransformDirection(moveDirection) * (speed * 3) * Time.deltaTime);
+            controller.Move(speed * 4 * Time.deltaTime * dashDirection);
         }
         else
         {
