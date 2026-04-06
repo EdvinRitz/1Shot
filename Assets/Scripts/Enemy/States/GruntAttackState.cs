@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackState : BaseState
+public class GruntAttackState : BaseState
 {
     float windupTimer;
     float winddownTimer;
@@ -40,7 +40,7 @@ public class AttackState : BaseState
                 winddownTimer -= Time.deltaTime;
                 if(winddownTimer <= 0)
                 {
-                    stateMachine.ChangeState(new MoveTowardsPlayerState());
+                    stateMachine.ChangeState(new GruntMoveState());
                 }
                 
             }

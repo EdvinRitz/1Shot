@@ -1,6 +1,6 @@
 public abstract class BaseState
 {
-    public EnemyMovingTowardsPlayer enemyMovingTowardsPlayer;
+    public GruntEnemy enemyMovingTowardsPlayer;
     public StateMachine stateMachine;
 
     public abstract void Enter();

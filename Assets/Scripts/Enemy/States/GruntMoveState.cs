@@ -1,5 +1,5 @@
 using UnityEngine;
-public class MoveTowardsPlayerState : BaseState
+public class GruntMoveState : BaseState
 {
 
     public override void Enter()
@@ -17,7 +17,7 @@ public class MoveTowardsPlayerState : BaseState
         if((Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyMovingTowardsPlayer.Player.transform.position) < enemyMovingTowardsPlayer.attackDistance) && enemyMovingTowardsPlayer.CanSeePlayer()) 
         {
             Debug.Log("attack State activated");
-            stateMachine.ChangeState(new AttackState());
+            stateMachine.ChangeState(new GruntAttackState());
         }
         //Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyMovingTowardsPlayer.Player.transform.position)
         

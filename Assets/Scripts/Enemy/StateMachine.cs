@@ -7,7 +7,7 @@ public class StateMachine : MonoBehaviour
     public void Initialise()
     {
         //Setup the default state.
-        ChangeState(new MoveTowardsPlayerState());
+        
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,7 +40,7 @@ public class StateMachine : MonoBehaviour
             //Setup new state.
             activeState.stateMachine = this;
             //assign state enemy class.
-            activeState.enemyMovingTowardsPlayer = GetComponent<EnemyMovingTowardsPlayer>();
+            activeState.enemyMovingTowardsPlayer = GetComponent<GruntEnemy>();
             activeState.Enter();
         }
     }

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class DieState : BaseState
+public class GruntDieState : BaseState
 {
 
     public override void Enter()

@@ -1,13 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyMovingTowardsPlayer : MonoBehaviour
+public class GruntEnemy : MonoBehaviour
 {
     private UnityEngine.AI.NavMeshAgent agent;
     public UnityEngine.AI.NavMeshAgent Agent { get => agent; }
     private GameObject player;
     public GameObject Player { get => player; }
-    public EnemyMovingTowardsPlayer enemyMovingTowardsPlayer;
+    public GruntEnemy enemyMovingTowardsPlayer;
     private StateMachine stateMachine;
     public float attackDistance = 6f;
     public float sightDistance = 20f;
@@ -19,6 +19,7 @@ public class EnemyMovingTowardsPlayer : MonoBehaviour
         stateMachine = GetComponent<StateMachine>();
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
+        stateMachine.ChangeState(new GruntMoveState());
     }
 
     // Update is called once per frame
@@ -57,7 +58,7 @@ public class EnemyMovingTowardsPlayer : MonoBehaviour
     
     public void Die()
     {
-        stateMachine.ChangeState(new DieState());
+        stateMachine.ChangeState(new GruntDieState());
     }
     //{
         //agent.isStopped = true;

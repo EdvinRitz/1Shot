@@ -44,7 +44,7 @@ public class WeaponShoot : MonoBehaviour
         {
             Debug.Log(hitValid.transform.name);
             //StateMachine stateMachine = hitValid.transform.GetComponent<StateMachine>();
-            EnemyMovingTowardsPlayer enemy = hitValid.transform.GetComponent<EnemyMovingTowardsPlayer>();
+            GruntEnemy enemy = hitValid.transform.GetComponent<GruntEnemy>();
             if (enemy != null)
             {
                 enemy.Die();
