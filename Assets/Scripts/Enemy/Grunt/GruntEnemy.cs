@@ -7,7 +7,7 @@ public class GruntEnemy : MonoBehaviour
     public UnityEngine.AI.NavMeshAgent Agent { get => agent; }
     private GameObject player;
     public GameObject Player { get => player; }
-    public GruntEnemy enemyMovingTowardsPlayer;
+    public GruntEnemy gruntEnemy;
     private StateMachine stateMachine;
     public float attackDistance = 6f;
     public float sightDistance = 20f;
@@ -19,7 +19,7 @@ public class GruntEnemy : MonoBehaviour
         stateMachine = GetComponent<StateMachine>();
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
-        stateMachine.ChangeState(new GruntMoveState());
+        stateMachine.ChangeState(new GruntMoveState(this));
     }
 
     // Update is called once per frame
@@ -58,7 +58,7 @@ public class GruntEnemy : MonoBehaviour
     
     public void Die()
     {
-        stateMachine.ChangeState(new GruntDieState());
+        stateMachine.ChangeState(new GruntDieState(this));
     }
     //{
         //agent.isStopped = true;

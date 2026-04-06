@@ -39,8 +39,6 @@ public class StateMachine : MonoBehaviour
         {
             //Setup new state.
             activeState.stateMachine = this;
-            //assign state enemy class.
-            activeState.enemyMovingTowardsPlayer = GetComponent<GruntEnemy>();
             activeState.Enter();
         }
     }

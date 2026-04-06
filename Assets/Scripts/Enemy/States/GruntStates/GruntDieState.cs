@@ -3,16 +3,20 @@ using UnityEngine;
 
 public class GruntDieState : BaseState
 {
+    public GruntDieState(GruntEnemy gruntEnemy)
+    {
+        this.gruntEnemy = gruntEnemy;
+    }
 
     public override void Enter()
     {
-        enemyMovingTowardsPlayer.Agent.isStopped = true;
-        enemyMovingTowardsPlayer.StartCoroutine(DisableAfterDelay());
+        gruntEnemy.Agent.isStopped = true;
+        gruntEnemy.StartCoroutine(DisableAfterDelay());
     }
     IEnumerator DisableAfterDelay()
     {
         yield return new WaitForSeconds(1f);
-        enemyMovingTowardsPlayer.gameObject.SetActive(false);
+        gruntEnemy.gameObject.SetActive(false);
     }
     public override void Perform()
     {

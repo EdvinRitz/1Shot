@@ -1,6 +1,10 @@
 using UnityEngine;
 public class GruntMoveState : BaseState
 {
+    public GruntMoveState(GruntEnemy gruntEnemy)
+    {
+        this.gruntEnemy = gruntEnemy;
+    }
 
     public override void Enter()
     {
@@ -12,15 +16,12 @@ public class GruntMoveState : BaseState
     }
     public void walkTowardsPlayer()
     {
-        enemyMovingTowardsPlayer.Agent.SetDestination(enemyMovingTowardsPlayer.Player.transform.position);
+        gruntEnemy.Agent.SetDestination(gruntEnemy.Player.transform.position);
         
-        if((Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyMovingTowardsPlayer.Player.transform.position) < enemyMovingTowardsPlayer.attackDistance) && enemyMovingTowardsPlayer.CanSeePlayer()) 
+        if((Vector3.Distance(gruntEnemy.transform.position, gruntEnemy.Player.transform.position) < gruntEnemy.attackDistance) && gruntEnemy.CanSeePlayer()) 
         {
-            Debug.Log("attack State activated");
-            stateMachine.ChangeState(new GruntAttackState());
+            stateMachine.ChangeState(new GruntAttackState(gruntEnemy));
         }
-        //Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyMovingTowardsPlayer.Player.transform.position)
-        
     }
 
     public override void Exit()

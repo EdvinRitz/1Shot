@@ -12,15 +12,19 @@ public class GruntAttackState : BaseState
 
     float dashSpeed = 10f;
 
+    public GruntAttackState(GruntEnemy gruntEnemy)
+    {
+        this.gruntEnemy = gruntEnemy;
+    }
     public override void Enter()
     {
-        dashDirection = (enemyMovingTowardsPlayer.Player.transform.position - enemyMovingTowardsPlayer.transform.position).normalized;
-        playerInitialPosition = enemyMovingTowardsPlayer.Player.transform.position;
-        enemyInitialPostion = enemyMovingTowardsPlayer.transform.position;
-        dashDistanceTarget = Vector3.Distance(enemyMovingTowardsPlayer.transform.position, playerInitialPosition);
+        dashDirection = (gruntEnemy.Player.transform.position - gruntEnemy.transform.position).normalized;
+        playerInitialPosition = gruntEnemy.Player.transform.position;
+        enemyInitialPostion = gruntEnemy.transform.position;
+        dashDistanceTarget = Vector3.Distance(gruntEnemy.transform.position, playerInitialPosition);
         windupTimer = 0.5f;
         winddownTimer = 0.5f;
-        enemyMovingTowardsPlayer.Agent.isStopped = true;
+        gruntEnemy.Agent.isStopped = true;
 
     }
 
@@ -29,27 +33,25 @@ public class GruntAttackState : BaseState
         windupTimer -= Time.deltaTime;
         if (windupTimer <= 0)
         {
-            Debug.Log("attack made");
-            if(Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyInitialPostion) < dashDistanceTarget)
+            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) < dashDistanceTarget)
             {
-                enemyMovingTowardsPlayer.transform.position += dashSpeed * Time.deltaTime * dashDirection;
+                gruntEnemy.transform.position += dashSpeed * Time.deltaTime * dashDirection;
             }
 
-            if(Vector3.Distance(enemyMovingTowardsPlayer.transform.position, enemyInitialPostion) >= dashDistanceTarget)
+            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget)
             {
                 winddownTimer -= Time.deltaTime;
                 if(winddownTimer <= 0)
                 {
-                    stateMachine.ChangeState(new GruntMoveState());
+                    stateMachine.ChangeState(new GruntMoveState(gruntEnemy));
                 }
                 
             }
-            //stateMachine.ChangeState(new MoveTowardsPlayerState());
         }
         
     }
     public override void Exit()
     {
-        enemyMovingTowardsPlayer.Agent.isStopped = false;
+        gruntEnemy.Agent.isStopped = false;
     }
 }
