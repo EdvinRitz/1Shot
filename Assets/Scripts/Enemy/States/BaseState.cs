@@ -1,6 +1,6 @@
 public abstract class BaseState
 {
-    public GruntEnemy gruntEnemy;
+    public BaseEnemy baseEnemy;
     public StateMachine stateMachine;
 
     public abstract void Enter();

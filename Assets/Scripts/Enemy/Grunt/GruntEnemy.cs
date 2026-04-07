@@ -1,18 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class GruntEnemy : MonoBehaviour
+public class GruntEnemy : BaseEnemy
 {
-    private UnityEngine.AI.NavMeshAgent agent;
-    public UnityEngine.AI.NavMeshAgent Agent { get => agent; }
-    private GameObject player;
-    public GameObject Player { get => player; }
-    private StateMachine stateMachine;
     public float attackDistance = 6f;
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         stateMachine = GetComponent<StateMachine>();
@@ -22,12 +17,12 @@ public class GruntEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         
     }
 
-    public bool CanSeePlayer()
+    public override bool CanSeePlayer()
     {
         if (player != null)
         {
@@ -55,8 +50,8 @@ public class GruntEnemy : MonoBehaviour
         return false;
     }
     
-    public void Die()
-    {
-        stateMachine.ChangeState(new GruntDieState(this));
-    }
+    //public override void Die()
+    //{
+        //stateMachine.ChangeState(new DieState(this));
+    //}
 }

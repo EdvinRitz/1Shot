@@ -152,6 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58985bc8215fdc04e973c260a86414e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovingTowardsPlayer
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  stateMachine: {fileID: 0}
   attackDistance: 6
   sightDistance: 20
   fieldOfView: 85
@@ -893,6 +896,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58985bc8215fdc04e973c260a86414e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovingTowardsPlayer
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  stateMachine: {fileID: 0}
   attackDistance: 6
   sightDistance: 20
   fieldOfView: 10
@@ -1948,7 +1954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23f88ffc0a6a9840aac89dd50274d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunnerEnemy
-  shotgunnerEnemy: {fileID: 908690577}
   lookDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &957133666
 GameObject:
@@ -2083,7 +2088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1085093021
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2213,6 +2218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58985bc8215fdc04e973c260a86414e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovingTowardsPlayer
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  stateMachine: {fileID: 0}
   attackDistance: 6
   sightDistance: 20
   fieldOfView: 10

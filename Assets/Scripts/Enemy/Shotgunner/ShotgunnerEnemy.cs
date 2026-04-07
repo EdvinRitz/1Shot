@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class ShotgunnerEnemy : MonoBehaviour
+public class ShotgunnerEnemy : BaseEnemy
 {
-    private ShotgunnerEnemy shotgunnerEnemy;
-    private UnityEngine.AI.NavMeshAgent agent;
-    public UnityEngine.AI.NavMeshAgent Agent { get => agent; }
-    private GameObject player;
-    public GameObject Player { get => player; }
-    private StateMachine stateMachine;
+    public ShotgunnerEnemy shotgunnerEnemy;
     public Vector3 lookDirection;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         stateMachine = GetComponent<StateMachine>();
@@ -21,9 +16,13 @@ public class ShotgunnerEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         lookDirection = (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
         shotgunnerEnemy.transform.rotation = Quaternion.LookRotation(lookDirection);
+    }
+    public override bool CanSeePlayer()
+    {
+        return true;
     }
 }

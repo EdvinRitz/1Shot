@@ -1,22 +1,22 @@
 using System.Collections;
 using UnityEngine;
 
-public class GruntDieState : BaseState
+public class DieState : BaseState
 {
-    public GruntDieState(GruntEnemy gruntEnemy)
+    public DieState(BaseEnemy baseEnemy)
     {
-        this.gruntEnemy = gruntEnemy;
+        this.baseEnemy = baseEnemy;
     }
 
     public override void Enter()
     {
-        gruntEnemy.Agent.isStopped = true;
-        gruntEnemy.StartCoroutine(DisableAfterDelay());
+        baseEnemy.Agent.isStopped = true;
+        baseEnemy.StartCoroutine(DisableAfterDelay());
     }
     IEnumerator DisableAfterDelay()
     {
         yield return new WaitForSeconds(1f);
-        gruntEnemy.gameObject.SetActive(false);
+        baseEnemy.gameObject.SetActive(false);
     }
     public override void Perform()
     {

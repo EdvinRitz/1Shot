@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GruntAttackState : BaseState
 {
+    GruntEnemy gruntEnemy;
     float windupTimer;
     float winddownTimer;
     Vector3 dashDirection;

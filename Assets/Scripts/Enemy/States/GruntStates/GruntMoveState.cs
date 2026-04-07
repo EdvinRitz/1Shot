@@ -1,6 +1,7 @@
 using UnityEngine;
 public class GruntMoveState : BaseState
 {
+    GruntEnemy gruntEnemy;
     public GruntMoveState(GruntEnemy gruntEnemy)
     {
         this.gruntEnemy = gruntEnemy;
