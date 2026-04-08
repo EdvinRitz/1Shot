@@ -18,8 +18,9 @@ public class ShotgunnerEnemy : BaseEnemy
     // Update is called once per frame
     public override void Update()
     {
-        lookDirection = (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
-        shotgunnerEnemy.transform.rotation = Quaternion.LookRotation(lookDirection);
+        //lookDirection = (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
+        //shotgunnerEnemy.transform.rotation = Quaternion.LookRotation(lookDirection);
+        shotgunnerEnemy.transform.LookAt(shotgunnerEnemy.Player.transform);
     }
     public override bool CanSeePlayer()
     {
