@@ -3,11 +3,11 @@ using UnityEngine;
 
 public abstract class BaseEnemy : MonoBehaviour
 {
-    public UnityEngine.AI.NavMeshAgent agent;
+    protected UnityEngine.AI.NavMeshAgent agent;
     public UnityEngine.AI.NavMeshAgent Agent { get => agent; }
-    public GameObject player;
+    protected GameObject player;
     public GameObject Player { get => player; }
-    public StateMachine stateMachine;
+    protected StateMachine stateMachine;
 
     public abstract void Start();
 
