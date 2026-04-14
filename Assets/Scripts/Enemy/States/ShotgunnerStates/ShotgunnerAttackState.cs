@@ -42,9 +42,9 @@ public class ShotgunnerAttackState : BaseState
         //instanciate a new bullet
         GameObject bullet = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
         //calculate the direction to the player
-        Vector3 shootDirection = (shotgunnerEnemy.Player.transform.position - gunbarrel.transform.position).normalized;
+        Vector3 shootDirection = gunbarrel.forward;
         //add force rigidbody to the bullet
-        bullet.GetComponent<Rigidbody>().linearVelocity = Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up) * shootDirection * 40;
+        bullet.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
         Debug.Log("Shoot");
         shotTimer = 0;
     }
