@@ -8,6 +8,8 @@ public class ShotgunnerEnemy : BaseEnemy
     [Range(0.1f,10f)]
     public float fireRate;
     public Transform gunBarrel;
+    public float moveCloserDistance;
+    public float moveAwayDistance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
@@ -15,7 +17,7 @@ public class ShotgunnerEnemy : BaseEnemy
         stateMachine = GetComponent<StateMachine>();
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
-        stateMachine.ChangeState(new ShotgunnerAttackState(this));
+        stateMachine.ChangeState(new ShotgunnerMoveState(this));
     }
 
     // Update is called once per frame

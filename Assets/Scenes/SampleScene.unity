@@ -1981,10 +1981,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunnerEnemy
   sightDistance: 20
   fieldOfView: 85
-  shotgunnerEnemy: {fileID: 0}
   lookDirection: {x: 0, y: 0, z: 0}
   fireRate: 1.6
   gunBarrel: {fileID: 640950900}
+  moveCloserDistance: 10
 --- !u!1 &957133666
 GameObject:
   m_ObjectHideFlags: 0
