@@ -5,6 +5,7 @@ public class ShotgunnerAttackState : BaseState
 {
     private float shotTimer;
     readonly ShotgunnerEnemy shotgunnerEnemy;
+    Vector3 retreatDirection;
 
     public ShotgunnerAttackState(ShotgunnerEnemy shotgunnerEnemy)
     {
@@ -18,6 +19,10 @@ public class ShotgunnerAttackState : BaseState
 
     public override void Perform()
     {
+        if (Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) > shotgunnerEnemy.moveCloserDistance)
+        {
+            stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
+        }
         if (shotgunnerEnemy.CanSeePlayer())
         {
             shotTimer += Time.deltaTime;
@@ -26,9 +31,10 @@ public class ShotgunnerAttackState : BaseState
                 Shoot();
             }
         }
-        if(Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) > shotgunnerEnemy.moveCloserDistance)
+        if(Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) < shotgunnerEnemy.moveAwayDistance)
         {
-            stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
+            retreatDirection = -(shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
+            shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.transform.position + retreatDirection * 5f);
         }
         
     }

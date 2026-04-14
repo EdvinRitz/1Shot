@@ -10,7 +10,7 @@ public class ShotgunnerMoveState : BaseState
     
     public override void Enter()
     {
-        shotgunnerEnemy.Agent.isStopped = false;
+        
     }
 
     public override void Perform()
@@ -21,7 +21,7 @@ public class ShotgunnerMoveState : BaseState
         }
         else
         {
-            shotgunnerEnemy.Agent.isStopped = true;
+            shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.transform.position);
             stateMachine.ChangeState(new ShotgunnerAttackState(shotgunnerEnemy));
         }
     }

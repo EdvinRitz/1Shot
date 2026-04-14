@@ -1985,6 +1985,7 @@ MonoBehaviour:
   fireRate: 1.6
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 10
+  moveAwayDistance: 5
 --- !u!1 &957133666
 GameObject:
   m_ObjectHideFlags: 0
