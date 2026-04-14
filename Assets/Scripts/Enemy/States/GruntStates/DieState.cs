@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class DieState : BaseState
+public class GruntDieState : BaseState
 {
-    public DieState(BaseEnemy baseEnemy)
+    public GruntDieState(BaseEnemy gruntEnemy)
     {
-        this.baseEnemy = baseEnemy;
+        this.baseEnemy = gruntEnemy;
     }
 
     public override void Enter()
