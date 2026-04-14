@@ -4,7 +4,6 @@ public class ShotgunnerEnemy : BaseEnemy
 {
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
-    public ShotgunnerEnemy shotgunnerEnemy;
     public Vector3 lookDirection;
     [Range(0.1f,10f)]
     public float fireRate;
@@ -16,7 +15,6 @@ public class ShotgunnerEnemy : BaseEnemy
         stateMachine = GetComponent<StateMachine>();
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
-        shotgunnerEnemy = GetComponent<ShotgunnerEnemy>();
         stateMachine.ChangeState(new ShotgunnerAttackState(this));
     }
 
@@ -25,7 +23,7 @@ public class ShotgunnerEnemy : BaseEnemy
     {
         //lookDirection = (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
         //shotgunnerEnemy.transform.rotation = Quaternion.LookRotation(lookDirection);
-        shotgunnerEnemy.transform.LookAt(shotgunnerEnemy.Player.transform);
+        this.transform.LookAt(this.Player.transform);
     }
         public override bool CanSeePlayer()
     {
