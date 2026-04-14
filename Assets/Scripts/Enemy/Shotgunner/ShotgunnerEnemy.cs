@@ -6,6 +6,9 @@ public class ShotgunnerEnemy : BaseEnemy
     public float fieldOfView = 85f;
     public ShotgunnerEnemy shotgunnerEnemy;
     public Vector3 lookDirection;
+    [Range(0.1f,10f)]
+    public float fireRate;
+    public Transform gunBarrel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
@@ -14,7 +17,7 @@ public class ShotgunnerEnemy : BaseEnemy
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
         shotgunnerEnemy = GetComponent<ShotgunnerEnemy>();
-        //stateMachine.ChangeState(new GruntMoveState(this));
+        stateMachine.ChangeState(new ShotgunnerAttackState(this));
     }
 
     // Update is called once per frame
