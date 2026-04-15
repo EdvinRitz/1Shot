@@ -1703,7 +1703,7 @@ GameObject:
   - component: {fileID: 860295337}
   m_Layer: 0
   m_Name: Weapon
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1984,7 +1984,7 @@ MonoBehaviour:
   lookDirection: {x: 0, y: 0, z: 0}
   fireRate: 1
   bulletsPerShotSliderValue: 2
-  totalSpreadAngle: 60
+  totalSpreadAngle: 70
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 12
   moveAwayDistance: 9

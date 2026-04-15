@@ -46,23 +46,51 @@ public class ShotgunnerAttackState : BaseState
 
     public void Shoot()
     {
-        float angleStep = shotgunnerEnemy.totalSpreadAngle / (shotgunnerEnemy.CalculateNumberOfBullets() - 1);
-        //Store reference to gun barrel
         Transform gunbarrel = shotgunnerEnemy.gunBarrel;
-        //instanciate a new bullet
-        GameObject bullet = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
-        GameObject bullet1 = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
-        GameObject bullet2 = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
-        
         Vector3 shootDirection = gunbarrel.forward;
-        Vector3 rotatedDirection1 = Quaternion.AngleAxis(angleStep, Vector3.up) * shootDirection;
-        Vector3 rotatedDirection2 = Quaternion.AngleAxis(-angleStep, Vector3.up) * shootDirection;
+
+        if(shotgunnerEnemy.CalculateNumberOfBullets() == 1){
+            GameObject bulletSingle = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+            bulletSingle.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
+        }
+        else
+        {
+            GameObject bulletSingle = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+            bulletSingle.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
+            float angleStep = shotgunnerEnemy.totalSpreadAngle / (shotgunnerEnemy.CalculateNumberOfBullets() - 1);
+            int counter = 0;
+            for (int i = 0; i < (shotgunnerEnemy.CalculateNumberOfBullets() - 1) / 2; i++) 
+            {
+                counter++;
+                GameObject bulletPosetive = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+                GameObject bulletNegative = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+
+                Vector3 rotatedDirectionPosetive = Quaternion.AngleAxis(angleStep * counter, Vector3.up) * shootDirection;
+                Vector3 rotatedDirectionNegative = Quaternion.AngleAxis(-angleStep * counter, Vector3.up) * shootDirection;
+
+                bulletPosetive.GetComponent<Rigidbody>().linearVelocity = rotatedDirectionPosetive * 10;
+                bulletNegative.GetComponent<Rigidbody>().linearVelocity = rotatedDirectionNegative * 10;
+
+            }
+            
+        }
+        //float angleStep = shotgunnerEnemy.totalSpreadAngle / (shotgunnerEnemy.CalculateNumberOfBullets() - 1);
+        //Store reference to gun barrel
+        //Transform gunbarrel = shotgunnerEnemy.gunBarrel;
+        //instanciate a new bullet
+        //GameObject bullet = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+        //GameObject bullet1 = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+        //GameObject bullet2 = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+        
+        //Vector3 shootDirection = gunbarrel.forward;
+        //Vector3 rotatedDirection1 = Quaternion.AngleAxis(angleStep, Vector3.up) * shootDirection;
+        //Vector3 rotatedDirection2 = Quaternion.AngleAxis(-angleStep, Vector3.up) * shootDirection;
 
 
         //add force rigidbody to the bullet
-        bullet.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
-        bullet1.GetComponent<Rigidbody>().linearVelocity = rotatedDirection1 * 10;
-        bullet2.GetComponent<Rigidbody>().linearVelocity = rotatedDirection2 * 10;
+        //bullet.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
+        //bullet1.GetComponent<Rigidbody>().linearVelocity = rotatedDirection1 * 10;
+        //bullet2.GetComponent<Rigidbody>().linearVelocity = rotatedDirection2 * 10;
         shotTimer = 0;
     }
 }
