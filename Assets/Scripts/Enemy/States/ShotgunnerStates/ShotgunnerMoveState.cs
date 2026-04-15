@@ -3,6 +3,7 @@ using UnityEngine;
 public class ShotgunnerMoveState : BaseState
 {
     readonly ShotgunnerEnemy shotgunnerEnemy;
+    Vector3 playerDirection;
     public ShotgunnerMoveState(ShotgunnerEnemy shotgunnerEnemy)
     {
         this.shotgunnerEnemy = shotgunnerEnemy;
@@ -21,7 +22,8 @@ public class ShotgunnerMoveState : BaseState
         }
         else
         {
-            shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.transform.position);
+            playerDirection = (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
+            shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.transform.position + playerDirection * 1f);
             stateMachine.ChangeState(new ShotgunnerAttackState(shotgunnerEnemy));
         }
     }
