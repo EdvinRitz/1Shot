@@ -1984,8 +1984,8 @@ MonoBehaviour:
   lookDirection: {x: 0, y: 0, z: 0}
   fireRate: 1.6
   gunBarrel: {fileID: 640950900}
-  moveCloserDistance: 10
-  moveAwayDistance: 5
+  moveCloserDistance: 12
+  moveAwayDistance: 8
 --- !u!1 &957133666
 GameObject:
   m_ObjectHideFlags: 0
