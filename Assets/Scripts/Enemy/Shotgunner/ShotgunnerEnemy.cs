@@ -10,6 +10,7 @@ public class ShotgunnerEnemy : BaseEnemy
     [Tooltip("number + number - 1")]
     [Range(1,6)]
     public int bulletsPerShotSliderValue;
+    public int totalSpreadAngle = 90;
     public Transform gunBarrel;
     public float moveCloserDistance;
     public float moveAwayDistance;

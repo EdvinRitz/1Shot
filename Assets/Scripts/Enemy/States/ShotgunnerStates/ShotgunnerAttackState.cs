@@ -6,7 +6,6 @@ public class ShotgunnerAttackState : BaseState
     private float shotTimer;
     readonly ShotgunnerEnemy shotgunnerEnemy;
     Vector3 retreatDirection;
-    int totalSpreadAngle = 90;
 
     public ShotgunnerAttackState(ShotgunnerEnemy shotgunnerEnemy)
     {
@@ -47,15 +46,23 @@ public class ShotgunnerAttackState : BaseState
 
     public void Shoot()
     {
-        float angleStep = totalSpreadAngle / (shotgunnerEnemy.CalculateNumberOfBullets() - 1);
+        float angleStep = shotgunnerEnemy.totalSpreadAngle / (shotgunnerEnemy.CalculateNumberOfBullets() - 1);
         //Store reference to gun barrel
         Transform gunbarrel = shotgunnerEnemy.gunBarrel;
         //instanciate a new bullet
         GameObject bullet = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+        GameObject bullet1 = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+        GameObject bullet2 = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
         
         Vector3 shootDirection = gunbarrel.forward;
+        Vector3 rotatedDirection1 = Quaternion.AngleAxis(angleStep, Vector3.up) * shootDirection;
+        Vector3 rotatedDirection2 = Quaternion.AngleAxis(-angleStep, Vector3.up) * shootDirection;
+
+
         //add force rigidbody to the bullet
         bullet.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
+        bullet1.GetComponent<Rigidbody>().linearVelocity = rotatedDirection1 * 10;
+        bullet2.GetComponent<Rigidbody>().linearVelocity = rotatedDirection2 * 10;
         shotTimer = 0;
     }
 }

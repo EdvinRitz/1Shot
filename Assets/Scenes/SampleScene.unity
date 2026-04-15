@@ -1984,7 +1984,7 @@ MonoBehaviour:
   lookDirection: {x: 0, y: 0, z: 0}
   fireRate: 1
   bulletsPerShotSliderValue: 2
-  bulletsPerShot: 1
+  totalSpreadAngle: 60
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 12
   moveAwayDistance: 9
