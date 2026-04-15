@@ -1983,6 +1983,8 @@ MonoBehaviour:
   fieldOfView: 85
   lookDirection: {x: 0, y: 0, z: 0}
   fireRate: 1
+  bulletsPerShotSliderValue: 2
+  bulletsPerShot: 1
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 12
   moveAwayDistance: 9
@@ -2404,7 +2406,7 @@ Transform:
   m_GameObject: {fileID: 1210396488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.374, y: 0.137, z: 0.711}
+  m_LocalPosition: {x: 0, y: 0.137, z: 0.711}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

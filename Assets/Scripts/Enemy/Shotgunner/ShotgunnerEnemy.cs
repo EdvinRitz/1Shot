@@ -7,6 +7,9 @@ public class ShotgunnerEnemy : BaseEnemy
     public Vector3 lookDirection;
     [Range(0.1f,10f)]
     public float fireRate;
+    [Tooltip("number + number - 1")]
+    [Range(1,6)]
+    public int bulletsPerShotSliderValue;
     public Transform gunBarrel;
     public float moveCloserDistance;
     public float moveAwayDistance;
@@ -27,7 +30,7 @@ public class ShotgunnerEnemy : BaseEnemy
         //shotgunnerEnemy.transform.rotation = Quaternion.LookRotation(lookDirection);
         this.transform.LookAt(this.Player.transform);
     }
-        public override bool CanSeePlayer()
+    public override bool CanSeePlayer()
     {
         if (player != null)
         {
@@ -54,4 +57,10 @@ public class ShotgunnerEnemy : BaseEnemy
         }
         return false;
     }
+
+    public int CalculateNumberOfBullets()
+    {
+        return bulletsPerShotSliderValue + bulletsPerShotSliderValue -1;
+    }
+
 }
