@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
             Debug.Log("Hit Player");
             //hittTransform.GetComponent<PlayerHealth>().TakeDamage(10);
         }
-        if (hittTransform.CompareTag("Enemy"))
+        if (hittTransform.CompareTag("Enemy") || hittTransform.CompareTag("Bullet"))
         {
             return;
         }

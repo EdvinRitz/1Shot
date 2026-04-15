@@ -6,6 +6,7 @@ public class ShotgunnerAttackState : BaseState
     private float shotTimer;
     readonly ShotgunnerEnemy shotgunnerEnemy;
     Vector3 retreatDirection;
+    int totalSpreadAngle = 90;
 
     public ShotgunnerAttackState(ShotgunnerEnemy shotgunnerEnemy)
     {
@@ -46,11 +47,12 @@ public class ShotgunnerAttackState : BaseState
 
     public void Shoot()
     {
+        float angleStep = totalSpreadAngle / (shotgunnerEnemy.CalculateNumberOfBullets() - 1);
         //Store reference to gun barrel
         Transform gunbarrel = shotgunnerEnemy.gunBarrel;
         //instanciate a new bullet
         GameObject bullet = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
-        //calculate the direction to the player
+        
         Vector3 shootDirection = gunbarrel.forward;
         //add force rigidbody to the bullet
         bullet.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
