@@ -22,6 +22,10 @@ public class ShotgunnerMoveState : BaseState
         }
         else
         {
+            if (!shotgunnerEnemy.CanSeePlayer())
+            {
+                return;
+            }
             playerDirection = (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
             shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.transform.position + playerDirection * 1f);
             stateMachine.ChangeState(new ShotgunnerAttackState(shotgunnerEnemy));
