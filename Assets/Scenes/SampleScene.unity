@@ -1876,6 +1876,7 @@ MonoBehaviour:
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 12
   moveAwayDistance: 9
+  mask: 0
 --- !u!1 &957133666
 GameObject:
   m_ObjectHideFlags: 0
@@ -3017,7 +3018,7 @@ GameObject:
   - component: {fileID: 1762229030}
   m_Layer: 7
   m_Name: wall (1)
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
