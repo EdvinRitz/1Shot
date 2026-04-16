@@ -14,6 +14,7 @@ public class ShotgunnerEnemy : BaseEnemy
     public Transform gunBarrel;
     public float moveCloserDistance;
     public float moveAwayDistance;
+    public int mask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
@@ -22,7 +23,11 @@ public class ShotgunnerEnemy : BaseEnemy
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
         stateMachine.ChangeState(new ShotgunnerMoveState(this));
+        int enemyLayer = LayerMask.NameToLayer("Enemy");
+        int enemyMask = 1 << enemyLayer;
+        mask = ~enemyMask;
     }
+
 
     // Update is called once per frame
     public override void Update()
@@ -44,7 +49,7 @@ public class ShotgunnerEnemy : BaseEnemy
                 {
                     Ray ray = new Ray(transform.position, targetDirection);
                     RaycastHit hitInfo = new RaycastHit();
-                    if (Physics.Raycast(ray, out hitInfo, sightDistance))
+                    if (Physics.Raycast(ray, out hitInfo, sightDistance, mask))
                     {
                         if (hitInfo.transform.gameObject == player)
                         {
