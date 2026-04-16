@@ -19,7 +19,7 @@ public class ShotgunnerAttackState : BaseState
 
     public override void Perform()
     {
-        if (Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) > shotgunnerEnemy.moveCloserDistance)
+        if (Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) > shotgunnerEnemy.moveCloserDistance || !shotgunnerEnemy.CanSeePlayer())
         {
             stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
         }
