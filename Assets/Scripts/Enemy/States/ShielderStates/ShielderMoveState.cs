@@ -17,7 +17,17 @@ public class ShielderMoveState : BaseState
     // Update is called once per frame
     public override void Perform()
     {
+        walkTowardsPlayer();
+    }
+
+    public void walkTowardsPlayer()
+    {
+        shielderEnemy.Agent.SetDestination(shielderEnemy.Player.transform.position);
         
+        if((Vector3.Distance(shielderEnemy.transform.position, shielderEnemy.Player.transform.position) < shielderEnemy.attackDistance) && shielderEnemy.CanSeePlayer()) 
+        {
+            //stateMachine.ChangeState(new GruntAttackState(gruntEnemy));
+        }
     }
 
     public override void Exit()

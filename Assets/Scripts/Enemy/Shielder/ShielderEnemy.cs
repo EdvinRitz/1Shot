@@ -12,6 +12,7 @@ public class ShielderEnemy : BaseEnemy
         stateMachine = GetComponent<StateMachine>();
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
+        stateMachine.ChangeState(new ShielderMoveState(this));
     }
 
     // Update is called once per frame
