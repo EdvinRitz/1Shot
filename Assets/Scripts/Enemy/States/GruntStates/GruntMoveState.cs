@@ -13,9 +13,9 @@ public class GruntMoveState : BaseState
     }
     public override void Perform()
     {
-        walkTowardsPlayer();
+        WalkTowardsPlayer();
     }
-    public void walkTowardsPlayer()
+    public void WalkTowardsPlayer()
     {
         gruntEnemy.Agent.SetDestination(gruntEnemy.Player.transform.position);
         

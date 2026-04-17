@@ -48,4 +48,22 @@ public class ShielderEnemy : BaseEnemy
         }
         return false;
     }
+
+    public bool PlayerInFieldOfView()
+    {
+        if (player != null)
+        {
+            //is the player close enough to be seen?
+            if (Vector3.Distance(transform.position, player.transform.position) < sightDistance)
+            {
+                Vector3 targetDirection = player.transform.position - transform.position;
+                float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
+                if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

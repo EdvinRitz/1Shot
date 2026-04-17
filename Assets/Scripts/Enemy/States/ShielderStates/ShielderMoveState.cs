@@ -17,10 +17,10 @@ public class ShielderMoveState : BaseState
     // Update is called once per frame
     public override void Perform()
     {
-        walkTowardsPlayer();
+        WalkTowardsPlayer();
     }
 
-    public void walkTowardsPlayer()
+    public void WalkTowardsPlayer()
     {
         shielderEnemy.Agent.SetDestination(shielderEnemy.Player.transform.position);
         
