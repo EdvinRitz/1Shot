@@ -38,7 +38,7 @@ public class ShielderMoveState : BaseState
 
         if((Vector3.Distance(shielderEnemy.transform.position, shielderEnemy.Player.transform.position) < shielderEnemy.attackDistance) && shielderEnemy.CanSeePlayer()) 
         {
-            //stateMachine.ChangeState(new GruntAttackState(gruntEnemy));
+            //TODO switch to attack state
         }
     }
 
