@@ -24,7 +24,7 @@ public class ShielderMoveState : BaseState
     public void WalkTowardsPlayer()
     {
         //shielderEnemy.Agent.SetDestination(shielderEnemy.Player.transform.position);
-        if (!shielderEnemy.PlayerInFieldOfView())
+        if (!shielderEnemy.PlayerInFieldOfView() || Vector3.Distance(shielderEnemy.transform.position, shielderEnemy.Player.transform.position) <= shielderEnemy.stopDistance)
         {
             shielderEnemy.Agent.isStopped = true;
             Vector3 directionToPlayer = (shielderEnemy.Player.transform.position - shielderEnemy.transform.position).normalized;

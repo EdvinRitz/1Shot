@@ -4,7 +4,8 @@ public class ShielderEnemy : BaseEnemy
 {
     public float attackDistance = 6f;
     public float sightDistance = 20f;
-    public float fieldOfView = 85f;
+    public float fieldOfView = 60f;
+    public float stopDistance = 3f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {

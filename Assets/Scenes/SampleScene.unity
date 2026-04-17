@@ -2771,7 +2771,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShielderEnemy
   attackDistance: 6
   sightDistance: 20
-  fieldOfView: 85
+  fieldOfView: 30
+  stopDistance: 3
 --- !u!1 &1375741464
 GameObject:
   m_ObjectHideFlags: 0
