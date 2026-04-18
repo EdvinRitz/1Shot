@@ -15,6 +15,7 @@ public class ShotgunnerEnemy : BaseEnemy
     public float moveCloserDistance;
     public float moveAwayDistance;
     private int mask;
+    public float panicDistance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {

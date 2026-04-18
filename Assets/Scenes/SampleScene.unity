@@ -1971,7 +1971,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 180
@@ -2095,12 +2095,12 @@ MonoBehaviour:
   fieldOfView: 85
   lookDirection: {x: 0, y: 0, z: 0}
   fireRate: 1
-  bulletsPerShotSliderValue: 3
+  bulletsPerShotSliderValue: 2
   totalSpreadAngle: 80
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 12
   moveAwayDistance: 9
-  mask: 0
+  panicDistance: 4
 --- !u!1 &957133666
 GameObject:
   m_ObjectHideFlags: 0

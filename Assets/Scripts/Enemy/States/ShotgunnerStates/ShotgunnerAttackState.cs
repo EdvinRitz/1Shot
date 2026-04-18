@@ -32,7 +32,12 @@ public class ShotgunnerAttackState : BaseState
                 Shoot();
             }
         }
-        if(Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) < shotgunnerEnemy.moveAwayDistance)
+
+        if(Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) <= shotgunnerEnemy.panicDistance)
+        {
+            stateMachine.ChangeState(new ShotgunnerPanicState(shotgunnerEnemy));
+        }
+        else if(Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) < shotgunnerEnemy.moveAwayDistance)
         {
             retreatDirection = -(shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
             shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.transform.position + retreatDirection * 2f);
