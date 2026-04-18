@@ -16,6 +16,7 @@ public class ShotgunnerMoveState : BaseState
 
     public override void Perform()
     {
+        shotgunnerEnemy.transform.LookAt(shotgunnerEnemy.Player.transform);
         if (Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) > shotgunnerEnemy.moveCloserDistance || !shotgunnerEnemy.CanSeePlayer())
         {
             shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.Player.transform.position);

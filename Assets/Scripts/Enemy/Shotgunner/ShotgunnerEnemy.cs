@@ -14,7 +14,7 @@ public class ShotgunnerEnemy : BaseEnemy
     public Transform gunBarrel;
     public float moveCloserDistance;
     public float moveAwayDistance;
-    public int mask;
+    private int mask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
@@ -34,7 +34,7 @@ public class ShotgunnerEnemy : BaseEnemy
     {
         //lookDirection = (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
         //shotgunnerEnemy.transform.rotation = Quaternion.LookRotation(lookDirection);
-        this.transform.LookAt(this.Player.transform);
+        //this.transform.LookAt(this.Player.transform);
     }
     public override bool CanSeePlayer()
     {
