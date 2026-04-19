@@ -16,6 +16,7 @@ public class ShotgunnerEnemy : BaseEnemy
     public float moveAwayDistance;
     private int mask;
     public float panicDistance;
+    public float panicMoveDistance = 10f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
@@ -26,7 +27,9 @@ public class ShotgunnerEnemy : BaseEnemy
         stateMachine.ChangeState(new ShotgunnerMoveState(this));
         int enemyLayer = LayerMask.NameToLayer("Enemy");
         int enemyMask = 1 << enemyLayer;
-        mask = ~enemyMask;
+        int rayCastStopLayer = LayerMask.NameToLayer("RayCastStop");
+        int rayCastStopMask = 1 << rayCastStopLayer;
+        mask = ~(enemyMask | rayCastStopMask);
     }
 
 

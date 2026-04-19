@@ -5,7 +5,6 @@ public class ShotgunnerPanicState : BaseState
     readonly ShotgunnerEnemy shotgunnerEnemy;
     float normalSpeed;
     Vector3 panicEndPostition;
-    public float panicMoveDistance = 10f;
     ShielderEnemy shielderEnemyClosest;
     public ShotgunnerPanicState(ShotgunnerEnemy shotgunnerEnemy)
     {
@@ -18,7 +17,7 @@ public class ShotgunnerPanicState : BaseState
 
         if(ShielderEnemy.activeShielderEnemies.Count == 0)
         {
-            panicEndPostition = shotgunnerEnemy.transform.position + (shotgunnerEnemy.transform.position - shotgunnerEnemy.Player.transform.position).normalized * panicMoveDistance;
+            panicEndPostition = shotgunnerEnemy.transform.position - shotgunnerEnemy.transform.forward * shotgunnerEnemy.panicMoveDistance;
         }
         else if(ShielderEnemy.activeShielderEnemies.Count == 1)
         {
@@ -30,7 +29,7 @@ public class ShotgunnerPanicState : BaseState
 
             for(int i = 1; i < ShielderEnemy.activeShielderEnemies.Count; i++)
             {
-                if (Vector3.Distance(shotgunnerEnemy.transform.position, ShielderEnemy.activeShielderEnemies[i].transform.position) < Vector3.Distance(shotgunnerEnemy.transform.position, ShielderEnemy.activeShielderEnemies[i-1].transform.position))
+                if (Vector3.Distance(shotgunnerEnemy.transform.position, ShielderEnemy.activeShielderEnemies[i].transform.position) < Vector3.Distance(shotgunnerEnemy.transform.position, shielderEnemyClosest.transform.position))
                 {
                     shielderEnemyClosest = ShielderEnemy.activeShielderEnemies[i];
                 }
@@ -42,12 +41,12 @@ public class ShotgunnerPanicState : BaseState
     {
         if(ShielderEnemy.activeShielderEnemies.Count > 0)
         {
-            panicEndPostition = shielderEnemyClosest.transform.position - shielderEnemyClosest.transform.forward * 1.5f;
+            panicEndPostition = shielderEnemyClosest.transform.position - shielderEnemyClosest.transform.forward * 2f;
         }
 
         shotgunnerEnemy.Agent.SetDestination(panicEndPostition);
 
-        if(Vector3.Distance(shotgunnerEnemy.transform.position, panicEndPostition) <= 0.2f)
+        if(Vector3.Distance(shotgunnerEnemy.transform.position, panicEndPostition) <= 0.3f)
         {
             stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
         }

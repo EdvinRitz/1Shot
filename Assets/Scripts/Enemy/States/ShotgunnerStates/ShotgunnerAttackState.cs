@@ -19,7 +19,9 @@ public class ShotgunnerAttackState : BaseState
 
     public override void Perform()
     {
-        shotgunnerEnemy.transform.LookAt(shotgunnerEnemy.Player.transform);
+        //shotgunnerEnemy.transform.LookAt(shotgunnerEnemy.Player.transform);
+        Vector3 directionToPlayer = (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
+        shotgunnerEnemy.transform.rotation = Quaternion.RotateTowards(shotgunnerEnemy.transform.rotation, Quaternion.LookRotation(directionToPlayer), 180 * Time.deltaTime);
         if (Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) > shotgunnerEnemy.moveCloserDistance || !shotgunnerEnemy.CanSeePlayer())
         {
             stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
