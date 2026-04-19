@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ShielderEnemy : BaseEnemy
@@ -6,7 +7,19 @@ public class ShielderEnemy : BaseEnemy
     public float sightDistance = 20f;
     public float fieldOfView = 60f;
     public float stopDistance = 3f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static List<ShielderEnemy> activeShielders = new();
+
+
+    public void OnEnable()
+    {
+        activeShielders.Add(this);
+    }
+
+    void OnDisable()
+    {
+        activeShielders.Remove(this);
+    }
+
     public override void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
