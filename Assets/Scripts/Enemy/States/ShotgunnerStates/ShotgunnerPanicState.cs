@@ -3,7 +3,6 @@ using UnityEngine;
 public class ShotgunnerPanicState : BaseState
 {
     readonly ShotgunnerEnemy shotgunnerEnemy;
-    Vector3 panicDirection;
     float normalSpeed;
     Vector3 panicEndPostition;
     public float panicMoveDistance = 10f;
@@ -19,8 +18,7 @@ public class ShotgunnerPanicState : BaseState
 
         if(ShielderEnemy.activeShielderEnemies.Count == 0)
         {
-            panicDirection = -(shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
-            panicEndPostition = shotgunnerEnemy.transform.position + panicDirection * panicMoveDistance;
+            panicEndPostition = shotgunnerEnemy.transform.position + (shotgunnerEnemy.transform.position - shotgunnerEnemy.Player.transform.position).normalized * panicMoveDistance;
         }
         else if(ShielderEnemy.activeShielderEnemies.Count == 1)
         {
@@ -37,24 +35,22 @@ public class ShotgunnerPanicState : BaseState
                     shielderEnemyClosest = ShielderEnemy.activeShielderEnemies[i];
                 }
             }
-            //ShielderEnemyClosest = ShielderEnemy.activeShielderEnemies[?];
         }
-        else
-        {
-            //Error handling?
-        }
-        
-        
-        //shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.transform.position + panicDirection * 10f);
     }
 
     public override void Perform()
     {
         if(ShielderEnemy.activeShielderEnemies.Count > 0)
         {
-            panicEndPostition = shielderEnemyClosest.transform.position - shielderEnemyClosest.transform.forward * 1f;
+            panicEndPostition = shielderEnemyClosest.transform.position - shielderEnemyClosest.transform.forward * 1.5f;
         }
+
         shotgunnerEnemy.Agent.SetDestination(panicEndPostition);
+
+        if(Vector3.Distance(shotgunnerEnemy.transform.position, panicEndPostition) <= 0.2f)
+        {
+            stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
+        }
     }
 
     public override void Exit()
