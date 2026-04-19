@@ -7,17 +7,17 @@ public class ShielderEnemy : BaseEnemy
     public float sightDistance = 20f;
     public float fieldOfView = 60f;
     public float stopDistance = 3f;
-    public static List<ShielderEnemy> activeShielders = new();
+    public static List<ShielderEnemy> activeShielderEnemies = new();
 
 
     public void OnEnable()
     {
-        activeShielders.Add(this);
+        activeShielderEnemies.Add(this);
     }
 
     void OnDisable()
     {
-        activeShielders.Remove(this);
+        activeShielderEnemies.Remove(this);
     }
 
     public override void Start()
