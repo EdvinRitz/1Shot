@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
             //hittTransform.GetComponent<PlayerHealth>().TakeDamage(10);
             Destroy(gameObject);
         }
-        if (hittTransform.CompareTag("Enemy") || hittTransform.CompareTag("Bullet"))
+        if (hittTransform.CompareTag("Enemy") || hittTransform.CompareTag("Bullet") || hittTransform.CompareTag("RayCastStop"))
         {
             return;
         }
