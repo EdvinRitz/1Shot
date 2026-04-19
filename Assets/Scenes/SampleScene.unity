@@ -1284,6 +1284,7 @@ GameObject:
   - component: {fileID: 679599666}
   - component: {fileID: 679599667}
   - component: {fileID: 679599668}
+  - component: {fileID: 679599669}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1464,6 +1465,22 @@ MonoBehaviour:
   ySensetivity: 30
   playerInputHandler: {fileID: 0}
   playerMotor: {fileID: 0}
+--- !u!208 &679599669
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679599660}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.75, y: 1, z: 0.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &698282544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,7 +1988,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 180
