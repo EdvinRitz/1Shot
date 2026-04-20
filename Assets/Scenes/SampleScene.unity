@@ -2460,14 +2460,13 @@ MonoBehaviour:
   sightDistance: 20
   fieldOfView: 85
   fireRate: 1
-  bulletsPerShotSliderValue: 2
+  bulletsPerShotSliderValue: 3
   totalBulletSpreadAngle: 90
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 12
   moveAwayDistance: 9
   panicDistance: 4
   panicMoveDistance: 10
-  panicState: 0
 --- !u!1 &957133666
 GameObject:
   m_ObjectHideFlags: 0

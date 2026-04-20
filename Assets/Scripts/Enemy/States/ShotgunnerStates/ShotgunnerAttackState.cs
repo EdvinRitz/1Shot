@@ -14,7 +14,8 @@ public class ShotgunnerAttackState : BaseState
     
     public override void Enter()
     {
-        shotgunnerEnemy.Agent.updateRotation = false;     
+        shotgunnerEnemy.Agent.updateRotation = false;    
+        
     }
 
     public override void Perform()
@@ -59,26 +60,26 @@ public class ShotgunnerAttackState : BaseState
         Transform gunbarrel = shotgunnerEnemy.gunBarrel;
         Vector3 shootDirection = gunbarrel.forward;
 
-        if(shotgunnerEnemy.CalculateNumberOfBullets() == 1){
-            GameObject bulletSingle = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
-            bulletSingle.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
-        }
-        else
+        //Always shoot a center bullet
+        GameObject bulletSingle = Object.Instantiate(shotgunnerEnemy.BulletPrefab, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+        bulletSingle.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
+
+        if (shotgunnerEnemy.NumberOfBullets > 1)
         {
-            GameObject bulletSingle = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
-            bulletSingle.GetComponent<Rigidbody>().linearVelocity = shootDirection * 10;
-            float angleStep = shotgunnerEnemy.totalBulletSpreadAngle / (shotgunnerEnemy.CalculateNumberOfBullets() - 1);
+            float angleStep = shotgunnerEnemy.totalBulletSpreadAngle / (shotgunnerEnemy.NumberOfBullets - 1);
             int counter = 0;
-            for (int i = 0; i < (shotgunnerEnemy.CalculateNumberOfBullets() - 1) / 2; i++) 
+            //Spawn a mirrored pair of bullets with mirrored angles
+            for (int i = 0; i < (shotgunnerEnemy.NumberOfBullets - 1) / 2; i++) 
             {
                 counter++;
-                GameObject bulletPosetive = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
-                GameObject bulletNegative = GameObject.Instantiate(Resources.Load("Bullet") as GameObject, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+                GameObject bulletPositive = Object.Instantiate(shotgunnerEnemy.BulletPrefab, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+                GameObject bulletNegative = Object.Instantiate(shotgunnerEnemy.BulletPrefab, gunbarrel.position, shotgunnerEnemy.transform.rotation);
+                
 
-                Vector3 rotatedDirectionPosetive = Quaternion.AngleAxis(angleStep * counter, Vector3.up) * shootDirection;
+                Vector3 rotatedDirectionPositive = Quaternion.AngleAxis(angleStep * counter, Vector3.up) * shootDirection;
                 Vector3 rotatedDirectionNegative = Quaternion.AngleAxis(-angleStep * counter, Vector3.up) * shootDirection;
 
-                bulletPosetive.GetComponent<Rigidbody>().linearVelocity = rotatedDirectionPosetive * 10;
+                bulletPositive.GetComponent<Rigidbody>().linearVelocity = rotatedDirectionPositive * 10;
                 bulletNegative.GetComponent<Rigidbody>().linearVelocity = rotatedDirectionNegative * 10;
             }  
         }

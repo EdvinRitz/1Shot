@@ -4,8 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(StateMachine))]
 public class ShotgunnerEnemy : BaseEnemy
 {
+    [Header("Vision")]
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
+    [Header("Shooting")]
     [Range(0.1f,10f)]
     public float fireRate;
     [Tooltip("number + number - 1")]
@@ -13,12 +15,24 @@ public class ShotgunnerEnemy : BaseEnemy
     public int bulletsPerShotSliderValue;
     public int totalBulletSpreadAngle = 90;
     public Transform gunBarrel;
+    [Header("Movement")]
+    [Tooltip("Distance from Player that activates the move state")]
     public float moveCloserDistance;
+    [Tooltip("Distance from Player that activates the move away logic in the attack state")]
     public float moveAwayDistance;
+    [Tooltip("Distance from Player that activates the panic state")]
     public float panicDistance;
+    [Tooltip("Distance moved when paniced and no Shielders are active")]
     public float panicMoveDistance = 10f;
+    
+    private bool panicState = false;
+    public bool PanicState {get => panicState; set => panicState = value;}   
+    private GameObject bulletPrefab;
+    public GameObject BulletPrefab { get => bulletPrefab; }
+    private int numberOfBullets;
+    public int NumberOfBullets { get => numberOfBullets; }
+
     private int mask;
-    public bool panicState = false;
 
     public override void Start()
     {
@@ -31,6 +45,10 @@ public class ShotgunnerEnemy : BaseEnemy
         //Shotgunner can see through enemies and objects on layer "RayCastStop" (like shielders shields)
         int layerMasks = LayerMask.GetMask("RayCastStop", "Enemy");
         mask = ~layerMasks;
+
+        //Loads bullet once
+        bulletPrefab = Resources.Load<GameObject>("Bullet");
+        numberOfBullets = CalculateNumberOfBullets();
     }
 
     public override void Update()
