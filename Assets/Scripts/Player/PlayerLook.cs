@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInputHandler))]
 public class PlayerLook : MonoBehaviour
 {
     public Camera cam;
@@ -7,19 +8,17 @@ public class PlayerLook : MonoBehaviour
     public float xSensetivity = 30f;
     public float ySensetivity = 30f;
 
-    public PlayerInputHandler playerInputHandler;
-    public PlayerMotor playerMotor;
+    private PlayerInputHandler playerInputHandler;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerInputHandler = GetComponent<PlayerInputHandler>();
-        playerMotor = GetComponent<PlayerMotor>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ProcessLook(playerInputHandler.lookInput);
+        ProcessLook(playerInputHandler.LookInput);
     }
 
     public void ProcessLook(Vector2 input){
@@ -31,6 +30,6 @@ public class PlayerLook : MonoBehaviour
         //Apply this to our camera transform.
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         //rotate player to look left and right.
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensetivity);
+        transform.Rotate(mouseX * Time.deltaTime * xSensetivity * Vector3.up);
     }
 }

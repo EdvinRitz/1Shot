@@ -1,36 +1,30 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMotor : MonoBehaviour
 {
-    public Vector3 moveDirection = Vector3.zero;
-    public Vector3 dashDirection = Vector3.zero;
+    private Vector3 moveDirection = Vector3.zero;
+    private Vector3 dashDirection = Vector3.zero;
     private CharacterController controller;
     public PlayerInputHandler playerInputHandler;
     private Vector3 playerVelocity;
     public float speed = 5f;
     private bool isGrounded;
-    public float gravity = -9.8f;
+    private float gravity = -9.8f;
     public float jumpHeight = 0.75f;
-    public bool isDashing;
-    public float dashTimer;
+    private bool isDashing;
+    private float dashTimer;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
-    {
-
-    }
     void Start()
     {
         controller = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isDashing)
         {
-            ProcessMove(playerInputHandler.moveInput);
+            ProcessMove(playerInputHandler.MoveInput);
         }
        
         isGrounded = controller.isGrounded;
@@ -40,24 +34,20 @@ public class PlayerMotor : MonoBehaviour
         }
         if(playerInputHandler.dashPressed == true || isDashing == true)
         {
-            Dash(playerInputHandler.moveInput);
+            Dash(playerInputHandler.MoveInput);
         }
-        
     }
 
     public void ProcessMove(Vector2 input)
     {
         moveDirection.x = input.x;
         moveDirection.z = input.y;
-        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        controller.Move(speed * Time.deltaTime * transform.TransformDirection(moveDirection));
         playerVelocity.y += gravity * Time.deltaTime;
         if (isGrounded && playerVelocity.y < 0){
             playerVelocity.y = -2f;
         }
         controller.Move(playerVelocity * Time.deltaTime);
-        //Vector3 worldMove = transform.TransformDirection(moveDirection) * speed;
-        //Debug.Log($"input: {input}, move magnitude: {worldMove.magnitude}");
-
     }
 
     public void Jump(){
@@ -76,6 +66,7 @@ public class PlayerMotor : MonoBehaviour
         dashTimer = 0.2f;
         }
         isDashing = true;
+        //Can't dash if we are not moving
         if(dashDirection == Vector3.zero)
         {
             isDashing = false;
@@ -91,7 +82,6 @@ public class PlayerMotor : MonoBehaviour
         {
             isDashing = false;
         }
-        //Debug.Log("dashed");
         playerInputHandler.dashPressed = false;
     }
 }

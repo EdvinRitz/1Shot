@@ -53,7 +53,7 @@ public class ShotgunnerEnemy : BaseEnemy
 
     public override void Update()
     {
-        if (!panicState)
+        if (!panicState && stateMachine.activeState.ToString() != "DieState")
         {
         Vector3 directionToPlayer = (Player.transform.position - transform.position).normalized;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(directionToPlayer), 180 * Time.deltaTime);
