@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+[RequireComponent(typeof(StateMachine))]
 public class ShielderEnemy : BaseEnemy
 {
     public float attackDistance = 6f;
@@ -63,6 +65,7 @@ public class ShielderEnemy : BaseEnemy
         return false;
     }
 
+    //Same as CanSeePlayer() but without a RayCast
     public bool PlayerInFieldOfView()
     {
         if (player != null)
