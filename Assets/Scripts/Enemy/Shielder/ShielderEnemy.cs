@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+[RequireComponent(typeof(StateMachine))]
 public class ShielderEnemy : BaseEnemy
 {
     public float attackDistance = 6f;
@@ -46,8 +48,8 @@ public class ShielderEnemy : BaseEnemy
                 float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
                 if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
                 {
-                    Ray ray = new Ray(transform.position, targetDirection);
-                    RaycastHit hitInfo = new RaycastHit();
+                    Ray ray = new(transform.position, targetDirection);
+                    RaycastHit hitInfo = new();
                     if (Physics.Raycast(ray, out hitInfo, sightDistance))
                     {
                         if (hitInfo.transform.gameObject == player)
@@ -63,6 +65,7 @@ public class ShielderEnemy : BaseEnemy
         return false;
     }
 
+    //Same as CanSeePlayer() but without a RayCast
     public bool PlayerInFieldOfView()
     {
         if (player != null)

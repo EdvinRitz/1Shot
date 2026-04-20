@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class GruntAttackState : BaseState
@@ -10,13 +9,13 @@ public class GruntAttackState : BaseState
     Vector3 playerInitialPosition;
     Vector3 enemyInitialPostion;
     float dashDistanceTarget;
-
-    float dashSpeed = 10f;
+    readonly float dashSpeed = 10f;
 
     public GruntAttackState(GruntEnemy gruntEnemy)
     {
         this.gruntEnemy = gruntEnemy;
     }
+
     public override void Enter()
     {
         dashDirection = (gruntEnemy.Player.transform.position - gruntEnemy.transform.position).normalized;
@@ -30,6 +29,12 @@ public class GruntAttackState : BaseState
     }
 
     public override void Perform()
+    {
+        AttackPlayer();
+    }
+
+    //Perform a "Dash-attack" towards the player and then change back to GruntMoveState
+    public void AttackPlayer()
     {
         windupTimer -= Time.deltaTime;
         if (windupTimer <= 0)
@@ -49,8 +54,8 @@ public class GruntAttackState : BaseState
                 
             }
         }
-        
     }
+
     public override void Exit()
     {
         gruntEnemy.Agent.isStopped = false;

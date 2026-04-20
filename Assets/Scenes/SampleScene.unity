@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 125604713}
   - component: {fileID: 125604712}
   - component: {fileID: 125604711}
+  - component: {fileID: 125604717}
   m_Layer: 6
   m_Name: Enemy Moving (1)
   m_TagString: Untagged
@@ -384,6 +385,18 @@ Transform:
   - {fileID: 1733686961}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &125604717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125604710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73154047bc6103348858b87bbd160476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateMachine
 --- !u!1 &148142813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &440772717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1776,14 +1789,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6391dba182220f341af94466cb0e0f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMotor
-  moveDirection: {x: 0, y: 0, z: 0}
-  dashDirection: {x: 0, y: 0, z: 0}
   playerInputHandler: {fileID: 679599666}
   speed: 5
-  gravity: -9.8
   jumpHeight: 0.3
-  isDashing: 0
-  dashTimer: 0
 --- !u!114 &679599668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1799,8 +1807,6 @@ MonoBehaviour:
   cam: {fileID: 1880964165}
   xSensetivity: 30
   ySensetivity: 30
-  playerInputHandler: {fileID: 0}
-  playerMotor: {fileID: 0}
 --- !u!208 &679599669
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -2301,7 +2307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &908690570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2446,10 +2452,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunnerEnemy
   sightDistance: 20
   fieldOfView: 85
-  lookDirection: {x: 0, y: 0, z: 0}
   fireRate: 1
-  bulletsPerShotSliderValue: 2
-  totalSpreadAngle: 80
+  bulletsPerShotSliderValue: 3
+  totalBulletSpreadAngle: 90
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 12
   moveAwayDistance: 9
@@ -2588,7 +2593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1085093021
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3091,7 +3096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1363750063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3875,7 +3880,7 @@ GameObject:
   - component: {fileID: 1742994662}
   - component: {fileID: 1742994661}
   - component: {fileID: 1742994660}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4108,7 +4113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1875336984
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class ShotgunnerPanicState : BaseState
     }
     public override void Enter()
     {
+        shotgunnerEnemy.PanicState = true;
+
         normalSpeed = shotgunnerEnemy.Agent.speed;
         shotgunnerEnemy.Agent.speed = shotgunnerEnemy.Agent.speed * 2;
 
@@ -55,5 +57,6 @@ public class ShotgunnerPanicState : BaseState
     public override void Exit()
     {
         shotgunnerEnemy.Agent.speed = normalSpeed;
+        shotgunnerEnemy.PanicState = false;
     }
 }

@@ -1,46 +1,28 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
     private InputSystem inputSystem;
     public InputSystem.PlayerActions playerActions;
+    [HideInInspector]
     public bool jumpPressed;
+    [HideInInspector]
     public bool shootPressed;
+    [HideInInspector]
     public bool dashPressed;
-    private PlayerMotor playerMotor;
-    public Vector2 moveInput { get; private set; }
-    public Vector2 lookInput { get; private set; }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Vector2 MoveInput { get; private set; }
+    public Vector2 LookInput { get; private set; }
 
     void Awake()
     {
         inputSystem = new InputSystem();
         playerActions = inputSystem.Player;
-
-        playerMotor = GetComponent<PlayerMotor>();
     }
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        moveInput = playerActions.Move.ReadValue<Vector2>();
-        if (moveInput != Vector2.zero)
-        {
-            //Debug.Log(moveInput);
-        }
-
-        lookInput = playerActions.Look.ReadValue<Vector2>();
-        if (lookInput != Vector2.zero)
-        {
-            //Debug.Log(lookInput);
-        }
-        //Debug.Log(jumpPressed);
+        MoveInput = playerActions.Move.ReadValue<Vector2>();
+        LookInput = playerActions.Look.ReadValue<Vector2>();
     }
 
     private void OnEnable()
@@ -49,7 +31,6 @@ public class PlayerInputHandler : MonoBehaviour
         playerActions.Jump.performed += ctx => jumpPressed = true;
         playerActions.Shoot.performed += ctx => shootPressed = true;
         playerActions.Dash.performed += ctx => dashPressed = true;
-        //JumpPressed = false;
     }
 
     private void OnDisable()

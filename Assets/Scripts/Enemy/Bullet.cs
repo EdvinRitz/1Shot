@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
         if (hittTransform.CompareTag("Player"))
         {
             hasHit = true;
-            Debug.Log("Hit Player");
+            //TODO implement Player damage logic
             //hittTransform.GetComponent<PlayerHealth>().TakeDamage(10);
             Destroy(gameObject);
         }

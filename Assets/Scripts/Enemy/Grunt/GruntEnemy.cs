@@ -1,12 +1,13 @@
-using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+[RequireComponent(typeof(StateMachine))]
 public class GruntEnemy : BaseEnemy
 {
     public float attackDistance = 6f;
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     public override void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -16,7 +17,6 @@ public class GruntEnemy : BaseEnemy
         stateMachine.ChangeState(new GruntMoveState(this));
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         
@@ -33,8 +33,8 @@ public class GruntEnemy : BaseEnemy
                 float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
                 if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
                 {
-                    Ray ray = new Ray(transform.position, targetDirection);
-                    RaycastHit hitInfo = new RaycastHit();
+                    Ray ray = new(transform.position, targetDirection);
+                    RaycastHit hitInfo = new();
                     if (Physics.Raycast(ray, out hitInfo, sightDistance))
                     {
                         if (hitInfo.transform.gameObject == player)
@@ -49,9 +49,4 @@ public class GruntEnemy : BaseEnemy
         }
         return false;
     }
-    
-    //public override void Die()
-    //{
-        //stateMachine.ChangeState(new DieState(this));
-    //}
 }
