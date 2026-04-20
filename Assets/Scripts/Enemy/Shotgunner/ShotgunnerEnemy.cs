@@ -1,23 +1,25 @@
 using UnityEngine;
 
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+[RequireComponent(typeof(StateMachine))]
 public class ShotgunnerEnemy : BaseEnemy
 {
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
-    public Vector3 lookDirection;
     [Range(0.1f,10f)]
     public float fireRate;
     [Tooltip("number + number - 1")]
-    [Range(1,6)]
+    [Range(1,5)]
     public int bulletsPerShotSliderValue;
-    public int totalSpreadAngle = 90;
+    public int totalBulletSpreadAngle = 90;
     public Transform gunBarrel;
     public float moveCloserDistance;
     public float moveAwayDistance;
-    private int mask;
     public float panicDistance;
     public float panicMoveDistance = 10f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private int mask;
+    public bool panicState = false;
+
     public override void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -25,21 +27,21 @@ public class ShotgunnerEnemy : BaseEnemy
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
         stateMachine.ChangeState(new ShotgunnerMoveState(this));
-        int enemyLayer = LayerMask.NameToLayer("Enemy");
-        int enemyMask = 1 << enemyLayer;
-        int rayCastStopLayer = LayerMask.NameToLayer("RayCastStop");
-        int rayCastStopMask = 1 << rayCastStopLayer;
-        mask = ~(enemyMask | rayCastStopMask);
+
+        //Shotgunner can see through enemies and objects on layer "RayCastStop" (like shielders shields)
+        int layerMasks = LayerMask.GetMask("RayCastStop", "Enemy");
+        mask = ~layerMasks;
     }
 
-
-    // Update is called once per frame
     public override void Update()
     {
-        //lookDirection = (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized;
-        //shotgunnerEnemy.transform.rotation = Quaternion.LookRotation(lookDirection);
-        //this.transform.LookAt(this.Player.transform);
+        if (!panicState)
+        {
+        Vector3 directionToPlayer = (Player.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(directionToPlayer), 180 * Time.deltaTime);
+        }
     }
+    
     public override bool CanSeePlayer()
     {
         if (player != null)
@@ -51,8 +53,8 @@ public class ShotgunnerEnemy : BaseEnemy
                 float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
                 if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
                 {
-                    Ray ray = new Ray(transform.position, targetDirection);
-                    RaycastHit hitInfo = new RaycastHit();
+                    Ray ray = new(transform.position, targetDirection);
+                    RaycastHit hitInfo = new();
                     if (Physics.Raycast(ray, out hitInfo, sightDistance, mask))
                     {
                         if (hitInfo.transform.gameObject == player)
@@ -70,7 +72,7 @@ public class ShotgunnerEnemy : BaseEnemy
 
     public int CalculateNumberOfBullets()
     {
-        return bulletsPerShotSliderValue + bulletsPerShotSliderValue -1;
+        return bulletsPerShotSliderValue + bulletsPerShotSliderValue - 1;
     }
 
 }

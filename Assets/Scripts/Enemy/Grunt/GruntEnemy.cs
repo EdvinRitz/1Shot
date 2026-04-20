@@ -33,7 +33,7 @@ public class GruntEnemy : BaseEnemy
                 float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
                 if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
                 {
-                    Ray ray = new Ray(transform.position, targetDirection);
+                    Ray ray = new(transform.position, targetDirection);
                     RaycastHit hitInfo = new();
                     if (Physics.Raycast(ray, out hitInfo, sightDistance))
                     {

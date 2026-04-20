@@ -2314,7 +2314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &908690570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2459,15 +2459,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunnerEnemy
   sightDistance: 20
   fieldOfView: 85
-  lookDirection: {x: 0, y: 0, z: 0}
   fireRate: 1
   bulletsPerShotSliderValue: 2
-  totalSpreadAngle: 80
+  totalBulletSpreadAngle: 90
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 12
   moveAwayDistance: 9
   panicDistance: 4
   panicMoveDistance: 10
+  panicState: 0
 --- !u!1 &957133666
 GameObject:
   m_ObjectHideFlags: 0
@@ -3104,7 +3104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1363750063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3888,7 +3888,7 @@ GameObject:
   - component: {fileID: 1742994662}
   - component: {fileID: 1742994661}
   - component: {fileID: 1742994660}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
