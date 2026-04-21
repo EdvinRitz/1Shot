@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ShotgunnerPanicState : BaseState
 {
     readonly ShotgunnerEnemy shotgunnerEnemy;
     float normalSpeed;
+    float panicTimer;
     Vector3 panicEndPostition;
     ShielderEnemy shielderEnemyClosest;
     public ShotgunnerPanicState(ShotgunnerEnemy shotgunnerEnemy)
@@ -13,7 +15,7 @@ public class ShotgunnerPanicState : BaseState
     public override void Enter()
     {
         shotgunnerEnemy.PanicState = true;
-
+        panicTimer = 3f;
         normalSpeed = shotgunnerEnemy.Agent.speed;
         shotgunnerEnemy.Agent.speed = shotgunnerEnemy.Agent.speed * 2;
 
@@ -45,12 +47,23 @@ public class ShotgunnerPanicState : BaseState
         {
             panicEndPostition = shielderEnemyClosest.transform.position - shielderEnemyClosest.transform.forward * 2f;
         }
+        else
+        {
+            panicTimer -= Time.deltaTime;
+        }
 
         shotgunnerEnemy.Agent.SetDestination(panicEndPostition);
 
-        if(Vector3.Distance(shotgunnerEnemy.transform.position, panicEndPostition) <= 0.3f)
+        if(ShielderEnemy.activeShielderEnemies.Count > 0 && Vector3.Distance(shotgunnerEnemy.transform.position, panicEndPostition) <= 0.3f)
         {
             stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
+        }
+        else
+        {
+            if(panicTimer <= 0)
+            {
+                stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
+            }
         }
     }
 

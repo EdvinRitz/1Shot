@@ -24,7 +24,6 @@ public class ShotgunnerEnemy : BaseEnemy
     public float panicDistance;
     [Tooltip("Distance moved when paniced and no Shielders are active")]
     public float panicMoveDistance = 10f;
-    
     private bool panicState = false;
     public bool PanicState {get => panicState; set => panicState = value;}   
     private GameObject bulletPrefab;
