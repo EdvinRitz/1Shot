@@ -21,7 +21,9 @@ public class ShotgunnerPanicState : BaseState
 
         if(ShielderEnemy.activeShielderEnemies.Count == 0)
         {
-            panicEndPostition = shotgunnerEnemy.transform.position - shotgunnerEnemy.transform.forward * shotgunnerEnemy.panicMoveDistance;
+            shotgunnerEnemy.Agent.updateRotation = false; 
+            panicEndPostition = shotgunnerEnemy.transform.position - (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized * shotgunnerEnemy.panicMoveDistance;
+            shotgunnerEnemy.transform.rotation = Quaternion.LookRotation((shotgunnerEnemy.transform.position - shotgunnerEnemy.Player.transform.position ).normalized);
         }
         else if(ShielderEnemy.activeShielderEnemies.Count == 1)
         {
@@ -71,5 +73,9 @@ public class ShotgunnerPanicState : BaseState
     {
         shotgunnerEnemy.Agent.speed = normalSpeed;
         shotgunnerEnemy.PanicState = false;
+        if(ShielderEnemy.activeShielderEnemies.Count == 0)
+        {
+            shotgunnerEnemy.Agent.updateRotation = true; 
+        }
     }
 }
