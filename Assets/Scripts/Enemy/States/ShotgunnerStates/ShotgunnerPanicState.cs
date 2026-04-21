@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ShotgunnerPanicState : BaseState
 {
     readonly ShotgunnerEnemy shotgunnerEnemy;
     float normalSpeed;
+    float panicTimer;
     Vector3 panicEndPostition;
     ShielderEnemy shielderEnemyClosest;
     public ShotgunnerPanicState(ShotgunnerEnemy shotgunnerEnemy)
@@ -13,13 +15,15 @@ public class ShotgunnerPanicState : BaseState
     public override void Enter()
     {
         shotgunnerEnemy.PanicState = true;
-
+        panicTimer = 3f;
         normalSpeed = shotgunnerEnemy.Agent.speed;
         shotgunnerEnemy.Agent.speed = shotgunnerEnemy.Agent.speed * 2;
 
         if(ShielderEnemy.activeShielderEnemies.Count == 0)
         {
-            panicEndPostition = shotgunnerEnemy.transform.position - shotgunnerEnemy.transform.forward * shotgunnerEnemy.panicMoveDistance;
+            shotgunnerEnemy.Agent.updateRotation = false; 
+            panicEndPostition = shotgunnerEnemy.transform.position - (shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.position).normalized * shotgunnerEnemy.panicMoveDistance;
+            shotgunnerEnemy.transform.rotation = Quaternion.LookRotation((shotgunnerEnemy.transform.position - shotgunnerEnemy.Player.transform.position ).normalized);
         }
         else if(ShielderEnemy.activeShielderEnemies.Count == 1)
         {
@@ -45,12 +49,23 @@ public class ShotgunnerPanicState : BaseState
         {
             panicEndPostition = shielderEnemyClosest.transform.position - shielderEnemyClosest.transform.forward * 2f;
         }
+        else
+        {
+            panicTimer -= Time.deltaTime;
+        }
 
         shotgunnerEnemy.Agent.SetDestination(panicEndPostition);
 
-        if(Vector3.Distance(shotgunnerEnemy.transform.position, panicEndPostition) <= 0.3f)
+        if(ShielderEnemy.activeShielderEnemies.Count > 0 && Vector3.Distance(shotgunnerEnemy.transform.position, panicEndPostition) <= 0.3f)
         {
             stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
+        }
+        else
+        {
+            if(panicTimer <= 0)
+            {
+                stateMachine.ChangeState(new ShotgunnerMoveState(shotgunnerEnemy));
+            }
         }
     }
 
@@ -58,5 +73,9 @@ public class ShotgunnerPanicState : BaseState
     {
         shotgunnerEnemy.Agent.speed = normalSpeed;
         shotgunnerEnemy.PanicState = false;
+        if(ShielderEnemy.activeShielderEnemies.Count == 0)
+        {
+            shotgunnerEnemy.Agent.updateRotation = true; 
+        }
     }
 }
