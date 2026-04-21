@@ -17,7 +17,17 @@ public class GruntMoveState : BaseState
     }
     public void WalkTowardsPlayer()
     {
-        gruntEnemy.Agent.SetDestination(gruntEnemy.Player.transform.position);
+        if(Vector3.Distance(gruntEnemy.transform.position, gruntEnemy.Player.transform.position) > gruntEnemy.playerCloseDistance)
+        {
+            gruntEnemy.Agent.isStopped = false;
+            gruntEnemy.Agent.SetDestination(gruntEnemy.Player.transform.position);
+        }
+        else
+        {
+            gruntEnemy.Agent.isStopped = true;
+            gruntEnemy.transform.rotation = Quaternion.RotateTowards(gruntEnemy.transform.rotation, Quaternion.LookRotation((gruntEnemy.Player.transform.position - gruntEnemy.transform.position).normalized), 180 * Time.deltaTime);
+        }
+
         
         if((Vector3.Distance(gruntEnemy.transform.position, gruntEnemy.Player.transform.position) < gruntEnemy.attackDistance) && gruntEnemy.CanSeePlayer()) 
         {
