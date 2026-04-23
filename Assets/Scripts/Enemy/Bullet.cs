@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
         {
             hasHit = true;
             //TODO implement Player damage logic
-            //hittTransform.GetComponent<PlayerHealth>().TakeDamage(10);
+            hittTransform.GetComponent<PlayerHealth>().TakeDamage(1);
             Destroy(gameObject);
         }
         if (hittTransform.CompareTag("Enemy") || hittTransform.CompareTag("Bullet") || hittTransform.CompareTag("RayCastStop"))
