@@ -17,7 +17,7 @@ public class ShotgunnerMoveState : BaseState
     {
         if (Vector3.Distance(shotgunnerEnemy.transform.position, shotgunnerEnemy.Player.transform.position) > shotgunnerEnemy.moveCloserDistance - 1.5f || !shotgunnerEnemy.CanSeePlayer())
         {
-            shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.Player.transform.position);
+            shotgunnerEnemy.Agent.SetDestination(shotgunnerEnemy.Player.transform.position - shotgunnerEnemy.transform.forward * (shotgunnerEnemy.moveAwayDistance + 1.5f));
         }
         else
         {

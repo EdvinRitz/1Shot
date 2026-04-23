@@ -2473,7 +2473,7 @@ MonoBehaviour:
   totalBulletSpreadAngle: 90
   gunBarrel: {fileID: 640950900}
   moveCloserDistance: 12
-  moveAwayDistance: 9
+  moveAwayDistance: 7
   panicDistance: 4
   panicMoveDistance: 10
 --- !u!1 &957133666
