@@ -9,7 +9,7 @@ public class GruntAttackState : BaseState
     Vector3 playerInitialPosition;
     Vector3 enemyInitialPostion;
     float dashDistanceTarget;
-    readonly float dashSpeed = 10f;
+    readonly float dashSpeed = 15f;
 
     public GruntAttackState(GruntEnemy gruntEnemy)
     {
@@ -39,9 +39,9 @@ public class GruntAttackState : BaseState
         windupTimer -= Time.deltaTime;
         if (windupTimer <= 0)
         {
-            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) < dashDistanceTarget)
+            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) < dashDistanceTarget/3)
             {
-                gruntEnemy.transform.position += dashSpeed * Time.deltaTime * dashDirection;
+                gruntEnemy.transform.position += dashSpeed * Time.deltaTime * dashDirection/3;
             }
 
             if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget)
