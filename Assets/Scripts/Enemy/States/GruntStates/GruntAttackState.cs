@@ -50,9 +50,8 @@ public class GruntAttackState : BaseState
 
             if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget/3)
             {
-                Vector3 hitboxSize = new(1,0.5f,2);
-                //OnDrawGizmos()
-                var hitArray = Physics.OverlapBox(gruntEnemy.attackHitboxCenter.transform.position,hitboxSize);
+                Vector3 hitboxSize = new(0.5f,0.5f,1);
+                var hitArray = Physics.OverlapBox(gruntEnemy.attackHitboxCenter.transform.position,gruntEnemy.hitboxSize);
                 foreach(Collider hit in hitArray)
                 {
                     if (hit.CompareTag("Player") && !playerHit)
