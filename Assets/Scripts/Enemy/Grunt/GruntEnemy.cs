@@ -8,6 +8,7 @@ public class GruntEnemy : BaseEnemy
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
     public float playerCloseDistance = 1f;
+    public GameObject AttackHitboxCenter;
 
     public override void Start()
     {

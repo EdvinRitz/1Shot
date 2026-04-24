@@ -269,6 +269,7 @@ MonoBehaviour:
   sightDistance: 20
   fieldOfView: 85
   playerCloseDistance: 0.85
+  AttackHitboxCenter: {fileID: 0}
 --- !u!195 &125604712
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1247,6 +1248,7 @@ MonoBehaviour:
   sightDistance: 20
   fieldOfView: 10
   playerCloseDistance: 0.85
+  AttackHitboxCenter: {fileID: 0}
 --- !u!195 &440772719
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2614,6 +2616,7 @@ Transform:
   m_Children:
   - {fileID: 859721572}
   - {fileID: 1750984271}
+  - {fileID: 1226408670}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1085093025
@@ -2654,6 +2657,7 @@ MonoBehaviour:
   sightDistance: 20
   fieldOfView: 10
   playerCloseDistance: 2
+  AttackHitboxCenter: {fileID: 1226408669}
 --- !u!114 &1085093027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3003,6 +3007,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210396488}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1226408669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226408670}
+  m_Layer: 6
+  m_Name: AttackHitboxCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1226408670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226408669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.897}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1085093024}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1363750062
 GameObject:
   m_ObjectHideFlags: 0

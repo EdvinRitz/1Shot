@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GruntAttackState : BaseState
@@ -10,6 +11,7 @@ public class GruntAttackState : BaseState
     Vector3 enemyInitialPostion;
     float dashDistanceTarget;
     readonly float dashSpeed = 15f;
+    bool playerHit;
 
     public GruntAttackState(GruntEnemy gruntEnemy)
     {
@@ -25,6 +27,8 @@ public class GruntAttackState : BaseState
         windupTimer = 0.5f;
         winddownTimer = 0.5f;
         gruntEnemy.Agent.isStopped = true;
+
+        playerHit = false;
 
     }
 
@@ -46,6 +50,17 @@ public class GruntAttackState : BaseState
 
             if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget/3)
             {
+                Vector3 hitboxSize = new(1,0.5f,2);
+                //OnDrawGizmos();
+                var hitArray = Physics.OverlapBox(gruntEnemy.AttackHitboxCenter.transform.position,hitboxSize);
+                foreach(Collider hit in hitArray)
+                {
+                    if (hit.CompareTag("Player") && !playerHit)
+                    {
+                        hit.GetComponent<PlayerHealth>().TakeDamage(1f);
+                        playerHit = true;
+                    }
+                }
                 winddownTimer -= Time.deltaTime;
                 if(winddownTimer <= 0)
                 {
