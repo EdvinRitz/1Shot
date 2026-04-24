@@ -269,7 +269,7 @@ MonoBehaviour:
   sightDistance: 20
   fieldOfView: 85
   playerCloseDistance: 0.85
-  AttackHitboxCenter: {fileID: 0}
+  attackHitboxCenter: {fileID: 0}
 --- !u!195 &125604712
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   sightDistance: 20
   fieldOfView: 10
   playerCloseDistance: 0.85
-  AttackHitboxCenter: {fileID: 0}
+  attackHitboxCenter: {fileID: 0}
 --- !u!195 &440772719
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2657,7 +2657,7 @@ MonoBehaviour:
   sightDistance: 20
   fieldOfView: 10
   playerCloseDistance: 2
-  AttackHitboxCenter: {fileID: 1226408669}
+  attackHitboxCenter: {fileID: 1226408669}
 --- !u!114 &1085093027
 MonoBehaviour:
   m_ObjectHideFlags: 0

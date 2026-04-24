@@ -8,7 +8,7 @@ public class GruntEnemy : BaseEnemy
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
     public float playerCloseDistance = 1f;
-    public GameObject AttackHitboxCenter;
+    public GameObject attackHitboxCenter;
 
     public override void Start()
     {
@@ -21,7 +21,7 @@ public class GruntEnemy : BaseEnemy
 
     public override void Update()
     {
-        
+
     }
 
     public override bool CanSeePlayer()
@@ -50,5 +50,13 @@ public class GruntEnemy : BaseEnemy
             }
         }
         return false;
+    }
+
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        //Gizmos.matrix = transform.localToWorldMatrix;
+        Vector3 hitboxSize = new(2,1f,4);
+        Gizmos.DrawCube(attackHitboxCenter.transform.position, hitboxSize);
     }
 }
