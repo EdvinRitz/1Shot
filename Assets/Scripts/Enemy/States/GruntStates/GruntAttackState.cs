@@ -44,7 +44,7 @@ public class GruntAttackState : BaseState
                 gruntEnemy.transform.position += dashSpeed * Time.deltaTime * dashDirection/3;
             }
 
-            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget)
+            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget/3)
             {
                 winddownTimer -= Time.deltaTime;
                 if(winddownTimer <= 0)
