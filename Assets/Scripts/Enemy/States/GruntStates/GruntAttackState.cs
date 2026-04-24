@@ -43,12 +43,12 @@ public class GruntAttackState : BaseState
         windupTimer -= Time.deltaTime;
         if (windupTimer <= 0)
         {
-            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) < dashDistanceTarget/3)
+            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) < dashDistanceTarget/2)
             {
-                gruntEnemy.transform.position += dashSpeed * Time.deltaTime * dashDirection/3;
+                gruntEnemy.transform.position += dashSpeed * Time.deltaTime * dashDirection/2;
             }
 
-            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget/3)
+            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget/2)
             {
                 Vector3 hitboxSize = new(0.5f,0.5f,1);
                 var hitArray = Physics.OverlapBox(gruntEnemy.attackHitboxCenter.transform.position,gruntEnemy.hitboxSize);
