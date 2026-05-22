@@ -15,7 +15,7 @@ public class ShotgunnerAttackState : BaseState
     public override void Enter()
     {
         //Rotation should only come from ShotgunnerEnemy.cs script while attacking
-        shotgunnerEnemy.Agent.updateRotation = false;    
+        shotgunnerEnemy.Agent.updateRotation = false;
     }
 
     public override void Perform()

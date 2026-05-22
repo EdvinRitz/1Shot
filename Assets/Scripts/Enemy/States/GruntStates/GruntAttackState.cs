@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GruntAttackState : BaseState
@@ -9,7 +10,8 @@ public class GruntAttackState : BaseState
     Vector3 playerInitialPosition;
     Vector3 enemyInitialPostion;
     float dashDistanceTarget;
-    readonly float dashSpeed = 10f;
+    readonly float dashSpeed = 15f;
+    bool playerHit;
 
     public GruntAttackState(GruntEnemy gruntEnemy)
     {
@@ -26,6 +28,8 @@ public class GruntAttackState : BaseState
         winddownTimer = 0.5f;
         gruntEnemy.Agent.isStopped = true;
 
+        playerHit = false;
+
     }
 
     public override void Perform()
@@ -39,13 +43,23 @@ public class GruntAttackState : BaseState
         windupTimer -= Time.deltaTime;
         if (windupTimer <= 0)
         {
-            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) < dashDistanceTarget)
+            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) < dashDistanceTarget/2)
             {
-                gruntEnemy.transform.position += dashSpeed * Time.deltaTime * dashDirection;
+                gruntEnemy.transform.position += dashSpeed * Time.deltaTime * dashDirection/2;
             }
 
-            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget)
+            if(Vector3.Distance(gruntEnemy.transform.position, enemyInitialPostion) >= dashDistanceTarget/2)
             {
+                Vector3 hitboxSize = new(0.5f,0.5f,1);
+                var hitArray = Physics.OverlapBox(gruntEnemy.attackHitboxCenter.transform.position,gruntEnemy.hitboxSize);
+                foreach(Collider hit in hitArray)
+                {
+                    if (hit.CompareTag("Player") && !playerHit)
+                    {
+                        hit.GetComponent<PlayerHealth>().TakeDamage(1f);
+                        playerHit = true;
+                    }
+                }
                 winddownTimer -= Time.deltaTime;
                 if(winddownTimer <= 0)
                 {
