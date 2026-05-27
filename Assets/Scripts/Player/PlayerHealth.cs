@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -50,5 +51,6 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Restart");
         playerInputHandler.restartPressed = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
