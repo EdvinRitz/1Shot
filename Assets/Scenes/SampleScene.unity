@@ -1782,6 +1782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0f7cf00c60a9a4aaa8d9285971cde2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
+  playerHealth: {fileID: 679599670}
   jumpPressed: 0
   shootPressed: 0
   dashPressed: 0
@@ -1845,6 +1846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 5
+  isDead: 0
 --- !u!195 &679599671
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2239,7 +2241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &908690570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2525,7 +2527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1085093021
 BoxCollider:
   m_ObjectHideFlags: 0
