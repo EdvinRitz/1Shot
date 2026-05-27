@@ -36,11 +36,11 @@ public class PlayerMotor : MonoBehaviour
         }
        
         isGrounded = controller.isGrounded;
-        if(playerInputHandler.jumpPressed == true)
+        if(playerInputHandler.jumpPressed)
         {
             Jump();
         }
-        if((playerInputHandler.dashPressed == true && dashCooldownTimer <= 0) || isDashing == true)
+        if((playerInputHandler.dashPressed && dashCooldownTimer <= 0) || isDashing)
         {
             Dash(playerInputHandler.MoveInput);
         }

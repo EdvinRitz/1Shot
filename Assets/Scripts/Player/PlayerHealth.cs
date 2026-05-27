@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 5;
     //private float lerpTimer;
     public bool isDead;
+    public PlayerInputHandler playerInputHandler;
 
     void Start()
     {
@@ -15,7 +16,10 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        
+        if(playerInputHandler.restartPressed && isDead)
+        {
+            Restart();
+        }
     }
 
         public void TakeDamage(float damage)
@@ -40,5 +44,11 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Game Over");
         isDead = true;
+    }
+
+    public void Restart()
+    {
+        Debug.Log("Restart");
+        playerInputHandler.restartPressed = false;
     }
 }

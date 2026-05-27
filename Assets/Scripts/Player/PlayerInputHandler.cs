@@ -11,6 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool shootPressed;
     [HideInInspector]
     public bool dashPressed;
+    public bool restartPressed;
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
 
@@ -37,6 +38,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerActions.Jump.performed += ctx => jumpPressed = true;
         playerActions.Shoot.performed += ctx => shootPressed = true;
         playerActions.Dash.performed += ctx => dashPressed = true;
+        playerActions.Restart.performed += ctx => restartPressed = true;
     }
 
     private void ResetInput()

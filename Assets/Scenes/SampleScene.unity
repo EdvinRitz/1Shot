@@ -1786,6 +1786,7 @@ MonoBehaviour:
   jumpPressed: 0
   shootPressed: 0
   dashPressed: 0
+  restartPressed: 0
 --- !u!114 &679599667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1847,6 +1848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 5
   isDead: 0
+  playerInputHandler: {fileID: 679599666}
 --- !u!195 &679599671
 NavMeshAgent:
   m_ObjectHideFlags: 0
