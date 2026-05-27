@@ -14,6 +14,8 @@ public class PlayerMotor : MonoBehaviour
     public float jumpHeight = 0.75f;
     private bool isDashing;
     private float dashTimer;
+    public float dashCooldown = 1f;
+    private float dashCooldownTimer;
 
     void Start()
     {
@@ -22,6 +24,12 @@ public class PlayerMotor : MonoBehaviour
 
     void Update()
     {
+        if (dashCooldownTimer > 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
+            playerInputHandler.dashPressed = false;
+        }
+
         if (!isDashing)
         {
             ProcessMove(playerInputHandler.MoveInput);
@@ -32,7 +40,7 @@ public class PlayerMotor : MonoBehaviour
         {
             Jump();
         }
-        if(playerInputHandler.dashPressed == true || isDashing == true)
+        if((playerInputHandler.dashPressed == true && dashCooldownTimer <= 0) || isDashing == true)
         {
             Dash(playerInputHandler.MoveInput);
         }
@@ -81,6 +89,7 @@ public class PlayerMotor : MonoBehaviour
         else
         {
             isDashing = false;
+            dashCooldownTimer = dashCooldown;
         }
         playerInputHandler.dashPressed = false;
     }
