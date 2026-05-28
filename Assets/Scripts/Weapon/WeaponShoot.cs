@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
+using System.Collections;
 
 
 
@@ -7,6 +9,8 @@ public class WeaponShoot : MonoBehaviour
 {
     public PlayerInputHandler playerInputHandler;
     public Camera fpCamera;
+    public LineRenderer lineRenderer;
+    public GameObject muzzle;
 
     void Update()
     {
@@ -21,6 +25,7 @@ public class WeaponShoot : MonoBehaviour
         //Using RaycastAll instead of RaycastNonAlloc since I don't know how big the premade array should be for 
         // RaycastNonAlloc and shooting is not gonna be something that happens too often 
         var hits = Physics.RaycastAll(fpCamera.transform.position, fpCamera.transform.forward);
+        Vector3 rayEnd = muzzle.transform.position;
         List<RaycastHit> orderedHitsByDistance = new(hits);
         List<RaycastHit> validHits = new();
         orderedHitsByDistance.Sort(SortByDistance);
@@ -28,11 +33,15 @@ public class WeaponShoot : MonoBehaviour
         {
             if(hit.transform.gameObject.layer != LayerMask.NameToLayer("Enemy"))
             {
+                rayEnd = hit.point;
                 break;
             }
             
             validHits.Add(hit);
         }
+
+        DrawRay(muzzle.transform.position, rayEnd);
+
         foreach (RaycastHit hitValid in validHits)
         {
             Debug.Log(hitValid.transform.name);
@@ -44,8 +53,21 @@ public class WeaponShoot : MonoBehaviour
         playerInputHandler.shootPressed = false;
     }
 
+    private void DrawRay(Vector3 rayStart, Vector3 rayEnd)
+    {
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, rayStart);
+        lineRenderer.SetPosition(1, rayEnd);
+        StartCoroutine(DisableAfterDelay());
+    }
+
     private int SortByDistance(RaycastHit a, RaycastHit b)
     {
         return a.distance.CompareTo(b.distance);
+    }
+    IEnumerator DisableAfterDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        lineRenderer.enabled = false;
     }
 }
