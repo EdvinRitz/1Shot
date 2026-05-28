@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
+using System.Collections;
 
 
 
@@ -57,10 +58,16 @@ public class WeaponShoot : MonoBehaviour
         lineRenderer.enabled = true;
         lineRenderer.SetPosition(0, rayStart);
         lineRenderer.SetPosition(1, rayEnd);
+        StartCoroutine(DisableAfterDelay());
     }
 
     private int SortByDistance(RaycastHit a, RaycastHit b)
     {
         return a.distance.CompareTo(b.distance);
+    }
+    IEnumerator DisableAfterDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        lineRenderer.enabled = false;
     }
 }
