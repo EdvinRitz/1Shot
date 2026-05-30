@@ -13,6 +13,8 @@ public class PlayerLook : MonoBehaviour
     void Start()
     {
         playerInputHandler = GetComponent<PlayerInputHandler>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

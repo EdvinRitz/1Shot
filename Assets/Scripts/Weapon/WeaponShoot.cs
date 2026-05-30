@@ -31,7 +31,7 @@ public class WeaponShoot : MonoBehaviour
         orderedHitsByDistance.Sort(SortByDistance);
         foreach (RaycastHit hit in orderedHitsByDistance)
         {
-            if(hit.transform.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+            if(hit.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") && hit.transform.gameObject.layer != LayerMask.NameToLayer("Bullet"))
             {
                 rayEnd = hit.point;
                 break;
@@ -40,6 +40,7 @@ public class WeaponShoot : MonoBehaviour
             validHits.Add(hit);
         }
 
+        rayEnd -= fpCamera.transform.forward * 0.03f;
         DrawRay(muzzle.transform.position, rayEnd);
 
         foreach (RaycastHit hitValid in validHits)
