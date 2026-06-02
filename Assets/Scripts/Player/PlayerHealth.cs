@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     private float health;
+    public float Health { get => health; }
     public float maxHealth = 5;
     //private float lerpTimer;
     public bool isDead;
@@ -25,7 +26,10 @@ public class PlayerHealth : MonoBehaviour
 
         public void TakeDamage(float damage)
     {
-        health -= damage;
+        if(health > 0)
+        {
+            health -= damage;
+        }
         //lerpTimer = 0f;
         Debug.Log(health);
         if(health <= 0)
