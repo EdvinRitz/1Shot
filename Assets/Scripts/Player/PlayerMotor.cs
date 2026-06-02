@@ -15,7 +15,7 @@ public class PlayerMotor : MonoBehaviour
     private bool isDashing;
     private float dashTimer;
     public float dashCooldown = 1f;
-    private float dashCooldownTimer;
+    public float dashCooldownTimer;
 
     void Start()
     {

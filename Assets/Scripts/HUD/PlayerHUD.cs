@@ -4,7 +4,9 @@ using TMPro;
 public class PlayerHUD : MonoBehaviour
 {
     public TextMeshProUGUI playerHealthHUD;
+    public TextMeshProUGUI dashCooldownhHUD;
     public PlayerHealth playerHealth;
+    public PlayerMotor playerMotor;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,6 +16,15 @@ public class PlayerHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerHealthHUD.text = "HP: " + playerHealth.Health; //Current health;
+        playerHealthHUD.text = "HP: " + playerHealth.Health;
+
+        if(playerMotor.dashCooldownTimer > 0)
+        {
+            dashCooldownhHUD.text = "" + playerMotor.dashCooldownTimer.ToString("F2");
+        }
+        else
+        {
+            dashCooldownhHUD.text = "";
+        }
     }
 }
