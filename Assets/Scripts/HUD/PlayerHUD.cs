@@ -30,11 +30,13 @@ public class PlayerHUD : MonoBehaviour
 
         if (playerHealth.isDead)
         {
-            gameOverHUD.gameObject.SetActive(true);
+            //gameOverHUD.gameObject.SetActive(true);
+            gameOverHUD.enabled = true;
         }
         else
         {
-            gameOverHUD.gameObject.SetActive(false);
+            //gameOverHUD.gameObject.SetActive(false);
+            gameOverHUD.enabled = false;
         }
     }
 }
