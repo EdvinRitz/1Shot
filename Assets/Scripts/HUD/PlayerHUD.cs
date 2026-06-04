@@ -6,8 +6,11 @@ public class PlayerHUD : MonoBehaviour
     public TextMeshProUGUI playerHealthHUD;
     public TextMeshProUGUI dashCooldownHUD;
     public TextMeshProUGUI gameOverHUD;
+    public TextMeshProUGUI enemiesAmiedAtHUD;
     public PlayerHealth playerHealth;
     public PlayerMotor playerMotor;
+    public PlayerInputHandler playerInputHandler;
+    public AimMode aimMode;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,11 +33,23 @@ public class PlayerHUD : MonoBehaviour
 
         if (playerHealth.isDead)
         {
-            gameOverHUD.gameObject.SetActive(true);
+            //gameOverHUD.gameObject.SetActive(true);
+            gameOverHUD.enabled = true;
         }
         else
         {
-            gameOverHUD.gameObject.SetActive(false);
+            //gameOverHUD.gameObject.SetActive(false);
+            gameOverHUD.enabled = false;
         }
+
+        //if (playerInputHandler.aimHeld)
+        //{
+            //enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount;
+        //}
+        //else
+        //{
+            //enemiesAmiedAtHUD.text = "";
+        //}
+        enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount;
     }
 }
