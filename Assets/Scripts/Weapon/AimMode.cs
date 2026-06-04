@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class AimMode : MonoBehaviour
 {
@@ -18,10 +19,30 @@ public class AimMode : MonoBehaviour
         if (playerInputHandler.aimHeld)
         {
             Time.timeScale = aimTimeScale;
+
+            var hits = Physics.RaycastAll(fpCamera.transform.position, fpCamera.transform.forward);
+            List<RaycastHit> orderedHitsByDistance = new(hits);
+            List<RaycastHit> validHits = new();
+            orderedHitsByDistance.Sort(SortByDistance);
+            foreach (RaycastHit hit in orderedHitsByDistance)
+            {
+                if(hit.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") && hit.transform.gameObject.layer != LayerMask.NameToLayer("Bullet"))
+                {
+                    break;
+                }
+            
+                validHits.Add(hit);
+            }
+            Debug.Log(validHits.Count);
         }
         else
         {
             Time.timeScale = 1f;
         }
+    }
+
+    private int SortByDistance(RaycastHit a, RaycastHit b)
+    {
+        return a.distance.CompareTo(b.distance);
     }
 }
