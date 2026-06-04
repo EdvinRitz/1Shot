@@ -33,7 +33,7 @@ public class AimMode : MonoBehaviour
             
                 validHits.Add(hit);
             }
-            Debug.Log(validHits.Count);
+            AimHitCount = validHits.Count;
         }
         else
         {
