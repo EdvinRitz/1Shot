@@ -4378,10 +4378,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Shooting
       objectReference: {fileID: 0}
-    - target: {fileID: 8168609793613365532, guid: 179f95a4ea81a9942a0e8c3d8d5db40c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4439,10 +4435,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Moving
       objectReference: {fileID: 0}
-    - target: {fileID: 4399323505672690526, guid: 6678262ef08800b47b7ef676a6819c97, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4459,10 +4451,6 @@ PrefabInstance:
     - target: {fileID: 3056982770102856688, guid: 6198394951e407e4d9b4d3883b550f4e, type: 3}
       propertyPath: m_Name
       value: Shielder
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056982770102856688, guid: 6198394951e407e4d9b4d3883b550f4e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6085389601627033416, guid: 6198394951e407e4d9b4d3883b550f4e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4503,10 +4491,6 @@ PrefabInstance:
     - target: {fileID: 6085389601627033416, guid: 6198394951e407e4d9b4d3883b550f4e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6649098834520991456, guid: 6198394951e407e4d9b4d3883b550f4e, type: 3}
-      propertyPath: m_Speed
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

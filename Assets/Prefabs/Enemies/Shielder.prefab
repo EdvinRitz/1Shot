@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4324240437740936337}
   - component: {fileID: 4192984627038524119}
   - component: {fileID: 2425371550227349283}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 2430715543189047422}
   - component: {fileID: 3881674826305892308}
   - component: {fileID: 4600895066176489490}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +465,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 40
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 3879313469498472997}
   - component: {fileID: 8445766612487244542}
   - component: {fileID: 883552839262144543}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: eye (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

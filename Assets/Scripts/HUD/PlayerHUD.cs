@@ -42,13 +42,14 @@ public class PlayerHUD : MonoBehaviour
             gameOverHUD.enabled = false;
         }
 
-        if (playerInputHandler.aimHeld)
-        {
-            enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount;
-        }
-        else
-        {
-            enemiesAmiedAtHUD.text = "";
-        }
+        //if (playerInputHandler.aimHeld)
+        //{
+            //enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount;
+        //}
+        //else
+        //{
+            //enemiesAmiedAtHUD.text = "";
+        //}
+        enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount;
     }
 }
