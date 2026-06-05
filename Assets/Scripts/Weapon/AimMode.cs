@@ -8,10 +8,13 @@ public class AimMode : MonoBehaviour
     public float aimTimeScale = 0.6f;
     public int AimHitCount;
     private float originalFixedDeltaTime;
+    public float slowMoEnergy;
+    public float slowMoEnergyMax;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         originalFixedDeltaTime = Time.fixedDeltaTime;
+        slowMoEnergy = slowMoEnergyMax;
     }
 
     // Update is called once per frame
@@ -33,18 +36,28 @@ public class AimMode : MonoBehaviour
         
         AimHitCount = validHits.Count;
 
-        if (playerInputHandler.aimHeld)
+        if (playerInputHandler.aimHeld && slowMoEnergy > 0)
         {
             Time.timeScale = aimTimeScale;
             Time.fixedDeltaTime = originalFixedDeltaTime * Time.timeScale;
-
-            
+            slowMoEnergy -= Time.unscaledDeltaTime;
+        }
+        else if (playerInputHandler.aimHeld)
+        {
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = originalFixedDeltaTime;
         }
         else
         {
             Time.timeScale = 1f;
             Time.fixedDeltaTime = originalFixedDeltaTime;
+            if(slowMoEnergy < slowMoEnergyMax)
+            {
+                slowMoEnergy += Time.unscaledDeltaTime/4;
+            }
         }
+
+        slowMoEnergy = Mathf.Clamp(slowMoEnergy, 0, slowMoEnergyMax);
     }
 
     private int SortByDistance(RaycastHit a, RaycastHit b)
