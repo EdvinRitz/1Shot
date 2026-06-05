@@ -7,6 +7,7 @@ public class PlayerHUD : MonoBehaviour
     public TextMeshProUGUI dashCooldownHUD;
     public TextMeshProUGUI gameOverHUD;
     public TextMeshProUGUI enemiesAmiedAtHUD;
+    public TextMeshProUGUI slowMoEnergyHUD;
     public PlayerHealth playerHealth;
     public PlayerMotor playerMotor;
     public PlayerInputHandler playerInputHandler;
@@ -51,5 +52,8 @@ public class PlayerHUD : MonoBehaviour
             //enemiesAmiedAtHUD.text = "";
         //}
         enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount;
+
+        slowMoEnergyHUD.text = "" + aimMode.slowMoEnergy.ToString("F1");
+
     }
 }
