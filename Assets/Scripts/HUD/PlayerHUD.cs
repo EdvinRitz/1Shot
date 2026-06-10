@@ -32,7 +32,7 @@ public class PlayerHUD : MonoBehaviour
             dashCooldownHUD.text = "";
         }
 
-        if (playerHealth.isDead)
+        if (playerHealth.playerIsDead)
         {
             //gameOverHUD.gameObject.SetActive(true);
             gameOverHUD.enabled = true;

@@ -7,18 +7,18 @@ public class PlayerHealth : MonoBehaviour
     public float Health { get => health; }
     public float maxHealth = 5;
     //private float lerpTimer;
-    public bool isDead;
+    public bool playerIsDead;
     public PlayerInputHandler playerInputHandler;
 
     void Start()
     {
         health = maxHealth;
-        isDead = false;
+        playerIsDead = false;
     }
 
     void Update()
     {
-        if(playerInputHandler.restartPressed && isDead)
+        if(playerInputHandler.restartPressed && playerIsDead)
         {
             Restart();
         }
@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
             health -= damage;
         }
         //lerpTimer = 0f;
-        Debug.Log(health);
+        //Debug.Log(health);
         if(health <= 0)
         {
             GameOver();
@@ -48,7 +48,7 @@ public class PlayerHealth : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over");
-        isDead = true;
+        playerIsDead = true;
     }
 
     public void Restart()

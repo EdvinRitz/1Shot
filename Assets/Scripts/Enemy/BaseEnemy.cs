@@ -7,6 +7,8 @@ public abstract class BaseEnemy : MonoBehaviour
     public UnityEngine.AI.NavMeshAgent Agent { get => agent; }
     protected GameObject player;
     public GameObject Player { get => player; }
+    protected bool enemyIsDead = false;
+    public bool EnemyIsDead { get => enemyIsDead; }
     protected StateMachine stateMachine;
 
     public abstract void Start();
@@ -18,6 +20,7 @@ public abstract class BaseEnemy : MonoBehaviour
     
     public void Die()
     {
+        enemyIsDead = true;
         stateMachine.ChangeState(new DieState(this));
     }
 }
