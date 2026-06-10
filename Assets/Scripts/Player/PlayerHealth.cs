@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
             health -= damage;
         }
         //lerpTimer = 0f;
-        Debug.Log(health);
+        //Debug.Log(health);
         if(health <= 0)
         {
             GameOver();
