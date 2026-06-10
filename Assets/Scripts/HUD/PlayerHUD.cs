@@ -8,10 +8,14 @@ public class PlayerHUD : MonoBehaviour
     public TextMeshProUGUI gameOverHUD;
     public TextMeshProUGUI enemiesAmiedAtHUD;
     public TextMeshProUGUI slowMoEnergyHUD;
+    public TextMeshProUGUI ammoHUD;
+    public TextMeshProUGUI roundHUD;
     public PlayerHealth playerHealth;
     public PlayerMotor playerMotor;
     public PlayerInputHandler playerInputHandler;
     public AimMode aimMode;
+    public WeaponShoot weaponShoot;
+    public WaveSpawner waveSpawner;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,5 +59,15 @@ public class PlayerHUD : MonoBehaviour
 
         slowMoEnergyHUD.text = "" + aimMode.slowMoEnergy.ToString("F1");
 
+        ammoHUD.text = "Ammo: " + weaponShoot.shotsRemaining;
+
+        if (!waveSpawner.waveActive)
+        {
+            roundHUD.text = "ROUND " + (waveSpawner.currentWaveIndex + 1) + "\n" + waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesToSpawn.Length + " enemies";
+        }
+        else
+        {
+            roundHUD.text = "";
+        }
     }
 }
