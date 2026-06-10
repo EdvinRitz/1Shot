@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class Wave
 
 public class WaveSpawner : MonoBehaviour
 {
+    public PlayerHealth playerHealth;
     public Wave[] waves;
     public Transform[] spawnPoints;
     public GameObject enemyMovingPrefab;
@@ -47,8 +49,28 @@ public class WaveSpawner : MonoBehaviour
         foreach (GameObject enemy in waves[currentWaveIndex].enemiesToSpawn)
         {
             Transform spawnPoint = spawnPoints[enemyIndex % spawnPoints.Length];
-            Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+            GameObject spawnedEnemy = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+            spawnedEnemies.Add(spawnedEnemy);
             enemyIndex++;
         }
+    }
+
+    public void ResolveWave()
+    {
+        StartCoroutine(DelayResolveWave());
+        foreach (GameObject enemy in spawnedEnemies)
+        {
+            BaseEnemy baseEnemy = enemy.GetComponent<BaseEnemy>();
+            if (!baseEnemy.IsDead)
+            {
+                playerHealth.TakeDamage(1f);
+            }
+        }
+    }
+
+        IEnumerator DelayResolveWave()
+    {
+        yield return new WaitForSeconds(1.5f);
+        
     }
 }

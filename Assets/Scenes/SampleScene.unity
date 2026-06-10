@@ -2159,6 +2159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62e650a6bd6ff94d9a1b595d1dd0dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponShoot
+  waveSpawner: {fileID: 1731078659}
   playerInputHandler: {fileID: 679599666}
   fpCamera: {fileID: 1880964165}
   lineRenderer: {fileID: 860295338}
@@ -3688,10 +3689,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b10c3ee1d1c8c44afa19fdbbfa47e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
+  playerHealth: {fileID: 679599670}
   waves:
   - enemiesToSpawn:
     - {fileID: 4399323505672690526, guid: 6678262ef08800b47b7ef676a6819c97, type: 3}
     - {fileID: 4399323505672690526, guid: 6678262ef08800b47b7ef676a6819c97, type: 3}
+  - enemiesToSpawn:
+    - {fileID: 8168609793613365532, guid: 179f95a4ea81a9942a0e8c3d8d5db40c, type: 3}
+    - {fileID: 8168609793613365532, guid: 179f95a4ea81a9942a0e8c3d8d5db40c, type: 3}
   spawnPoints:
   - {fileID: 848879584}
   - {fileID: 464123880}

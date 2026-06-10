@@ -7,6 +7,7 @@ using System.Collections;
 
 public class WeaponShoot : MonoBehaviour
 {
+    public WaveSpawner waveSpawner;
     public PlayerInputHandler playerInputHandler;
     public Camera fpCamera;
     public LineRenderer lineRenderer;
@@ -52,6 +53,8 @@ public class WeaponShoot : MonoBehaviour
             }
         }
         playerInputHandler.shootPressed = false;
+
+        waveSpawner.ResolveWave();
     }
 
     private void DrawRay(Vector3 rayStart, Vector3 rayEnd)
