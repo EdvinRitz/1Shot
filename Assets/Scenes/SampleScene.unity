@@ -1864,7 +1864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 5
-  isDead: 0
+  playerIsDead: 0
   playerInputHandler: {fileID: 679599666}
 --- !u!195 &679599671
 NavMeshAgent:
@@ -2164,6 +2164,7 @@ MonoBehaviour:
   fpCamera: {fileID: 1880964165}
   lineRenderer: {fileID: 860295338}
   muzzle: {fileID: 1088850013}
+  shotsRemaining: 0
 --- !u!120 &860295338
 LineRenderer:
   serializedVersion: 3
@@ -3689,6 +3690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b10c3ee1d1c8c44afa19fdbbfa47e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
+  weaponShoot: {fileID: 860295337}
   playerHealth: {fileID: 679599670}
   waves:
   - enemiesToSpawn:

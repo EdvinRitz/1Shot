@@ -11,6 +11,7 @@ public class Wave
 
 public class WaveSpawner : MonoBehaviour
 {
+    public WeaponShoot weaponShoot;
     public PlayerHealth playerHealth;
     public Wave[] waves;
     public Transform[] spawnPoints;
@@ -45,6 +46,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void StartWave()
     {
+        weaponShoot.shotsRemaining++;
         int enemyIndex = 0;
         spawnedEnemies = new();
         foreach (GameObject enemy in waves[currentWaveIndex].enemiesToSpawn)

@@ -12,10 +12,11 @@ public class WeaponShoot : MonoBehaviour
     public Camera fpCamera;
     public LineRenderer lineRenderer;
     public GameObject muzzle;
+    public int shotsRemaining;
 
     void Update()
     {
-        if(playerInputHandler.shootPressed == true)
+        if(playerInputHandler.shootPressed == true && shotsRemaining > 0)
         {
             Shoot();
         }
@@ -23,6 +24,7 @@ public class WeaponShoot : MonoBehaviour
 
     public void Shoot()
     {
+        shotsRemaining--;
         //Using RaycastAll instead of RaycastNonAlloc since I don't know how big the premade array should be for 
         // RaycastNonAlloc and shooting is not gonna be something that happens too often 
         var hits = Physics.RaycastAll(fpCamera.transform.position, fpCamera.transform.forward);
