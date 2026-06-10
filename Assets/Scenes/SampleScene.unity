@@ -2944,7 +2944,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 412, y: -232}
+  m_AnchoredPosition: {x: 280, y: -230}
   m_SizeDelta: {x: 53.8743, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1374139547
@@ -3692,6 +3692,10 @@ MonoBehaviour:
   - enemiesToSpawn:
     - {fileID: 4399323505672690526, guid: 6678262ef08800b47b7ef676a6819c97, type: 3}
     - {fileID: 4399323505672690526, guid: 6678262ef08800b47b7ef676a6819c97, type: 3}
+  spawnPoints:
+  - {fileID: 848879584}
+  - {fileID: 464123880}
+  - {fileID: 222670485}
   enemyMovingPrefab: {fileID: 4399323505672690526, guid: 6678262ef08800b47b7ef676a6819c97, type: 3}
   spawnPoint1: {fileID: 848879584}
 --- !u!1 &1733686960
