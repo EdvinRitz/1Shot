@@ -12,13 +12,21 @@ public class WeaponShoot : MonoBehaviour
     public Camera fpCamera;
     public LineRenderer lineRenderer;
     public GameObject muzzle;
-    public int shotsRemaining;
+    public int shotsRemaining = 0;
 
     void Update()
     {
-        if(playerInputHandler.shootPressed == true && shotsRemaining > 0)
+        if(playerInputHandler.shootPressed == true)
         {
-            Shoot();
+            if(shotsRemaining <= 0)
+            {
+                playerInputHandler.shootPressed = false;
+            }
+            else if(shotsRemaining > 0)
+            {
+                Shoot();
+            }
+            
         }
     }
 

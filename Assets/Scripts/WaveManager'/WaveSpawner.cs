@@ -11,6 +11,7 @@ public class Wave
 
 public class WaveSpawner : MonoBehaviour
 {
+    public PlayerHUD playerHUD;
     public WeaponShoot weaponShoot;
     public PlayerHealth playerHealth;
     public Wave[] waves;
@@ -18,8 +19,8 @@ public class WaveSpawner : MonoBehaviour
     public GameObject enemyMovingPrefab;
     public Transform spawnPoint1;
     private GameObject spawnedEnemy;
-    private int currentWaveIndex;
-    private bool waveActive;
+    public int currentWaveIndex;
+    public bool waveActive;
     private List<GameObject> spawnedEnemies = new();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,21 +47,12 @@ public class WaveSpawner : MonoBehaviour
 
     private void StartWave()
     {
-        weaponShoot.shotsRemaining++;
-        int enemyIndex = 0;
-        spawnedEnemies = new();
-        foreach (GameObject enemy in waves[currentWaveIndex].enemiesToSpawn)
-        {
-            Transform spawnPoint = spawnPoints[enemyIndex % spawnPoints.Length];
-            GameObject spawnedEnemy = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
-            spawnedEnemies.Add(spawnedEnemy);
-            enemyIndex++;
-        }
+
+        StartCoroutine(StartWaveSequence());
     }
 
     public void ResolveWave()
     {
-        StartCoroutine(DelayResolveWave());
         foreach (GameObject enemy in spawnedEnemies)
         {
             BaseEnemy baseEnemy = enemy.GetComponent<BaseEnemy>();
@@ -84,8 +76,20 @@ public class WaveSpawner : MonoBehaviour
         
     }
 
-    IEnumerator DelayResolveWave()
+    IEnumerator StartWaveSequence()
     {
-        yield return new WaitForSeconds(1.5f);
+        waveActive = false;
+        yield return new WaitForSecondsRealtime(3f);
+        waveActive = true;
+        weaponShoot.shotsRemaining++;
+        int enemyIndex = 0;
+        spawnedEnemies = new();
+        foreach (GameObject enemy in waves[currentWaveIndex].enemiesToSpawn)
+        {
+            Transform spawnPoint = spawnPoints[enemyIndex % spawnPoints.Length];
+            GameObject spawnedEnemy = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+            spawnedEnemies.Add(spawnedEnemy);
+            enemyIndex++;
+        }
     }
 }
