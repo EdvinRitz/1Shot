@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -61,16 +62,28 @@ public class WaveSpawner : MonoBehaviour
         foreach (GameObject enemy in spawnedEnemies)
         {
             BaseEnemy baseEnemy = enemy.GetComponent<BaseEnemy>();
-            if (!baseEnemy.IsDead)
+            if (!baseEnemy.EnemyIsDead)
             {
                 playerHealth.TakeDamage(1f);
             }
+            baseEnemy.Die(); //change to taunt later or something else than normal die?
         }
+
+        currentWaveIndex++;
+
+        if (currentWaveIndex < waves.Length && !playerHealth.playerIsDead)
+        {
+            StartWave();
+        }
+        else
+        {
+            Debug.Log("All waves complete");
+        }
+        
     }
 
-        IEnumerator DelayResolveWave()
+    IEnumerator DelayResolveWave()
     {
         yield return new WaitForSeconds(1.5f);
-        
     }
 }

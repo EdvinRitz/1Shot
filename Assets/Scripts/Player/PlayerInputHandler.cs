@@ -24,7 +24,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     void Update()
     {
-        if (playerHealth.isDead)
+        if (playerHealth.playerIsDead)
         {
             ResetInput();
             return;
