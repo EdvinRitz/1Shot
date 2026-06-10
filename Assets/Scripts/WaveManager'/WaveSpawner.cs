@@ -67,7 +67,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (currentWaveIndex < waves.Length && !playerHealth.playerIsDead)
         {
-            StartWave();
+            StartCoroutine(WaveCompleteSequence());
         }
         else
         {
@@ -91,5 +91,11 @@ public class WaveSpawner : MonoBehaviour
             spawnedEnemies.Add(spawnedEnemy);
             enemyIndex++;
         }
+    }
+
+    IEnumerator WaveCompleteSequence()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        StartWave();
     }
 }

@@ -3980,6 +3980,9 @@ MonoBehaviour:
   - enemiesToSpawn:
     - {fileID: 8168609793613365532, guid: 179f95a4ea81a9942a0e8c3d8d5db40c, type: 3}
     - {fileID: 8168609793613365532, guid: 179f95a4ea81a9942a0e8c3d8d5db40c, type: 3}
+  - enemiesToSpawn:
+    - {fileID: 8168609793613365532, guid: 179f95a4ea81a9942a0e8c3d8d5db40c, type: 3}
+    - {fileID: 3056982770102856688, guid: 6198394951e407e4d9b4d3883b550f4e, type: 3}
   spawnPoints:
   - {fileID: 848879584}
   - {fileID: 464123880}
