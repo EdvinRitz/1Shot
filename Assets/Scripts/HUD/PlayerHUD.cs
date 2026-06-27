@@ -63,7 +63,14 @@ public class PlayerHUD : MonoBehaviour
 
         if (!waveSpawner.waveActive)
         {
-            roundHUD.text = "ROUND " + (waveSpawner.currentWaveIndex + 1) + "\n" + waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesToSpawn.Length + " enemies";
+            if(waveSpawner.currentWaveIndex < waveSpawner.waves.Length){
+                roundHUD.text = "ROUND " + (waveSpawner.currentWaveIndex + 1) + "\n" + waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesToSpawn.Length + " enemies";
+            }
+            else
+            {
+                roundHUD.text = "ROUND " + (waveSpawner.currentWaveIndex + 1) + "\n" + waveSpawner.enemyCount + " enemies";
+            }
+            
         }
         else
         {

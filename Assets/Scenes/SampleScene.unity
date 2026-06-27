@@ -3539,7 +3539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 280, y: -230}
+  m_AnchoredPosition: {x: 40.3, y: -5}
   m_SizeDelta: {x: 53.8743, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1374139547
@@ -4291,6 +4291,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b10c3ee1d1c8c44afa19fdbbfa47e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
+  randomEnemyPool:
+  - {fileID: 4399323505672690526, guid: 6678262ef08800b47b7ef676a6819c97, type: 3}
+  - {fileID: 8168609793613365532, guid: 179f95a4ea81a9942a0e8c3d8d5db40c, type: 3}
+  - {fileID: 3056982770102856688, guid: 6198394951e407e4d9b4d3883b550f4e, type: 3}
   playerHUD: {fileID: 1542477348}
   weaponShoot: {fileID: 860295337}
   playerHealth: {fileID: 679599670}
@@ -5169,7 +5173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 491.5, y: 0}
+  m_AnchoredPosition: {x: 493, y: -5}
   m_SizeDelta: {x: 53.8743, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2051865361

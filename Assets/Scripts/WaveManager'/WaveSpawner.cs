@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -23,6 +22,7 @@ public class WaveSpawner : MonoBehaviour
     public int currentWaveIndex;
     public bool waveActive;
     private List<GameObject> spawnedEnemies = new();
+    public int enemyCount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -48,8 +48,15 @@ public class WaveSpawner : MonoBehaviour
 
     private void StartWave()
     {
-
-        StartCoroutine(StartWaveSequence());
+        if (currentWaveIndex < waves.Length)
+        {
+            StartCoroutine(StartWaveSequence());
+        }
+        else
+        {
+            StartCoroutine(StartRandomWaveSequence());
+        }
+        
     }
 
     public void ResolveWave()
@@ -66,13 +73,13 @@ public class WaveSpawner : MonoBehaviour
 
         currentWaveIndex++;
 
-        if (currentWaveIndex < waves.Length && !playerHealth.playerIsDead)
+        if (!playerHealth.playerIsDead)
         {
             StartCoroutine(WaveCompleteSequence());
         }
         else
         {
-            Debug.Log("All waves complete");
+            Debug.Log("Error");
         }
         
     }
@@ -84,7 +91,6 @@ public class WaveSpawner : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
         waveActive = true;
         weaponShoot.shotsRemaining++;
-        int enemyIndex = 0;
         spawnedEnemies = new();
         foreach (GameObject enemy in waves[currentWaveIndex].enemiesToSpawn)
         {
@@ -96,8 +102,33 @@ public class WaveSpawner : MonoBehaviour
             GameObject spawnedEnemy = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
             spawnedEnemies.Add(spawnedEnemy);
             availableSpawnPoints.Remove(spawnPoint);
-            enemyIndex++;
         }
+    }
+
+    IEnumerator StartRandomWaveSequence()
+    {
+        enemyCount = 1 + currentWaveIndex / 2;
+        List<Transform> availableSpawnPoints = new(spawnPoints);
+        waveActive = false;
+        yield return new WaitForSecondsRealtime(3f);
+        waveActive = true;
+        weaponShoot.shotsRemaining++;
+        spawnedEnemies = new();
+        
+        for (int i = 0; i < enemyCount; i++)
+        {
+            if(availableSpawnPoints.Count <= 0)
+            {
+                availableSpawnPoints = new(spawnPoints);
+            }
+            Transform spawnPoint = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
+            int randomIndex = Random.Range(0, randomEnemyPool.Length);
+            GameObject enemyPrefab = randomEnemyPool[randomIndex];
+            GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            spawnedEnemies.Add(spawnedEnemy);
+            availableSpawnPoints.Remove(spawnPoint);
+        }
+        
     }
 
     IEnumerator WaveCompleteSequence()
