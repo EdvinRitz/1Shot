@@ -26,26 +26,8 @@ public class WaveSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentWaveIndex = 0;
-        //spawnedEnemy = Instantiate(enemyMovingPrefab, spawnPoint1.position, spawnPoint1.rotation);
-        //foreach (GameObject enemy in waves[0].enemiesToSpawn)
-        //{
-           // Instantiate(enemy, spawnPoint1.position, spawnPoint1.rotation);
-        //}
-
         StartWave();
-        //foreach (RaycastHit hit in orderedHitsByDistance)
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if(!spawnedEnemy.activeSelf)
-        //{
-            //Debug.Log("Round won");
-        //}
-    }
-
     private void StartWave()
     {
         if (currentWaveIndex < waves.Length)
@@ -67,8 +49,8 @@ public class WaveSpawner : MonoBehaviour
             if (!baseEnemy.EnemyIsDead)
             {
                 playerHealth.TakeDamage(1f);
+                baseEnemy.Die(); //Add taunt later or something else for surviving enemies? Instead of normal die?
             }
-            baseEnemy.Die(); //change to taunt later or something else than normal die?
         }
 
         currentWaveIndex++;
