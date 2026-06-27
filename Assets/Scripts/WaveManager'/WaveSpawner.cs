@@ -11,6 +11,7 @@ public class Wave
 
 public class WaveSpawner : MonoBehaviour
 {
+    public GameObject[] randomEnemyPool;
     public PlayerHUD playerHUD;
     public WeaponShoot weaponShoot;
     public PlayerHealth playerHealth;
@@ -78,6 +79,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator StartWaveSequence()
     {
+        List<Transform> availableSpawnPoints = new(spawnPoints);
         waveActive = false;
         yield return new WaitForSecondsRealtime(3f);
         waveActive = true;
@@ -86,9 +88,14 @@ public class WaveSpawner : MonoBehaviour
         spawnedEnemies = new();
         foreach (GameObject enemy in waves[currentWaveIndex].enemiesToSpawn)
         {
-            Transform spawnPoint = spawnPoints[enemyIndex % spawnPoints.Length];
+            if(availableSpawnPoints.Count <= 0)
+            {
+                availableSpawnPoints = new(spawnPoints);
+            }
+            Transform spawnPoint = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
             GameObject spawnedEnemy = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
             spawnedEnemies.Add(spawnedEnemy);
+            availableSpawnPoints.Remove(spawnPoint);
             enemyIndex++;
         }
     }
