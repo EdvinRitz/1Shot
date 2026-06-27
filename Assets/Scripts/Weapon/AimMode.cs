@@ -30,8 +30,15 @@ public class AimMode : MonoBehaviour
             {
                 break;
             }
+            else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+            {
+                
+            }
+            else
+            {
+                validHits.Add(hit);
+            }
             
-            validHits.Add(hit);
         }
         
         AimHitCount = validHits.Count;

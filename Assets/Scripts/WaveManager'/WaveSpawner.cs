@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,6 +10,7 @@ public class Wave
 
 public class WaveSpawner : MonoBehaviour
 {
+    public GameObject[] randomEnemyPool;
     public PlayerHUD playerHUD;
     public WeaponShoot weaponShoot;
     public PlayerHealth playerHealth;
@@ -22,33 +22,23 @@ public class WaveSpawner : MonoBehaviour
     public int currentWaveIndex;
     public bool waveActive;
     private List<GameObject> spawnedEnemies = new();
+    public int enemyCount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentWaveIndex = 0;
-        //spawnedEnemy = Instantiate(enemyMovingPrefab, spawnPoint1.position, spawnPoint1.rotation);
-        //foreach (GameObject enemy in waves[0].enemiesToSpawn)
-        //{
-           // Instantiate(enemy, spawnPoint1.position, spawnPoint1.rotation);
-        //}
-
         StartWave();
-        //foreach (RaycastHit hit in orderedHitsByDistance)
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if(!spawnedEnemy.activeSelf)
-        //{
-            //Debug.Log("Round won");
-        //}
-    }
-
     private void StartWave()
     {
-
-        StartCoroutine(StartWaveSequence());
+        if (currentWaveIndex < waves.Length)
+        {
+            StartCoroutine(StartWaveSequence());
+        }
+        else
+        {
+            StartCoroutine(StartRandomWaveSequence());
+        }
+        
     }
 
     public void ResolveWave()
@@ -59,38 +49,68 @@ public class WaveSpawner : MonoBehaviour
             if (!baseEnemy.EnemyIsDead)
             {
                 playerHealth.TakeDamage(1f);
+                baseEnemy.Die(); //Add taunt later or something else for surviving enemies? Instead of normal die?
             }
-            baseEnemy.Die(); //change to taunt later or something else than normal die?
         }
 
         currentWaveIndex++;
 
-        if (currentWaveIndex < waves.Length && !playerHealth.playerIsDead)
+        if (!playerHealth.playerIsDead)
         {
             StartCoroutine(WaveCompleteSequence());
         }
         else
         {
-            Debug.Log("All waves complete");
+            Debug.Log("Error");
         }
         
     }
 
     IEnumerator StartWaveSequence()
     {
+        List<Transform> availableSpawnPoints = new(spawnPoints);
         waveActive = false;
         yield return new WaitForSecondsRealtime(3f);
         waveActive = true;
         weaponShoot.shotsRemaining++;
-        int enemyIndex = 0;
         spawnedEnemies = new();
         foreach (GameObject enemy in waves[currentWaveIndex].enemiesToSpawn)
         {
-            Transform spawnPoint = spawnPoints[enemyIndex % spawnPoints.Length];
+            if(availableSpawnPoints.Count <= 0)
+            {
+                availableSpawnPoints = new(spawnPoints);
+            }
+            Transform spawnPoint = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
             GameObject spawnedEnemy = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
             spawnedEnemies.Add(spawnedEnemy);
-            enemyIndex++;
+            availableSpawnPoints.Remove(spawnPoint);
         }
+    }
+
+    IEnumerator StartRandomWaveSequence()
+    {
+        enemyCount = 1 + currentWaveIndex / 2;
+        List<Transform> availableSpawnPoints = new(spawnPoints);
+        waveActive = false;
+        yield return new WaitForSecondsRealtime(3f);
+        waveActive = true;
+        weaponShoot.shotsRemaining++;
+        spawnedEnemies = new();
+        
+        for (int i = 0; i < enemyCount; i++)
+        {
+            if(availableSpawnPoints.Count <= 0)
+            {
+                availableSpawnPoints = new(spawnPoints);
+            }
+            Transform spawnPoint = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
+            int randomIndex = Random.Range(0, randomEnemyPool.Length);
+            GameObject enemyPrefab = randomEnemyPool[randomIndex];
+            GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            spawnedEnemies.Add(spawnedEnemy);
+            availableSpawnPoints.Remove(spawnPoint);
+        }
+        
     }
 
     IEnumerator WaveCompleteSequence()
