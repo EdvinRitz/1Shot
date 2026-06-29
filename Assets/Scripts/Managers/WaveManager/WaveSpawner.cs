@@ -38,7 +38,6 @@ public class WaveSpawner : MonoBehaviour
         {
             StartCoroutine(StartRandomWaveSequence());
         }
-        
     }
 
     public void ResolveWave()
@@ -63,7 +62,6 @@ public class WaveSpawner : MonoBehaviour
         {
             Debug.Log("Error");
         }
-        
     }
 
     IEnumerator StartWaveSequence()
@@ -110,7 +108,6 @@ public class WaveSpawner : MonoBehaviour
             spawnedEnemies.Add(spawnedEnemy);
             availableSpawnPoints.Remove(spawnPoint);
         }
-        
     }
 
     IEnumerator WaveCompleteSequence()
@@ -118,4 +115,5 @@ public class WaveSpawner : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
         StartWave();
     }
+    
 }
