@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [System.Serializable]
@@ -56,7 +55,7 @@ public class WaveSpawner : MonoBehaviour
 
         currentWaveIndex++;
 
-        if(currentWaveIndex % 2 == 0)
+        if(currentWaveIndex % 2 == 0 && !playerHealth.playerIsDead)
         {
             upgradeManager.BeginSelection();
         }
@@ -66,7 +65,8 @@ public class WaveSpawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error");
+            Debug.Log("Player dead");
+            return;
         }
     }
 
