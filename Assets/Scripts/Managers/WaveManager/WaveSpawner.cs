@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [System.Serializable]
@@ -14,6 +15,7 @@ public class WaveSpawner : MonoBehaviour
     public PlayerHUD playerHUD;
     public WeaponShoot weaponShoot;
     public PlayerHealth playerHealth;
+    public UpgradeManager upgradeManager;
     public Wave[] waves;
     public Transform[] spawnPoints;
     public GameObject enemyMovingPrefab;
@@ -28,7 +30,7 @@ public class WaveSpawner : MonoBehaviour
     {
         StartWave();
     }
-    private void StartWave()
+    public void StartWave()
     {
         if (currentWaveIndex < waves.Length)
         {
@@ -54,7 +56,11 @@ public class WaveSpawner : MonoBehaviour
 
         currentWaveIndex++;
 
-        if (!playerHealth.playerIsDead)
+        if(currentWaveIndex % 2 == 0)
+        {
+            upgradeManager.BeginSelection();
+        }
+        else if (!playerHealth.playerIsDead)
         {
             StartCoroutine(WaveCompleteSequence());
         }

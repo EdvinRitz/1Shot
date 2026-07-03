@@ -12,6 +12,9 @@ public class PlayerInputHandler : MonoBehaviour
     [HideInInspector]
     public bool dashPressed;
     public bool restartPressed;
+    public bool upgrade1Pressed;
+    public bool upgrade2Pressed;
+    public bool upgrade3Pressed;
     public bool aimHeld;
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
@@ -40,6 +43,10 @@ public class PlayerInputHandler : MonoBehaviour
         playerActions.Shoot.performed += ctx => shootPressed = true;
         playerActions.Dash.performed += ctx => dashPressed = true;
         playerActions.Restart.performed += ctx => restartPressed = true;
+
+        playerActions.Upgrade1.performed += ctx => upgrade1Pressed = true;
+        playerActions.Upgrade2.performed += ctx => upgrade2Pressed = true;
+        playerActions.Upgrade3.performed += ctx => upgrade3Pressed = true;
 
         playerActions.Aim.performed += ctx => aimHeld = true;
         playerActions.Aim.canceled += ctx => aimHeld = false;
