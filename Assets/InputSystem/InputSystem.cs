@@ -190,6 +190,33 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Upgrade1"",
+                    ""type"": ""Button"",
+                    ""id"": ""105a5fe2-7ea2-4c06-aa2a-b5feea8695f1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Upgrade2"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f3ace16-75b0-47a4-828d-352e149c60db"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Upgrade3"",
+                    ""type"": ""Button"",
+                    ""id"": ""2f996dfc-055d-475f-83b0-2155b276a7a4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -415,17 +442,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""eb40bb66-4559-4dfa-9a2f-820438abb426"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""daba33a1-ad0c-4742-a909-43ad1cdfbeb6"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -564,6 +580,39 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""004e0374-ee3e-4d74-b0c0-d1c466bf89e3"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Upgrade1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""147ca3b3-dc29-4dc9-95e2-c9b7385157ad"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Upgrade2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8282375b-a9ef-4b1d-99e3-50c3fbb08872"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Upgrade3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1162,6 +1211,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Restart = m_Player.FindAction("Restart", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_Upgrade1 = m_Player.FindAction("Upgrade1", throwIfNotFound: true);
+        m_Player_Upgrade2 = m_Player.FindAction("Upgrade2", throwIfNotFound: true);
+        m_Player_Upgrade3 = m_Player.FindAction("Upgrade3", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1266,6 +1318,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Restart;
     private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_Upgrade1;
+    private readonly InputAction m_Player_Upgrade2;
+    private readonly InputAction m_Player_Upgrade3;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1321,6 +1376,18 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Aim".
         /// </summary>
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Upgrade1".
+        /// </summary>
+        public InputAction @Upgrade1 => m_Wrapper.m_Player_Upgrade1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Upgrade2".
+        /// </summary>
+        public InputAction @Upgrade2 => m_Wrapper.m_Player_Upgrade2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Upgrade3".
+        /// </summary>
+        public InputAction @Upgrade3 => m_Wrapper.m_Player_Upgrade3;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1380,6 +1447,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @Upgrade1.started += instance.OnUpgrade1;
+            @Upgrade1.performed += instance.OnUpgrade1;
+            @Upgrade1.canceled += instance.OnUpgrade1;
+            @Upgrade2.started += instance.OnUpgrade2;
+            @Upgrade2.performed += instance.OnUpgrade2;
+            @Upgrade2.canceled += instance.OnUpgrade2;
+            @Upgrade3.started += instance.OnUpgrade3;
+            @Upgrade3.performed += instance.OnUpgrade3;
+            @Upgrade3.canceled += instance.OnUpgrade3;
         }
 
         /// <summary>
@@ -1424,6 +1500,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @Upgrade1.started -= instance.OnUpgrade1;
+            @Upgrade1.performed -= instance.OnUpgrade1;
+            @Upgrade1.canceled -= instance.OnUpgrade1;
+            @Upgrade2.started -= instance.OnUpgrade2;
+            @Upgrade2.performed -= instance.OnUpgrade2;
+            @Upgrade2.canceled -= instance.OnUpgrade2;
+            @Upgrade3.started -= instance.OnUpgrade3;
+            @Upgrade3.performed -= instance.OnUpgrade3;
+            @Upgrade3.canceled -= instance.OnUpgrade3;
         }
 
         /// <summary>
@@ -1801,6 +1886,27 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Upgrade1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUpgrade1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Upgrade2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUpgrade2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Upgrade3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUpgrade3(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

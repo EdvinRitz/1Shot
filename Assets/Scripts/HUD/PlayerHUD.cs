@@ -55,7 +55,13 @@ public class PlayerHUD : MonoBehaviour
         //{
             //enemiesAmiedAtHUD.text = "";
         //}
-        enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount;
+        if(waveSpawner.currentWaveIndex < waveSpawner.waves.Length){
+        enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount + "/" + waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesToSpawn.Length; 
+        }
+        else
+        {
+            enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount + "/" + waveSpawner.enemyCount;
+        }
 
         slowMoEnergyHUD.text = "" + aimMode.slowMoEnergy.ToString("F1");
 

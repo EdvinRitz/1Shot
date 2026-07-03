@@ -36,7 +36,13 @@ public class AimMode : MonoBehaviour
             }
             else
             {
-                validHits.Add(hit);
+                if (hit.transform.TryGetComponent<BaseEnemy>(out var enemy))
+                {
+                    if(!enemy.EnemyIsDead){
+                        validHits.Add(hit);
+                    }
+                }
+                
             }
             
         }

@@ -14,6 +14,7 @@ public class WaveSpawner : MonoBehaviour
     public PlayerHUD playerHUD;
     public WeaponShoot weaponShoot;
     public PlayerHealth playerHealth;
+    public UpgradeManager upgradeManager;
     public Wave[] waves;
     public Transform[] spawnPoints;
     public GameObject enemyMovingPrefab;
@@ -28,7 +29,7 @@ public class WaveSpawner : MonoBehaviour
     {
         StartWave();
     }
-    private void StartWave()
+    public void StartWave()
     {
         if (currentWaveIndex < waves.Length)
         {
@@ -38,7 +39,6 @@ public class WaveSpawner : MonoBehaviour
         {
             StartCoroutine(StartRandomWaveSequence());
         }
-        
     }
 
     public void ResolveWave()
@@ -55,15 +55,19 @@ public class WaveSpawner : MonoBehaviour
 
         currentWaveIndex++;
 
-        if (!playerHealth.playerIsDead)
+        if(currentWaveIndex % 2 == 0 && !playerHealth.playerIsDead)
+        {
+            upgradeManager.BeginSelection();
+        }
+        else if (!playerHealth.playerIsDead)
         {
             StartCoroutine(WaveCompleteSequence());
         }
         else
         {
-            Debug.Log("Error");
+            Debug.Log("Player dead");
+            return;
         }
-        
     }
 
     IEnumerator StartWaveSequence()
@@ -110,7 +114,6 @@ public class WaveSpawner : MonoBehaviour
             spawnedEnemies.Add(spawnedEnemy);
             availableSpawnPoints.Remove(spawnPoint);
         }
-        
     }
 
     IEnumerator WaveCompleteSequence()
@@ -118,4 +121,5 @@ public class WaveSpawner : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
         StartWave();
     }
+    
 }

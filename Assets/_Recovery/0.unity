@@ -4346,9 +4346,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
   playerInputHandler: {fileID: 679599666}
   waveSpawner: {fileID: 1731078659}
-  playerHealth: {fileID: 679599670}
-  playerMotor: {fileID: 679599667}
-  aimMode: {fileID: 860295339}
 --- !u!1 &1733686960
 GameObject:
   m_ObjectHideFlags: 0
