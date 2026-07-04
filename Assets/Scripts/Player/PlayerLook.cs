@@ -7,6 +7,7 @@ public class PlayerLook : MonoBehaviour
     private float xRotation = 0f;
     public float xSensetivity = 30f;
     public float ySensetivity = 30f;
+    public UpgradeManager upgradeManager;
 
     private PlayerInputHandler playerInputHandler;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,7 +21,11 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ProcessLook(playerInputHandler.LookInput);
+        if (!upgradeManager.selectionActive)
+        {
+            ProcessLook(playerInputHandler.LookInput);
+        }
+        
     }
 
     public void ProcessLook(Vector2 input){
