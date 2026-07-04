@@ -70,7 +70,7 @@ public class UpgradeManager : MonoBehaviour
     public void UpgradeDash()
     {
         playerInputHandler.upgrade2Pressed = false;
-        playerMotor.dashCooldown -= 0.2f; 
+        playerMotor.dashCooldown = Mathf.Max(0.2f, playerMotor.dashCooldown - 0.2f);
         StartNextWave();
     }
     public void UpgradeSlowMo()

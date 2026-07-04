@@ -2296,7 +2296,7 @@ MonoBehaviour:
   upgradeManager: {fileID: 1731078660}
   speed: 5
   jumpHeight: 0.3
-  dashCooldown: 0.8
+  dashCooldown: 0.4
   dashCooldownTimer: 0
 --- !u!114 &679599668
 MonoBehaviour:
@@ -2342,7 +2342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2d58c1fced3df4d8c1d3f7c1a0539e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHealth: 5
+  startingHealth: 5
   playerIsDead: 0
   playerInputHandler: {fileID: 679599666}
 --- !u!195 &679599671
