@@ -5,14 +5,14 @@ public class PlayerHealth : MonoBehaviour
 {
     private float health;
     public float Health { get => health; }
-    public float maxHealth = 5;
+    public float startingHealth = 5;
     //private float lerpTimer;
     public bool playerIsDead;
     public PlayerInputHandler playerInputHandler;
 
     void Start()
     {
-        health = maxHealth;
+        health = startingHealth;
         playerIsDead = false;
     }
 

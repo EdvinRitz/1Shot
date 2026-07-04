@@ -7,6 +7,7 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 dashDirection = Vector3.zero;
     private CharacterController controller;
     public PlayerInputHandler playerInputHandler;
+    public UpgradeManager upgradeManager;
     private Vector3 playerVelocity;
     public float speed = 5f;
     private bool isGrounded;
@@ -24,13 +25,18 @@ public class PlayerMotor : MonoBehaviour
 
     void Update()
     {
+        if (upgradeManager.selectionActive)
+        {
+            return;
+        }
+
         if (dashCooldownTimer > 0)
         {
             dashCooldownTimer -= Time.deltaTime;
             playerInputHandler.dashPressed = false;
         }
 
-        if (!isDashing)
+        if (!isDashing && !upgradeManager.selectionActive)
         {
             ProcessMove(playerInputHandler.MoveInput);
         }
@@ -40,7 +46,7 @@ public class PlayerMotor : MonoBehaviour
         {
             Jump();
         }
-        if((playerInputHandler.dashPressed && dashCooldownTimer <= 0) || isDashing)
+        if((playerInputHandler.dashPressed && dashCooldownTimer <= 0)  || isDashing)
         {
             Dash(playerInputHandler.MoveInput);
         }
