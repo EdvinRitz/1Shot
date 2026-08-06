@@ -10,12 +10,14 @@ public class PlayerHUD : MonoBehaviour
     public TextMeshProUGUI slowMoEnergyHUD;
     public TextMeshProUGUI ammoHUD;
     public TextMeshProUGUI roundHUD;
+    public TextMeshProUGUI scoreHUD;
     public PlayerHealth playerHealth;
     public PlayerMotor playerMotor;
     public PlayerInputHandler playerInputHandler;
     public AimMode aimMode;
     public WeaponShoot weaponShoot;
     public WaveSpawner waveSpawner;
+    public ScoreManager scoreManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +28,8 @@ public class PlayerHUD : MonoBehaviour
     void Update()
     {
         playerHealthHUD.text = "HP: " + playerHealth.Health;
+
+        scoreHUD.text = "SCORE: " + scoreManager.playerScore;
 
         if(playerMotor.dashCooldownTimer > 0)
         {

@@ -15,6 +15,7 @@ public class WaveSpawner : MonoBehaviour
     public WeaponShoot weaponShoot;
     public PlayerHealth playerHealth;
     public UpgradeManager upgradeManager;
+    public ScoreManager scoreManager;
     public Wave[] waves;
     public Transform[] spawnPoints;
     public GameObject enemyMovingPrefab;
@@ -54,7 +55,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         currentWaveIndex++;
-
+        
         if(currentWaveIndex % 2 == 0 && !playerHealth.playerIsDead)
         {
             upgradeManager.BeginSelection();
@@ -68,6 +69,9 @@ public class WaveSpawner : MonoBehaviour
             Debug.Log("Player dead");
             return;
         }
+        
+        scoreManager.addScoreForCompletedWave(currentWaveIndex);
+        
     }
 
     IEnumerator StartWaveSequence()
