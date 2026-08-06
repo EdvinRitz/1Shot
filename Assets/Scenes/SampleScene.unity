@@ -2640,6 +2640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponShoot
   waveSpawner: {fileID: 1731078659}
   playerInputHandler: {fileID: 679599666}
+  scoreManager: {fileID: 1731078661}
   fpCamera: {fileID: 1880964165}
   lineRenderer: {fileID: 860295338}
   muzzle: {fileID: 1088850013}

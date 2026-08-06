@@ -26,5 +26,6 @@ public class ScoreManager : MonoBehaviour
         int comboBonus = (enemiesKilled - 1) * enemiesKilled / 2 * 100;
 
         playerScore += killScore + comboBonus;
+        Debug.Log(playerScore);
     }
 }

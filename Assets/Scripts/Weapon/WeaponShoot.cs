@@ -8,6 +8,7 @@ public class WeaponShoot : MonoBehaviour
 {
     public WaveSpawner waveSpawner;
     public PlayerInputHandler playerInputHandler;
+    public ScoreManager scoreManager;
     public Camera fpCamera;
     public LineRenderer lineRenderer;
     public GameObject muzzle;
@@ -62,7 +63,7 @@ public class WeaponShoot : MonoBehaviour
             }
         }
         playerInputHandler.shootPressed = false;
-
+        scoreManager.addScoreForEnemiesShot(validHits.Count);
         waveSpawner.ResolveWave();
     }
 
