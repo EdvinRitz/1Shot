@@ -2296,7 +2296,7 @@ MonoBehaviour:
   upgradeManager: {fileID: 1731078660}
   speed: 5
   jumpHeight: 0.3
-  dashCooldown: 0.4
+  dashCooldown: 1
   dashCooldownTimer: 0
 --- !u!114 &679599668
 MonoBehaviour:
@@ -4799,6 +4799,7 @@ GameObject:
   - component: {fileID: 1731078658}
   - component: {fileID: 1731078659}
   - component: {fileID: 1731078660}
+  - component: {fileID: 1731078661}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
@@ -4848,6 +4849,7 @@ MonoBehaviour:
   weaponShoot: {fileID: 860295337}
   playerHealth: {fileID: 679599670}
   upgradeManager: {fileID: 1731078660}
+  scoreManager: {fileID: 1731078661}
   waves:
   - enemiesToSpawn:
     - {fileID: 4399323505672690526, guid: 6678262ef08800b47b7ef676a6819c97, type: 3}
@@ -4897,6 +4899,19 @@ MonoBehaviour:
   aimMode: {fileID: 860295339}
   upgradePanel: {fileID: 1792594310}
   dashUpgradeButton: {fileID: 466558612}
+--- !u!114 &1731078661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731078657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f0a86654ffd7c4ab7d251d129bc0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  playerScore: 0
 --- !u!1 &1733686960
 GameObject:
   m_ObjectHideFlags: 0
