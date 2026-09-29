@@ -49,7 +49,10 @@ public class WeaponShoot : MonoBehaviour
                 break;
             }
             
-            validHits.Add(hit);
+            if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                validHits.Add(hit);
+            }
         }
 
         rayEnd -= fpCamera.transform.forward * 0.03f;

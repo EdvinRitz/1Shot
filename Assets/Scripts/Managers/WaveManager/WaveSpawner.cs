@@ -26,6 +26,7 @@ public class WaveSpawner : MonoBehaviour
     public bool waveActive;
     private List<GameObject> spawnedEnemies = new();
     public int enemyCount;
+    public int enemiesToKillRandomWave;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,10 +46,21 @@ public class WaveSpawner : MonoBehaviour
 
     public void ResolveWave()
     {
-        if(weaponShoot.validHits.Count < waves[currentWaveIndex].enemiesToKill)
+        if (currentWaveIndex < waves.Length)
         {
-            playerHealth.TakeDamage(waves[currentWaveIndex].enemiesToKill - weaponShoot.validHits.Count);
+            if(weaponShoot.validHits.Count < waves[currentWaveIndex].enemiesToKill)
+            {
+                playerHealth.TakeDamage(waves[currentWaveIndex].enemiesToKill - weaponShoot.validHits.Count);
+            }
         }
+        else
+        {
+            if(weaponShoot.validHits.Count < enemiesToKillRandomWave)
+            {
+                playerHealth.TakeDamage(enemiesToKillRandomWave - weaponShoot.validHits.Count);
+            }
+        }
+
 
         foreach (GameObject enemy in spawnedEnemies)
         {
@@ -103,6 +115,7 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator StartRandomWaveSequence()
     {
         enemyCount = 1 + currentWaveIndex / 2;
+        enemiesToKillRandomWave = Random.Range(Mathf.Max(1, enemyCount/2), enemyCount);
         List<Transform> availableSpawnPoints = new(spawnPoints);
         waveActive = false;
         yield return new WaitForSecondsRealtime(3f);
