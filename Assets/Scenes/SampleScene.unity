@@ -2346,6 +2346,7 @@ MonoBehaviour:
   startingHealth: 5
   playerIsDead: 0
   playerInputHandler: {fileID: 679599666}
+  upgradeManager: {fileID: 1731078660}
 --- !u!195 &679599671
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4913,6 +4914,7 @@ MonoBehaviour:
   currentWaveIndex: 0
   waveActive: 0
   enemyCount: 0
+  enemiesToKillRandomWave: 0
 --- !u!114 &1731078660
 MonoBehaviour:
   m_ObjectHideFlags: 0

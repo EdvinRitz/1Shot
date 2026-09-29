@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     //private float lerpTimer;
     public bool playerIsDead;
     public PlayerInputHandler playerInputHandler;
+    public UpgradeManager upgradeManager; 
 
     void Start()
     {
@@ -23,10 +24,9 @@ public class PlayerHealth : MonoBehaviour
             Restart();
         }
     }
-
         public void TakeDamage(float damage)
     {
-        if(health > 0)
+        if(health > 0 && !upgradeManager.selectionActive)
         {
             health -= damage;
         }
@@ -42,7 +42,6 @@ public class PlayerHealth : MonoBehaviour
     {
         health += healAmount;
         //lerpTimer = 0f;
-        Debug.Log(health);
     }
 
     public void GameOver()
