@@ -60,7 +60,7 @@ public class PlayerHUD : MonoBehaviour
             //enemiesAmiedAtHUD.text = "";
         //}
         if(waveSpawner.currentWaveIndex < waveSpawner.waves.Length){
-        enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount + "/" + waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesToSpawn.Length; 
+        enemiesAmiedAtHUD.text = "" + aimMode.AimHitCount + "/" + waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesToKill; 
         }
         else
         {
@@ -74,7 +74,7 @@ public class PlayerHUD : MonoBehaviour
         if (!waveSpawner.waveActive)
         {
             if(waveSpawner.currentWaveIndex < waveSpawner.waves.Length){
-                roundHUD.text = "ROUND " + (waveSpawner.currentWaveIndex + 1) + "\n" + waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesToSpawn.Length + " enemies";
+                roundHUD.text = "ROUND " + (waveSpawner.currentWaveIndex + 1) + "\nKILL: " + waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesToKill + " enemies";
             }
             else
             {

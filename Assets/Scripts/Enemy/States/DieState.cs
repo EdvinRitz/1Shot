@@ -10,7 +10,7 @@ public class DieState : BaseState
 
     public override void Enter()
     {
-        baseEnemy.Agent.isStopped = true;
+        //baseEnemy.Agent.isStopped = true;
         baseEnemy.Agent.updateRotation = false;
         baseEnemy.Agent.updatePosition = false;
         baseEnemy.StartCoroutine(DisableAfterDelay());

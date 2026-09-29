@@ -20,6 +20,7 @@ public abstract class BaseEnemy : MonoBehaviour
     
     public void Die()
     {
+        if (enemyIsDead) return;
         enemyIsDead = true;
         stateMachine.ChangeState(new DieState(this));
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Wave
 {
+    public int enemiesToKill;
     public GameObject[] enemiesToSpawn;
 }
 
@@ -44,12 +45,16 @@ public class WaveSpawner : MonoBehaviour
 
     public void ResolveWave()
     {
+        if(weaponShoot.validHits.Count < waves[currentWaveIndex].enemiesToKill)
+        {
+            playerHealth.TakeDamage(waves[currentWaveIndex].enemiesToKill - weaponShoot.validHits.Count);
+        }
+
         foreach (GameObject enemy in spawnedEnemies)
         {
             BaseEnemy baseEnemy = enemy.GetComponent<BaseEnemy>();
             if (!baseEnemy.EnemyIsDead)
             {
-                playerHealth.TakeDamage(1f);
                 baseEnemy.Die(); //Add taunt later or something else for surviving enemies? Instead of normal die?
             }
         }
