@@ -13,6 +13,7 @@ public class WeaponShoot : MonoBehaviour
     public LineRenderer lineRenderer;
     public GameObject muzzle;
     public int shotsRemaining = 0;
+    public List<RaycastHit> validHits = new();
 
     void Update()
     {
@@ -38,7 +39,7 @@ public class WeaponShoot : MonoBehaviour
         var hits = Physics.RaycastAll(fpCamera.transform.position, fpCamera.transform.forward);
         Vector3 rayEnd = muzzle.transform.position;
         List<RaycastHit> orderedHitsByDistance = new(hits);
-        List<RaycastHit> validHits = new();
+        validHits.Clear();
         orderedHitsByDistance.Sort(SortByDistance);
         foreach (RaycastHit hit in orderedHitsByDistance)
         {
@@ -48,7 +49,10 @@ public class WeaponShoot : MonoBehaviour
                 break;
             }
             
-            validHits.Add(hit);
+            if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                validHits.Add(hit);
+            }
         }
 
         rayEnd -= fpCamera.transform.forward * 0.03f;
@@ -56,7 +60,7 @@ public class WeaponShoot : MonoBehaviour
 
         foreach (RaycastHit hitValid in validHits)
         {
-            Debug.Log(hitValid.transform.name);
+            //Debug.Log(hitValid.transform.name);
             if (hitValid.transform.TryGetComponent<BaseEnemy>(out var enemy))
             {
                 enemy.Die();
