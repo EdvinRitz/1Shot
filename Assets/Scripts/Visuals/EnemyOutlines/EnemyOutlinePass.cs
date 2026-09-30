@@ -29,6 +29,16 @@ public class EnemyOutlinePass : ScriptableRenderPass
             return;
 
         var resources = frameData.Get<UniversalResourceData>();
+        var maskDescription = renderGraph.GetTextureDesc(resources.activeColorTexture);
+
+        maskDescription.name = "Enemy Outline Mask";
+        maskDescription.depthBufferBits = DepthBits.None;
+        maskDescription.msaaSamples = MSAASamples.None;
+        maskDescription.bindTextureMS = false;
+        maskDescription.clearBuffer = true;
+        maskDescription.clearColor = Color.black;
+
+        var maskTexture = renderGraph.CreateTexture(maskDescription);
 
         using (var builder = renderGraph.AddRasterRenderPass<PassData>(
             "Enemy Mask Test", out var passData))
@@ -36,8 +46,8 @@ public class EnemyOutlinePass : ScriptableRenderPass
             passData.enemyRenderer = enemyRenderer;
             passData.material = maskMaterial;
 
-            builder.SetRenderAttachment(
-                resources.activeColorTexture, 0, AccessFlags.Write);
+            builder.SetRenderAttachment(maskTexture, 0, AccessFlags.Write);
+            builder.AllowPassCulling(false); //Temporary
 
             builder.SetRenderFunc(
                 static (PassData data, RasterGraphContext context) =>
