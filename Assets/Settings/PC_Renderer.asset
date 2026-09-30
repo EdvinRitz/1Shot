@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4556745703944053360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f4fc9f89ee5454b95f0451e8a46b03, type: 3}
+  m_Name: EnemyOutlineRendererFeature
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyOutlineRendererFeature
+  m_Active: 1
 --- !u!114 &-836354725951375092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +82,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 7833122117494664109}
   - {fileID: -836354725951375092}
-  m_RendererFeatureMap: ad6b866f10d7b46c0cf972d5ceab64f4
+  - {fileID: -4556745703944053360}
+  m_RendererFeatureMap: ad6b866f10d7b46c0cf972d5ceab64f4909da0c8ec2fc3c0
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
