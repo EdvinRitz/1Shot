@@ -17,6 +17,40 @@ public class EnemyOutlinePass : ScriptableRenderPass
     public override void RecordRenderGraph(
         RenderGraph renderGraph, ContextContainer frameData)
     {
-        // We'll describe our drawing operations here.
+        if (maskMaterial == null)
+            return;
+
+        var enemy = Object.FindFirstObjectByType<BaseEnemy>();
+        if (enemy == null)
+            return;
+
+        var enemyRenderer = enemy.GetComponentInChildren<MeshRenderer>();
+        if (enemyRenderer == null)
+            return;
+
+        var resources = frameData.Get<UniversalResourceData>();
+
+        using (var builder = renderGraph.AddRasterRenderPass<PassData>(
+            "Enemy Mask Test", out var passData))
+        {
+            passData.enemyRenderer = enemyRenderer;
+            passData.material = maskMaterial;
+
+            builder.SetRenderAttachment(
+                resources.activeColorTexture, 0, AccessFlags.Write);
+
+            builder.SetRenderFunc(
+                static (PassData data, RasterGraphContext context) =>
+                {
+                    context.cmd.DrawRenderer(
+                        data.enemyRenderer, data.material, 0, 0);
+                });
+        }
+    }
+
+    private class PassData
+    {
+        public Renderer enemyRenderer;
+        public Material material;
     }
 }
