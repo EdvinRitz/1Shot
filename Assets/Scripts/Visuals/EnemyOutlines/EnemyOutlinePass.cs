@@ -21,61 +21,60 @@ public class EnemyOutlinePass : ScriptableRenderPass
         if (maskMaterial == null || outlineMaterial == null)
             return;
 
-        var enemy = Object.FindFirstObjectByType<BaseEnemy>();
-        if (enemy == null)
-            return;
-
-        var enemyRenderer = enemy.GetComponentInChildren<MeshRenderer>();
-        if (enemyRenderer == null)
-            return;
-
+        var enemies = Object.FindObjectsByType<BaseEnemy>(FindObjectsSortMode.None);
         var resources = frameData.Get<UniversalResourceData>();
-        var maskDescription = renderGraph.GetTextureDesc(resources.activeColorTexture);
 
-        maskDescription.name = "Enemy Outline Mask";
-        maskDescription.depthBufferBits = DepthBits.None;
-        maskDescription.msaaSamples = MSAASamples.None;
-        maskDescription.bindTextureMS = false;
-        maskDescription.clearBuffer = true;
-        maskDescription.clearColor = Color.black;
-
-        var maskTexture = renderGraph.CreateTexture(maskDescription);
-
-        using (var builder = renderGraph.AddRasterRenderPass<PassData>(
-            "Enemy Mask Test", out var passData))
+        foreach (var enemy in enemies)
         {
-            passData.enemyRenderer = enemyRenderer;
-            passData.material = maskMaterial;
+            var enemyRenderer = enemy.GetComponentInChildren<MeshRenderer>();
+            if (enemyRenderer == null)
+                continue;
 
-            builder.SetRenderAttachment(maskTexture, 0, AccessFlags.Write);
-            builder.SetGlobalTextureAfterPass(maskTexture, maskTextureId);
-            builder.AllowPassCulling(false); //Temporary
+            var maskDescription = renderGraph.GetTextureDesc(resources.activeColorTexture);
+            maskDescription.name = $"Enemy Outline Mask - {enemy.name}";
+            maskDescription.depthBufferBits = DepthBits.None;
+            maskDescription.msaaSamples = MSAASamples.None;
+            maskDescription.bindTextureMS = false;
+            maskDescription.clearBuffer = true;
+            maskDescription.clearColor = Color.black;
 
-            builder.SetRenderFunc(
-                static (PassData data, RasterGraphContext context) =>
-                {
-                    context.cmd.DrawRenderer(
-                        data.enemyRenderer, data.material, 0, 0);
-                });
-        }
+            var maskTexture = renderGraph.CreateTexture(maskDescription);
 
-        using (var builder = renderGraph.AddRasterRenderPass<PassData>(
-            "Enemy Outline", out var passData))
-        {
-            passData.enemyRenderer = enemyRenderer;
-            passData.material = outlineMaterial;
+            using (var builder = renderGraph.AddRasterRenderPass<PassData>(
+                $"Enemy Mask - {enemy.name}", out var maskPassData))
+            {
+                maskPassData.enemyRenderer = enemyRenderer;
+                maskPassData.material = maskMaterial;
 
-            builder.UseGlobalTexture(maskTextureId, AccessFlags.Read);
+                builder.SetRenderAttachment(maskTexture, 0, AccessFlags.Write);
+                builder.SetGlobalTextureAfterPass(maskTexture, maskTextureId);
+                builder.AllowPassCulling(false); // Temporary while developing.
 
-            builder.SetRenderAttachment(
-                resources.activeColorTexture, 0, AccessFlags.Write);
+                builder.SetRenderFunc(
+                    static (PassData data, RasterGraphContext context) =>
+                    {
+                        context.cmd.DrawRenderer(
+                            data.enemyRenderer, data.material, 0, 0);
+                    });
+            }
 
-            builder.SetRenderFunc(
-                static (PassData data, RasterGraphContext context) =>
-                {
-                    context.cmd.DrawRenderer(
-                        data.enemyRenderer, data.material, 0, 0);
-                });
+            using (var builder = renderGraph.AddRasterRenderPass<PassData>(
+                $"Enemy Outline - {enemy.name}", out var outlinePassData))
+            {
+                outlinePassData.enemyRenderer = enemyRenderer;
+                outlinePassData.material = outlineMaterial;
+
+                builder.UseGlobalTexture(maskTextureId, AccessFlags.Read);
+                builder.SetRenderAttachment(
+                    resources.activeColorTexture, 0, AccessFlags.Write);
+
+                builder.SetRenderFunc(
+                    static (PassData data, RasterGraphContext context) =>
+                    {
+                        context.cmd.DrawRenderer(
+                            data.enemyRenderer, data.material, 0, 0);
+                    });
+            }
         }
     }
 
