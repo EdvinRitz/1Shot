@@ -8,6 +8,9 @@ public class EnemyOutlineRendererFeature : ScriptableRendererFeature
     [SerializeField] private Material maskMaterial;
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
+        if (!AimMode.XRayActive)
+        return;
+        
         if (renderingData.cameraData.cameraType != CameraType.Game)
         return;
 

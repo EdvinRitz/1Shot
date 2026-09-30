@@ -48,7 +48,7 @@ public class EnemyOutlinePass : ScriptableRenderPass
 
                 builder.SetRenderAttachment(maskTexture, 0, AccessFlags.Write);
                 builder.SetGlobalTextureAfterPass(maskTexture, maskTextureId);
-                builder.AllowPassCulling(false); // Temporary while developing.
+                builder.AllowPassCulling(false);
 
                 builder.SetRenderFunc(
                     static (PassData data, RasterGraphContext context) =>
