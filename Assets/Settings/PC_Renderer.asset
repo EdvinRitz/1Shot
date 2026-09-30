@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: EnemyOutlineRendererFeature
   m_EditorClassIdentifier: Assembly-CSharp::EnemyOutlineRendererFeature
   m_Active: 1
+  outlineMaterial: {fileID: 2100000, guid: 3c63ed4ee12cd234c80ff33fed0cd7eb, type: 2}
+  maskMaterial: {fileID: 2100000, guid: 5c8391a485c29e94cb427cb9eefb5e76, type: 2}
 --- !u!114 &-836354725951375092
 MonoBehaviour:
   m_ObjectHideFlags: 0

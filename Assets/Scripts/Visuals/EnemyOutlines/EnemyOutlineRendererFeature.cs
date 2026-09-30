@@ -4,6 +4,8 @@ using UnityEngine.Rendering.Universal;
 public class EnemyOutlineRendererFeature : ScriptableRendererFeature
 {
     private EnemyOutlinePass enemyOutlinePass;
+    [SerializeField] private Material outlineMaterial;
+    [SerializeField] private Material maskMaterial;
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
         if (renderingData.cameraData.cameraType != CameraType.Game)
@@ -14,7 +16,7 @@ public class EnemyOutlineRendererFeature : ScriptableRendererFeature
 
     public override void Create()
     {
-        enemyOutlinePass = new EnemyOutlinePass();
+        enemyOutlinePass = new EnemyOutlinePass(outlineMaterial, maskMaterial);
         enemyOutlinePass.renderPassEvent = RenderPassEvent.AfterRenderingSkybox;
     }
 }
