@@ -7,6 +7,7 @@ public class EnemyOutlinePass : ScriptableRenderPass
 {
     private readonly Material outlineMaterial;
     private readonly Material maskMaterial;
+    private static readonly int maskTextureId = Shader.PropertyToID("_EnemyOutlineMask");
 
     public EnemyOutlinePass(Material outlineMaterial, Material maskMaterial)
     {
@@ -17,7 +18,7 @@ public class EnemyOutlinePass : ScriptableRenderPass
     public override void RecordRenderGraph(
         RenderGraph renderGraph, ContextContainer frameData)
     {
-        if (maskMaterial == null)
+        if (maskMaterial == null || outlineMaterial == null)
             return;
 
         var enemy = Object.FindFirstObjectByType<BaseEnemy>();
@@ -47,7 +48,27 @@ public class EnemyOutlinePass : ScriptableRenderPass
             passData.material = maskMaterial;
 
             builder.SetRenderAttachment(maskTexture, 0, AccessFlags.Write);
+            builder.SetGlobalTextureAfterPass(maskTexture, maskTextureId);
             builder.AllowPassCulling(false); //Temporary
+
+            builder.SetRenderFunc(
+                static (PassData data, RasterGraphContext context) =>
+                {
+                    context.cmd.DrawRenderer(
+                        data.enemyRenderer, data.material, 0, 0);
+                });
+        }
+
+        using (var builder = renderGraph.AddRasterRenderPass<PassData>(
+            "Enemy Outline", out var passData))
+        {
+            passData.enemyRenderer = enemyRenderer;
+            passData.material = outlineMaterial;
+
+            builder.UseGlobalTexture(maskTextureId, AccessFlags.Read);
+
+            builder.SetRenderAttachment(
+                resources.activeColorTexture, 0, AccessFlags.Write);
 
             builder.SetRenderFunc(
                 static (PassData data, RasterGraphContext context) =>
