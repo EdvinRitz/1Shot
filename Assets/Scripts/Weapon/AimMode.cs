@@ -10,6 +10,7 @@ public class AimMode : MonoBehaviour
     private float originalFixedDeltaTime;
     public float slowMoEnergy;
     public float slowMoEnergyMax;
+    public static bool XRayActive { get; private set; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -71,6 +72,7 @@ public class AimMode : MonoBehaviour
         }
 
         slowMoEnergy = Mathf.Clamp(slowMoEnergy, 0, slowMoEnergyMax);
+        XRayActive = playerInputHandler.aimHeld && slowMoEnergy > 0f;
     }
 
     private int SortByDistance(RaycastHit a, RaycastHit b)
