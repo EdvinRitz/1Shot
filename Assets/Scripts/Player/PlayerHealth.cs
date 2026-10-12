@@ -7,15 +7,18 @@ public class PlayerHealth : MonoBehaviour
     private float health;
     public float Health { get => health; }
     public float startingHealth = 5;
-    //private float lerpTimer;
-    public bool playerIsDead;
+    [HideInInspector]
+     public bool playerIsDead;
     public PlayerInputHandler playerInputHandler;
     public UpgradeManager upgradeManager;
     
     [Header("Damage Overlay")]
     public Image damageOverlay;
     private Color damageOverlayColor;
+    //also used for Heal Overlay.
+    [Tooltip("Also used for Heal Overlay")]
     public float duration;
+    [Tooltip("Also used for Heal Overlay")]
     public float fadeSpeed;
     private float durationTimer;
 
@@ -31,7 +34,6 @@ public class PlayerHealth : MonoBehaviour
         damageOverlayColor.a = 0f;
         healOverlayColor = healOverlay.color;
         healOverlayColor.a = 0f;
-        
     }
 
     void Update()
@@ -67,6 +69,7 @@ public class PlayerHealth : MonoBehaviour
     }
         public void TakeDamage(float damage)
     {
+        durationTimer = 0f;
         healOverlayColor.a = 0f;
         damageOverlayColor.a = 1f;
         
@@ -74,8 +77,6 @@ public class PlayerHealth : MonoBehaviour
         {
             health -= damage;
         }
-        //lerpTimer = 0f;
-        //Debug.Log(health);
         if(health <= 0)
         {
             GameOver();
@@ -84,11 +85,11 @@ public class PlayerHealth : MonoBehaviour
 
         public void RestoreHealth(float healAmount)
     {
+        durationTimer = 0f;
         damageOverlayColor.a = 0f;
         healOverlayColor.a = 1f;
         
         health += healAmount;
-        //lerpTimer = 0f;
     }
 
     public void GameOver()
