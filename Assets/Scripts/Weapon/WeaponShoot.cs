@@ -12,6 +12,7 @@ public class WeaponShoot : MonoBehaviour
     public Camera fpCamera;
     public LineRenderer lineRenderer;
     public GameObject muzzle;
+    [HideInInspector]
     public int shotsRemaining = 0;
     public List<RaycastHit> validHits = new();
 
@@ -35,7 +36,7 @@ public class WeaponShoot : MonoBehaviour
     {
         shotsRemaining--;
         //Using RaycastAll instead of RaycastNonAlloc since I don't know how big the premade array should be for 
-        // RaycastNonAlloc and shooting is not gonna be something that happens too often 
+        // RaycastNonAlloc and shooting is not gonna be something that happens too often (maybe).
         var hits = Physics.RaycastAll(fpCamera.transform.position, fpCamera.transform.forward);
         Vector3 rayEnd = muzzle.transform.position;
         List<RaycastHit> orderedHitsByDistance = new(hits);
@@ -43,6 +44,7 @@ public class WeaponShoot : MonoBehaviour
         orderedHitsByDistance.Sort(SortByDistance);
         foreach (RaycastHit hit in orderedHitsByDistance)
         {
+            //The ray does not stop for enemies or bullets. But it stops for everything else.
             if(hit.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") && hit.transform.gameObject.layer != LayerMask.NameToLayer("Bullet"))
             {
                 rayEnd = hit.point;
@@ -55,12 +57,13 @@ public class WeaponShoot : MonoBehaviour
             }
         }
 
+        //To make sure that the ray gets into objects and stuff. The ray can be a bit shy if you for example hit a square obstacle in a corner. The ray does not fully go into the object.
         rayEnd -= fpCamera.transform.forward * 0.03f;
         DrawRay(muzzle.transform.position, rayEnd);
-
+        
+        //Kill all enemies we hit.
         foreach (RaycastHit hitValid in validHits)
         {
-            //Debug.Log(hitValid.transform.name);
             if (hitValid.transform.TryGetComponent<BaseEnemy>(out var enemy))
             {
                 enemy.Die();
@@ -83,6 +86,7 @@ public class WeaponShoot : MonoBehaviour
     {
         return a.distance.CompareTo(b.distance);
     }
+    
     IEnumerator DisableAfterDelay()
     {
         yield return new WaitForSeconds(0.5f);
