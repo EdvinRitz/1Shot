@@ -19,18 +19,26 @@ public class PlayerHealth : MonoBehaviour
     public float fadeSpeed;
     private float durationTimer;
 
+    [Header("Heal Overlay")]
+    public Image healOverlay;
+    private Color healOverlayColor;
+
     void Start()
     {
         health = startingHealth;
         playerIsDead = false;
         damageOverlayColor = damageOverlay.color;
         damageOverlayColor.a = 0f;
+        healOverlayColor = healOverlay.color;
+        healOverlayColor.a = 0f;
         
     }
 
     void Update()
     {
         damageOverlay.color = damageOverlayColor;
+        healOverlay.color = healOverlayColor;
+
         if(playerInputHandler.restartPressed && playerIsDead)
         {
             Restart();
@@ -46,10 +54,22 @@ public class PlayerHealth : MonoBehaviour
                 damageOverlayColor.a = tempAlpha;
             }
         }
+        else if(healOverlay.color.a > 0)
+        {
+            durationTimer += Time.deltaTime;
+            if(durationTimer > duration)
+            {
+                float tempAlpha = healOverlay.color.a;
+                tempAlpha -= Time.deltaTime * fadeSpeed;
+                healOverlayColor.a = tempAlpha;
+            }
+        }
     }
         public void TakeDamage(float damage)
     {
+        healOverlayColor.a = 0f;
         damageOverlayColor.a = 1f;
+        
         if(health > 0 && !upgradeManager.selectionActive)
         {
             health -= damage;
@@ -64,6 +84,9 @@ public class PlayerHealth : MonoBehaviour
 
         public void RestoreHealth(float healAmount)
     {
+        damageOverlayColor.a = 0f;
+        healOverlayColor.a = 1f;
+        
         health += healAmount;
         //lerpTimer = 0f;
     }
