@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public float Health { get => health; }
     public float startingHealth = 5;
     [HideInInspector]
-     public bool playerIsDead;
+    public bool playerIsDead;
     public PlayerInputHandler playerInputHandler;
     public UpgradeManager upgradeManager;
     
@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
     {
         health = startingHealth;
         playerIsDead = false;
+        //No overlays visible
         damageOverlayColor = damageOverlay.color;
         damageOverlayColor.a = 0f;
         healOverlayColor = healOverlay.color;
