@@ -1,3 +1,4 @@
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,23 +10,46 @@ public class PlayerHealth : MonoBehaviour
     //private float lerpTimer;
     public bool playerIsDead;
     public PlayerInputHandler playerInputHandler;
-    public UpgradeManager upgradeManager; 
+    public UpgradeManager upgradeManager;
+    
+    [Header("Damage Overlay")]
+    public Image damageOverlay;
+    private Color damageOverlayColor;
+    public float duration;
+    public float fadeSpeed;
+    private float durationTimer;
 
     void Start()
     {
         health = startingHealth;
         playerIsDead = false;
+        damageOverlayColor = damageOverlay.color;
+        damageOverlayColor.a = 0f;
+        
     }
 
     void Update()
     {
+        damageOverlay.color = damageOverlayColor;
         if(playerInputHandler.restartPressed && playerIsDead)
         {
             Restart();
         }
+
+        if(damageOverlay.color.a > 0)
+        {
+            durationTimer += Time.deltaTime;
+            if(durationTimer > duration)
+            {
+                float tempAlpha = damageOverlay.color.a;
+                tempAlpha -= Time.deltaTime * fadeSpeed;
+                damageOverlayColor.a = tempAlpha;
+            }
+        }
     }
         public void TakeDamage(float damage)
     {
+        damageOverlayColor.a = 1f;
         if(health > 0 && !upgradeManager.selectionActive)
         {
             health -= damage;
