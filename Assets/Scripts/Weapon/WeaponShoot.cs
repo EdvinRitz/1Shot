@@ -70,7 +70,7 @@ public class WeaponShoot : MonoBehaviour
             }
         }
         playerInputHandler.shootPressed = false;
-        scoreManager.addScoreForEnemiesShot(validHits.Count);
+        scoreManager.AddScoreForEnemiesShot(validHits.Count);
         waveSpawner.ResolveWave();
     }
 

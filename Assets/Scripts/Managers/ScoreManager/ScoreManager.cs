@@ -5,11 +5,11 @@ public class ScoreManager : MonoBehaviour
     public int playerScore;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public void addScoreForCompletedWave(int waveNumber)
+    public void AddScoreForCompletedWave(int waveNumber)
     {
         playerScore += waveNumber*100;
     }
-    public void addScoreForEnemiesShot(int enemiesKilled)
+    public void AddScoreForEnemiesShot(int enemiesKilled)
     {
         int killScore = enemiesKilled * 100;
         int comboBonus = (enemiesKilled - 1) * enemiesKilled / 2 * 100;

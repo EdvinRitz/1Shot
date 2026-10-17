@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Wave
 {
-    public int enemiesToKill;
+    public int enemiesToKill; //How many enemies are required to kill in a wave.
     public GameObject[] enemiesToSpawn;
 }
 
@@ -19,14 +19,16 @@ public class WaveSpawner : MonoBehaviour
     public ScoreManager scoreManager;
     public Wave[] waves;
     public Transform[] spawnPoints;
-    public GameObject enemyMovingPrefab;
-    public Transform spawnPoint1;
-    private GameObject spawnedEnemy;
+    [HideInInspector]
     public int currentWaveIndex;
+    [HideInInspector]
     public bool waveActive;
     private List<GameObject> spawnedEnemies = new();
+    [HideInInspector]
     public int enemyCount;
-    public int enemiesToKillRandomWave;
+    [HideInInspector]
+    public int enemiesToKillRandomWave; //How many enemies are required to kill in a random wave.
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -87,7 +89,7 @@ public class WaveSpawner : MonoBehaviour
             return;
         }
         
-        scoreManager.addScoreForCompletedWave(currentWaveIndex);
+        scoreManager.AddScoreForCompletedWave(currentWaveIndex);
         
     }
 
