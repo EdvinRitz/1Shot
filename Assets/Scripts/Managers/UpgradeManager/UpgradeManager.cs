@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour
 {
+    [HideInInspector]
     public bool selectionActive;
     public PlayerInputHandler playerInputHandler;
     public WaveSpawner waveSpawner;
@@ -11,11 +12,6 @@ public class UpgradeManager : MonoBehaviour
     public AimMode aimMode;
     public GameObject upgradePanel;
     public Button dashUpgradeButton;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -55,7 +51,7 @@ public class UpgradeManager : MonoBehaviour
     {
         selectionActive = true;
         Debug.Log("Choose upgrade: 1, 2, or 3");
-        dashUpgradeButton.interactable = playerMotor.dashCooldown > 0.2f;
+        dashUpgradeButton.interactable = playerMotor.dashCooldown > 0.2f; //Controls wheither the Dash upgrade button can be clicked.
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

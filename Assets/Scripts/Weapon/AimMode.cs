@@ -5,12 +5,15 @@ public class AimMode : MonoBehaviour
 {
     public PlayerInputHandler playerInputHandler;
     public Camera fpCamera;
-    public float aimTimeScale = 0.6f;
+    public float aimTimeScale;
+    [HideInInspector]
     public int AimHitCount;
     private float originalFixedDeltaTime;
+    [HideInInspector]
     public float slowMoEnergy;
     public float slowMoEnergyMax;
     public static bool XRayActive { get; private set; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,15 +28,17 @@ public class AimMode : MonoBehaviour
         List<RaycastHit> orderedHitsByDistance = new(hits);
         List<RaycastHit> validHits = new();
         orderedHitsByDistance.Sort(SortByDistance);
+
+        //Constantly see how many enemies "in a row" are we aiming at right now?
         foreach (RaycastHit hit in orderedHitsByDistance)
         {
             if(hit.transform.gameObject.layer != LayerMask.NameToLayer("Enemy") && hit.transform.gameObject.layer != LayerMask.NameToLayer("Bullet"))
             {
-                break;
+                break; //Don't see behind obstacles like walls and stuff. But do see behind enemies and bullets.
             }
             else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Bullet"))
             {
-                
+                //Do nothing if we look at a bullet.
             }
             else
             {
@@ -52,12 +57,15 @@ public class AimMode : MonoBehaviour
 
         if (playerInputHandler.aimHeld && slowMoEnergy > 0)
         {
+            // We can decide how slowmo the slowmo is by assigning Time.timescale our own value.
             Time.timeScale = aimTimeScale;
             Time.fixedDeltaTime = originalFixedDeltaTime * Time.timeScale;
+            //slowMoEnergy drains "in normal time".
             slowMoEnergy -= Time.unscaledDeltaTime;
         }
         else if (playerInputHandler.aimHeld)
         {
+            //No slowMo if no slowMoEnergy.
             Time.timeScale = 1f;
             Time.fixedDeltaTime = originalFixedDeltaTime;
         }
@@ -65,6 +73,7 @@ public class AimMode : MonoBehaviour
         {
             Time.timeScale = 1f;
             Time.fixedDeltaTime = originalFixedDeltaTime;
+            //slowMoEnergy regenerates slowly if you don't press the slowMo botton.
             if(slowMoEnergy < slowMoEnergyMax)
             {
                 slowMoEnergy += Time.unscaledDeltaTime/4;

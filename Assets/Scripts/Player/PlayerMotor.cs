@@ -14,8 +14,10 @@ public class PlayerMotor : MonoBehaviour
     private float gravity = -9.8f;
     public float jumpHeight = 0.75f;
     private bool isDashing;
+    //This is how long a dash lasts for.
     private float dashTimer;
     public float dashCooldown = 1f;
+    [HideInInspector]
     public float dashCooldownTimer;
 
     void Start()
@@ -30,12 +32,14 @@ public class PlayerMotor : MonoBehaviour
             return;
         }
 
+        //Can't dash before cooldown is over.
         if (dashCooldownTimer > 0)
         {
             dashCooldownTimer -= Time.deltaTime;
             playerInputHandler.dashPressed = false;
         }
 
+        //Moving while dashing is weird, let's not do it.
         if (!isDashing && !upgradeManager.selectionActive)
         {
             ProcessMove(playerInputHandler.MoveInput);
@@ -74,6 +78,7 @@ public class PlayerMotor : MonoBehaviour
     public void Dash(Vector2 input)
     {
         if(!isDashing){
+        //Dash direction depends on movement inputs.
         dashDirection.x = input.x;
         dashDirection.z = input.y;
         dashDirection = transform.TransformDirection(dashDirection);
@@ -87,6 +92,7 @@ public class PlayerMotor : MonoBehaviour
             playerInputHandler.dashPressed = false;
             return;
         }
+        //We dash for the duration of the dashTimer.
         dashTimer -= Time.deltaTime;
         if(dashTimer > 0)
         {

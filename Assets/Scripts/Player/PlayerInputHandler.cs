@@ -11,10 +11,15 @@ public class PlayerInputHandler : MonoBehaviour
     public bool shootPressed;
     [HideInInspector]
     public bool dashPressed;
+    [HideInInspector]
     public bool restartPressed;
+    [HideInInspector]
     public bool upgrade1Pressed;
+    [HideInInspector]
     public bool upgrade2Pressed;
+    [HideInInspector]
     public bool upgrade3Pressed;
+    [HideInInspector]
     public bool aimHeld;
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
@@ -52,6 +57,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerActions.Aim.canceled += ctx => aimHeld = false;
     }
 
+    //We can't jump, shoot, dash, move, look or aim when we are dead.
     private void ResetInput()
     {
         jumpPressed = false;
