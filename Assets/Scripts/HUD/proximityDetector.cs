@@ -16,9 +16,14 @@ public class proximityDetector : MonoBehaviour
         var hitArray = Physics.OverlapSphere(player.transform.position,3f);
         foreach(Collider hit in hitArray)
         {
+            Vector3 relativePosition = player.transform.InverseTransformPoint(hit.transform.position);
             if (hit.CompareTag("Bullet"))
             {
-                Debug.Log("proximity detected");
+                //Debug.Log("proximity detected");
+                if(relativePosition.z < 0)
+                {
+                    Debug.Log("Behind");
+                }
             }
         }
 
