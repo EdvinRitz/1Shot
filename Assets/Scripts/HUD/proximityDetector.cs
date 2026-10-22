@@ -35,6 +35,7 @@ public class proximityDetector : MonoBehaviour
                     //Debug.Log(relativeDistance);
                     proximityIndicatorColor.a = 1f;
                     proximityIndicator.rectTransform.anchoredPosition = new Vector2(Mathf.Sin(angleRad) * 200, Mathf.Cos(angleRad) * 200);
+                    proximityIndicator.rectTransform.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(angleRad) * 90);
                 }
             }
         }
