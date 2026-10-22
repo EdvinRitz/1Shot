@@ -856,6 +856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::proximityDetector
   testBullet: {fileID: 79841513}
   player: {fileID: 679599660}
+  proximityIndicator: {fileID: 1451095194}
 --- !u!1 &222670484
 GameObject:
   m_ObjectHideFlags: 0
@@ -3201,7 +3202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &906273530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3805,7 +3806,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1116362855
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4609,7 +4610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
