@@ -857,6 +857,8 @@ MonoBehaviour:
   testBullet: {fileID: 79841513}
   player: {fileID: 679599660}
   proximityIndicator: {fileID: 1451095194}
+  distanceFromAimCenter: 200
+  sizeBaseMultiplier: 50
 --- !u!1 &222670484
 GameObject:
   m_ObjectHideFlags: 0

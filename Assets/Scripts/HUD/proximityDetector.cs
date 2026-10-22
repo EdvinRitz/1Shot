@@ -8,6 +8,8 @@ public class proximityDetector : MonoBehaviour
     public GameObject player;
     public Image proximityIndicator;
     private Color proximityIndicatorColor;
+    public float distanceFromAimCenter;
+    public float sizeBaseMultiplier;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,8 +36,9 @@ public class proximityDetector : MonoBehaviour
                     Debug.Log(angle);
                     //Debug.Log(relativeDistance);
                     proximityIndicatorColor.a = 1f;
-                    proximityIndicator.rectTransform.anchoredPosition = new Vector2(Mathf.Sin(angleRad) * 200, Mathf.Cos(angleRad) * 200);
+                    proximityIndicator.rectTransform.anchoredPosition = new Vector2(Mathf.Sin(angleRad) * distanceFromAimCenter, Mathf.Cos(angleRad) * distanceFromAimCenter);
                     proximityIndicator.rectTransform.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(angleRad) * 90);
+                    proximityIndicator.rectTransform.sizeDelta = new Vector2(sizeBaseMultiplier / relativeDistance, sizeBaseMultiplier / relativeDistance);
                 }
             }
         }
