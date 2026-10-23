@@ -34,16 +34,19 @@ public class proximityDetector : MonoBehaviour
         }
         //proximityIndicator.color = proximityIndicatorColor;
         //proximityIndicatorColor.a = 0f;
-        var hitArray = Physics.OverlapSphere(player.transform.position, 3f);
+        var hitArray = Physics.OverlapSphere(player.transform.position, 4f);
         foreach(Collider hit in hitArray)
         {
             
-            if (hit.CompareTag("Bullet") || hit.CompareTag("Enemy Main"))
+            if (hit.CompareTag("Bullet"))
             {
                 Vector3 relativePosition = player.transform.InverseTransformPoint(hit.transform.position);
                 float relativeDistance = Vector3.Distance(player.transform.position, hit.transform.position);
+                
+                Vector3 toPlayer = (player.transform.position - hit.transform.position).normalized;
+                float towardPlayer = Vector3.Dot(hit.attachedRigidbody.linearVelocity.normalized, toPlayer);
                 //Debug.Log(povCamera.WorldToViewportPoint(hit.transform.position).ToString());
-                if(relativePosition.z < 0)
+                if(relativePosition.z < 0 && towardPlayer > 0.5f)
                 {
                     //float angle = Mathf.Atan2(relativePosition.x, relativePosition.z) * Mathf.Rad2Deg; //Getting the angle on the horizontal plane.
                     float angleRad = Mathf.Atan2(relativePosition.x, relativePosition.z);
