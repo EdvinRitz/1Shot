@@ -10,18 +10,21 @@ public class proximityDetector : MonoBehaviour
     private Color proximityIndicatorColor;
     public float distanceFromAimCenter;
     public float sizeBaseMultiplier;
+    private GameObject proximityIndicatorPrefab;
+    public GameObject ProximityIndicatorPrefab { get => proximityIndicatorPrefab; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        proximityIndicatorColor = proximityIndicator.color;
-        proximityIndicatorColor.a = 0f;
+        //proximityIndicatorColor = proximityIndicator.color;
+        //proximityIndicatorColor.a = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        proximityIndicator.color = proximityIndicatorColor;
-        proximityIndicatorColor.a = 0f;
+        //proximityIndicator.color = proximityIndicatorColor;
+        //proximityIndicatorColor.a = 0f;
         var hitArray = Physics.OverlapSphere(player.transform.position, 3f);
         foreach(Collider hit in hitArray)
         {
@@ -34,12 +37,14 @@ public class proximityDetector : MonoBehaviour
                 {
                     float angle = Mathf.Atan2(relativePosition.x, relativePosition.z) * Mathf.Rad2Deg; //Getting the angle on the horizontal plane.
                     float angleRad = Mathf.Atan2(relativePosition.x, relativePosition.z);
+                    Image instantiatedProximityIndicator = Instantiate(proximityIndicator, proximityIndicator.transform.parent);
                     //Debug.Log(angle);
                     //Debug.Log(relativeDistance);
-                    proximityIndicatorColor.a = 1f;
-                    proximityIndicator.rectTransform.anchoredPosition = new Vector2(Mathf.Sin(angleRad) * distanceFromAimCenter, Mathf.Cos(angleRad) * distanceFromAimCenter);
-                    proximityIndicator.rectTransform.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(angleRad) * 90);
-                    proximityIndicator.rectTransform.sizeDelta = new Vector2(sizeBaseMultiplier / relativeDistance, sizeBaseMultiplier / relativeDistance);
+                    //proximityIndicatorColor.a = 1f;
+                    instantiatedProximityIndicator.gameObject.SetActive(true);
+                    instantiatedProximityIndicator.rectTransform.anchoredPosition = new Vector2(Mathf.Sin(angleRad) * distanceFromAimCenter, Mathf.Cos(angleRad) * distanceFromAimCenter);
+                    instantiatedProximityIndicator.rectTransform.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(angleRad) * 90);
+                    instantiatedProximityIndicator.rectTransform.sizeDelta = new Vector2(sizeBaseMultiplier / relativeDistance, sizeBaseMultiplier / relativeDistance);
                 }
             }
         }
