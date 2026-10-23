@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Bullet
   - RayCastStop
+  - Enemy Main
   layers:
   - Default
   - TransparentFX
